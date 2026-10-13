@@ -1,0 +1,13 @@
+---
+import WaLink from '@/components/WaLink.astro';
+import contact from '@/data/contact.json';
+---
+<section class="section contacto" id="contacto" aria-labelledby="ct-h">
+  <div class="wrap">
+    <p class="eyebrow">Contacto</p>
+    <h2 id="ct-h">Para empezar o preguntar.</h2>
+    <p class="lead">Te responde el equipo, {contact.horario}.</p>
+    <div class="cta-row"><a class="btn btn-primary" href="/empezar" data-cta="empezar" data-section="contacto">Empezar</a><WaLink section="contacto" /></div>
+    {contact.email.confirmado && <p><a class="link" href={`mailto:${contact.email.direccion}`}>{contact.email.direccion}</a></p>}
+  </div>
+</section>

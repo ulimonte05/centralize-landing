@@ -1,0 +1,48 @@
+---
+import Base from '@/layouts/Base.astro';
+import WaLink from '@/components/WaLink.astro';
+import Proof from '@/components/Proof.astro';
+import contact from '@/data/contact.json';
+const v = contact.productos.ventas.nombre;
+const demo = contact.calcom.url; const dur = contact.calcom.duracion.replace(' minutos', ' min');
+---
+<Base title="Agentes de IA para inmobiliarias: campañas, respuestas y seguimiento sobre tu CRM | Centralize" description={`${v} recontacta tu base con mensajes aprobados por Meta, responde en WhatsApp, Instagram y Facebook, califica y carga el lead en tu CRM. Incluye Centralito.`} path="/ventas" surface="dark" active="ventas">
+  <section class="page" data-surface="dark">
+    <div class="wrap">
+      <div class="page-head" style="max-width:860px">
+        <p class="eyebrow">{v}</p>
+        <h1>Agentes de IA para inmobiliarias: campañas, respuestas y seguimiento, sobre tu CRM.</h1>
+        <p class="frase-fija">{v} trabaja con tus clientes: responde, recontacta y califica tus leads. Es otro producto, se contrata aparte y viene con Centralito adentro.</p>
+        <div class="cta-row" style="margin-top:22px"><a class="btn btn-primary" style="background:var(--signal);box-shadow:none" href={demo} target="_blank" rel="noopener" data-cta="demo" data-section="ventas-hero">Agendar demo de {dur}</a><WaLink section="ventas" variant="btn-outline" label="Pedir propuesta por WhatsApp" text={`Hola, vengo de centralize.dev y quiero una propuesta de ${v}`} /></div>
+      </div>
+      <div class="prose">
+        <h2>El problema</h2>
+        <p>Los leads se enfrían en días y nadie hace el segundo, el tercero ni el cuarto seguimiento. Tu base tiene miles de contactos que consultaron una vez y quedaron ahí.</p>
+        <h2>Los tres canales, con lo que hace cada uno hoy</h2>
+        <ul>
+          <li><strong>WhatsApp:</strong> campañas con templates aprobados por Meta, seguimiento hasta que responden, calificación HOT / WARM / COLD y carga al CRM. Conectás tu número en 15 minutos, sin cambiarlo.</li>
+          <li><strong>Instagram:</strong> responde los mensajes directos y los comentarios sobre publicaciones.</li>
+          <li><strong>Facebook:</strong> responde los mensajes directos de publicaciones y anuncios, con el mismo bot.</li>
+        </ul>
+        <h2>Cómo arranca</h2>
+      </div>
+      <div class="cols-3" style="margin-top:16px">
+        <div class="step" style="background:var(--card);border-color:var(--line)"><span class="n">1</span><b>Conectás tu WhatsApp</b><p>En 15 minutos, sin cambiar de número.</p></div>
+        <div class="step" style="background:var(--card);border-color:var(--line)"><span class="n">2</span><b>Armamos el bot sobre tu negocio</b><p>Con tus propiedades, tu tono y tus reglas de derivación. Lo probás con nosotros.</p></div>
+        <div class="step" style="background:var(--card);border-color:var(--line)"><span class="n">3</span><b>Sale a producción</b><p>Cuando pasó nuestras pruebas sobre tu negocio. Vos definís si el bot sigue acompañando después de derivar o se corre.</p></div>
+      </div>
+      <div class="prose">
+        <h2>El panel</h2>
+        <p>Bandeja de entrada, Campañas, Probar bot, Contactos, Integraciones (Tokko, KiteProp, Xintel), Equipo y Uso de WhatsApp. Ves cuánto gasta cada asesor en WhatsApp y le ponés un tope.</p>
+        <h2>Dos productos, una misma base</h2>
+        <p>{v} incluye Centralito para todo el equipo. Centralito trabaja para vos: busca, ordena, tasa, arma y recuerda. Todo lo que le llega a un cliente lo mandás vos.</p>
+        <div style="margin:24px 0"><Proof which="ventas" /></div>
+        <h2>Preguntas</h2>
+        <h3>¿Qué cobra Meta?</h3><p>Meta factura los mensajes aparte; para la mayoría hoy es cero o unos pocos dólares por mes.</p>
+        <h3>¿Cómo se presenta el bot y cuándo deriva?</h3><p>Se presenta con el nombre que vos definas y deriva a un asesor cuando el lead pide hablar con una persona, cuando califica como HOT o cuando vos lo pausás desde el panel.</p>
+        <h3>¿Hay permanencia?</h3><p>No. Propuesta en una demo de {dur}, sin permanencia.</p>
+      </div>
+      <div class="cta-row" style="margin-top:40px"><a class="btn btn-primary" style="background:var(--signal);box-shadow:none" href={demo} target="_blank" rel="noopener" data-cta="demo" data-section="ventas-final">Agendar demo de {dur}</a><WaLink section="ventas" variant="btn-outline" label="Pedir propuesta por WhatsApp" text={`Hola, vengo de centralize.dev y quiero una propuesta de ${v}`} /></div>
+    </div>
+  </section>
+</Base>

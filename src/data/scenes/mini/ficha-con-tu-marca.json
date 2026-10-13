@@ -1,0 +1,10 @@
+{ "id": "ficha-con-tu-marca", "hora": "11:20", "titulo": "Ficha en PDF con tu marca", "chip": "Ficha en PDF con tu marca", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "armame la ficha en pdf con mi marca de Thames 400, para reenviar" },
+    { "de": "centralito", "texto": "Lista: precio, superficie, 8 fotos, tu logo y tu teléfono. Reenviásela a quien quieras desde acá.", "typing_ms": 1400,
+      "artefacto": { "tipo": "archivo", "clase": "pdf", "nombre": "Thames 400 · 3 ambientes.pdf", "meta": "PDF · 2 páginas · con tu marca" }, "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "archivo", "clase": "pdf", "nombre": "Thames 400 · 3 ambientes.pdf", "meta": "2 páginas · con tu marca", "unidad": "pedido" },
+  "antes": "capturas y media hora de Canva", "despues": "un mensaje y un PDF con tu marca",
+  "wa_text": "Centralito, armame la ficha en PDF con mi marca de Thames 400, lista para reenviar.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

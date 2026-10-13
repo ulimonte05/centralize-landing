@@ -1,0 +1,15 @@
+{
+  "whatsapp_ventas": { "e164": "5492994104866", "visible": "+54 9 299 410-4866" },
+  "texto_wa": "Hola, vengo de centralize.dev y quiero consultar por Centralito",
+  "calcom": { "url": "https://cal.com/umontenegro", "duracion": "15 minutos", "_nota": "crear evento de 20 min y cambiar acá (§16 #6)" },
+  "email": { "direccion": "hola@centralize.dev", "confirmado": false },
+  "platform": "https://platform.centralize.dev",
+  "redes": { "linkedin": "https://www.linkedin.com/company/centralize-ai", "instagram": "https://www.instagram.com/centralize.dev/" },
+  "sla_alta": "el próximo día hábil (lun a vie, 9 a 19)",
+  "sla_alta_corto": "en el próximo día hábil",
+  "horario": "de lunes a viernes de 9 a 19 (ART)",
+  "productos": { "ventas": { "nombre": "Centralize Ventas", "descriptor": "IA que habla con tus clientes" } },
+  "legal": { "razon_social": "", "cuit": "", "domicilio": "", "data_fiscal": false },
+  "cita": null,
+  "_cita_formato": { "texto": "Le pido el informe del propietario los viernes y me lo manda listo.", "nombre": "Nombre", "inmobiliaria": "Inmobiliaria", "ciudad": "Ciudad", "mes": "mes 2026" }
+}

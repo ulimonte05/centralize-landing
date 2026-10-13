@@ -1,0 +1,29 @@
+{
+  "id": "cambios-en-lote",
+  "hora": "11:14",
+  "titulo": "Cambios en lote, con tu OK antes",
+  "chip": "Aviso legal en 23 fichas",
+  "aura": "#F7C7A1",
+  "mensajes": [
+    { "de": "asesor", "texto": "a todas las fichas de Acoyte 300 agregales el aviso legal al final de la descripción y pasá a Disponible las que no están. mostrame el plan antes" },
+    { "de": "centralito", "texto": "Plan: 23 fichas de Acoyte 300. Las 23 reciben el aviso legal al final y 6 pasan de Suspendida a Disponible. Nada cambia hasta tu OK. ¿Confirmás?", "typing_ms": 1600,
+      "artefacto": { "tipo": "plan", "titulo": "Plan · 23 fichas de Acoyte 300", "items": [ ["23", "reciben el aviso legal al final de la descripción"], ["6", "pasan de Suspendida a Disponible"], ["0", "cambios hasta tu OK"] ] },
+      "respuestas_rapidas": ["Dale", "Todavía no"], "rama_stand": "Dale",
+      "anuncio": "Centralito pregunta: ¿confirmás el plan de 23 fichas? Elegí Dale o Todavía no" }
+  ],
+  "ramas": {
+    "Dale": [
+      { "de": "asesor", "texto": "dale" },
+      { "de": "centralito", "texto": "Hecho: 23 de 23 editadas y 6 de 6 pasadas a Disponible. Verificado en Tokko a las 11:16. Quedó registrado.", "typing_ms": 1400,
+        "artefacto": { "tipo": "registro", "filas": [ ["23 de 23", "editadas"], ["6 de 6", "pasadas a Disponible"], ["11:16", "verificado en Tokko"] ] } }
+    ],
+    "Todavía no": [
+      { "de": "asesor", "texto": "todavía no" },
+      { "de": "centralito", "texto": "Perfecto, no toco ninguna ficha. El plan te queda acá; cuando quieras lo aplico.", "typing_ms": 1100, "read": "tokko: sin cambios" }
+    ]
+  },
+  "antes": "ficha por ficha, una tarde",
+  "despues": "un plan, tu OK y todo verificado",
+  "wa_text": "Centralito, a todas las fichas de Acoyte 300 agregales el aviso legal al final de la descripción y pasá las que no están a Disponible. Mostrame el plan antes.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

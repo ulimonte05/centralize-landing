@@ -1,0 +1,49 @@
+---
+import PlanCard from '@/components/PlanCard.astro';
+import contact from '@/data/contact.json';
+interface Props { precio?: boolean }
+const { precio = true } = Astro.props;
+---
+<section class="section control" id="precio" aria-labelledby="ctl-h">
+  <div class="wrap">
+    <p class="eyebrow">Control y precio</p>
+    <h2 id="ctl-h">La IA hace. Vos decidís.</h2>
+    <p class="lead">Te pide OK antes de cualquier cambio en lote, te dice cuánto leyó y te cuenta qué hizo. Trabaja con tu usuario de Tokko: tus contactos siguen siendo tuyos.</p>
+    <div class={`control-grid ${precio ? '' : 'sin-precio'}`}>
+      <div class="control-left">
+        <div class="pila" aria-label="Lo que dejó el día">
+          <p class="mono up">Lo que dejó el día</p>
+          <div class="pila-stack">
+            <div class="pila-item hoja rv" style="--r:-6deg"><span class="doc-ico pdf" aria-hidden="true">PDF</span><b>ACM Caballito 3 amb.pdf</b><small>pedido pesado</small></div>
+            <div class="pila-item hoja rv" style="--r:3deg"><span class="doc-ico xls" aria-hidden="true">XLS</span><b>palermo-3amb.xlsx</b><small>128 filas · pedido</small></div>
+            <div class="pila-item hoja rv" style="--r:-2deg"><span class="doc-ico pdf" aria-hidden="true">PDF</span><b>Informe · Thames 400</b><small>3 páginas · pedido pesado</small></div>
+            <div class="pila-item plan-mini rv" style="--r:1deg"><b>Plan · 23 fichas de Acoyte 300</b><small>pedido</small><div class="btns"><span class="yes">Dale</span><span>Todavía no</span></div><div class="done"><i class="tick" aria-hidden="true"></i>Hecho: 23 de 23, verificado en Tokko</div></div>
+          </div>
+          <div class="registro card rv">
+            <p class="mono up">Registro</p>
+            <ul>
+              <li><time>08:32</time><span>Recordatorio 17:00 agendado</span></li>
+              <li><time>10:16</time><span>ACM listo en PDF</span></li>
+              <li><time>11:14</time><span>23 fichas actualizadas, con tu OK</span></li>
+              <li><time>13:42</time><span>128 contactos etiquetados · 1.940 de 1.940 revisados</span></li>
+              <li class="cero"><time>—</time><span>Mensajes a clientes: 0</span></li>
+            </ul>
+            <p class="mono up ejemplo">Ejemplo · registro del día</p>
+          </div>
+        </div>
+        {contact.cita && <blockquote class="cita"><p>“{contact.cita.texto}”</p><footer>— {contact.cita.nombre}, {contact.cita.inmobiliaria}, {contact.cita.ciudad} · {contact.cita.mes}</footer></blockquote>}
+        <p class="frase-fija">Centralito trabaja para vos: busca, ordena, tasa, arma y recuerda. Todo lo que le llega a un cliente lo mandás vos.</p>
+      </div>
+      {precio && (
+        <div class="control-right">
+          <PlanCard />
+          <ol class="pasos">
+            <li>Dejás tus datos (2 minutos).</li>
+            <li>Te escribimos {contact.sla_alta} y nos pasás un usuario de Tokko a tu nombre.</li>
+            <li>Le mandás el primer pedido por WhatsApp.</li>
+          </ol>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

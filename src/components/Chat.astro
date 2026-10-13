@@ -1,0 +1,9 @@
+---
+import { SCENES } from '@/lib/scenes';
+import { renderChatShell, renderSceneFinal } from '@/lib/render';
+interface Props { instance: 'hero' | 'dia' | 'empezar'; scene: string; mode: 'hero' | 'panel'; panel?: string; class?: string }
+const { instance, scene: id, mode, panel, class: classes = '' } = Astro.props;
+const scene = SCENES[id];
+const html = renderChatShell({ instance, mode, etiqueta: scene.etiqueta, inner: renderSceneFinal(scene, mode), sceneId: scene.id, classes, panel });
+---
+<Fragment set:html={html} />

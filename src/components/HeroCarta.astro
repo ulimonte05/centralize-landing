@@ -1,0 +1,41 @@
+---
+import Chat from '@/components/Chat.astro';
+import WaLink from '@/components/WaLink.astro';
+import PriceLine from '@/components/PriceLine.astro';
+import Proof from '@/components/Proof.astro';
+import { SCENES, CARTA_IDS } from '@/lib/scenes';
+const frases: Record<string, string> = {
+  'resumen-del-dia': 'qué entró anoche', 'tasacion-acm': 'una tasación de un 3 ambientes en Caballito', 'segmentar-contactos': 'los que consultaron por Palermo y nunca tuvieron visita',
+  'buscar-red': 'tres opciones en la Red Tokko', 'cambios-en-lote': 'el aviso legal en las 23 fichas de Acoyte 300', 'informe-propietario': 'el informe para el propietario de Thames 400',
+};
+const btn = (id: string, pressed = false) => `<button type="button" class="pedido" data-scene-trigger="${id}" data-target="hero" aria-pressed="${pressed}">${frases[id]}<span class="sr-only">. Ver en el chat</span><i class="glifo" aria-hidden="true"></i></button>`;
+const carta = `Pedile ${btn('resumen-del-dia', true)}, ${btn('tasacion-acm')}, ${btn('segmentar-contactos')}, ${btn('buscar-red')}, ${btn('cambios-en-lote')} o ${btn('informe-propietario')}. Lo que sale hacia un cliente lo mandás vos.`;
+---
+<section class="hero hero-carta" id="hero" aria-labelledby="h1">
+  <div class="wrap hero-grid">
+    <div class="hero-top">
+      <p class="eyebrow">Centralito · Para inmobiliarias</p>
+      <h1 id="h1">Operá tu Tokko desde <em>WhatsApp</em>, sin abrirlo.</h1>
+      <p class="lead lead-desk">Centralito es un colega de IA: le escribís, entra a tu Tokko, hace el trabajo y te cuenta qué hizo.</p>
+      <p class="lead lead-mob">Centralito: le escribís, entra a tu Tokko, hace el trabajo y te cuenta qué hizo.</p>
+      <p class="carta" set:html={carta} />
+    </div>
+    <div class="hero-chat">
+      <div class="aura" aria-hidden="true"></div>
+      <div class="avatar-tile" aria-hidden="true"><img src="/assets/centralito.jpg" width="150" height="150" alt=""></div>
+      <Chat instance="hero" scene="resumen-del-dia" mode="hero" />
+      <div class="pills-mobile pill-row scroll" aria-label="Pedidos de ejemplo">
+        {CARTA_IDS.map((id, i) => <button type="button" class="pill" data-scene-trigger={id} data-target="hero" aria-pressed={i === 0 ? 'true' : 'false'}>{SCENES[id].chip}</button>)}
+      </div>
+      <div class="chips-control"><span class="chip">OK antes de cambiar en lote</span><span class="chip">Te dice cuánto leyó</span><span class="chip">Te cuenta qué hizo</span></div>
+      <p class="mono up ejemplo">Ejemplo · los nombres y las cifras son de demostración</p>
+    </div>
+    <div class="hero-bottom">
+      <PriceLine />
+      <div class="cta-row"><a class="btn btn-primary" href="/empezar" data-cta="empezar" data-section="hero">Empezar</a><WaLink section="hero" /></div>
+      <p class="mandas-vos">Lo que sale hacia un cliente lo mandás vos.</p>
+      <Proof />
+      <p class="ventas-hint">¿Querés que la IA responda y recontacte a tus clientes, o usás KiteProp o Xintel? <a href="#ventas" data-cta="ventas-hint" data-section="hero">Eso es Centralize Ventas →</a></p>
+    </div>
+  </div>
+</section>

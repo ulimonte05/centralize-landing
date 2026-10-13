@@ -1,0 +1,22 @@
+{
+  "id": "tasacion-acm",
+  "hora": "10:15",
+  "titulo": "Una tasación",
+  "chip": "Una tasación",
+  "parada": "Tasación",
+  "aura": "#F7C7A1",
+  "mensajes": [
+    { "de": "asesor", "texto": "haceme un acm de un 3 amb en Caballito, 70 m², 20 años, buen estado. es para Marta" },
+    { "de": "centralito", "texto": "Dale. Busco comparables en tu cartera, la Red Tokko y los portales.", "typing_ms": 900, "panel": { "tipo": "acm", "estado": "vacio" }, "hold_ms": 1800 },
+    { "de": "centralito", "texto": "Con 15 publicaciones comparables, el rango razonable es USD 152.000 a 164.000 (USD 2.250 por m²). Descarté 2 fuera de rango.", "typing_ms": 1600,
+      "panel": { "tipo": "acm", "estado": "lleno" },
+      "artefacto": { "tipo": "acm-mini" },
+      "read": "cartera: 84 de 84 · red: 412 de 412 · comparables: 17 revisados, 15 usados", "hold_ms": 2200 },
+    { "de": "centralito", "texto": "Te dejo el informe para el propietario en PDF. Revisalo y, si te cierra, se lo mandás vos a Marta.", "typing_ms": 1000,
+      "artefacto": { "tipo": "archivo", "clase": "pdf", "nombre": "ACM Caballito 3 amb.pdf", "meta": "PDF · 4 páginas" }, "panel_accion": "acm-pdf", "hold_ms": 1200 }
+  ],
+  "antes": "1 a 2 horas por tasación",
+  "despues": "minutos, con el informe listo",
+  "wa_text": "Centralito, armame la tasación de un 3 ambientes en Caballito, 70 m², 20 años, buen estado, con comparables de la Red Tokko y portales y el PDF para el propietario.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

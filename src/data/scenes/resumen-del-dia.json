@@ -1,0 +1,46 @@
+{
+  "id": "resumen-del-dia",
+  "hora": "08:30",
+  "titulo": "El recordatorio del día",
+  "chip": "Qué entró anoche",
+  "parada": "Recordatorio",
+  "aura": "#FBDDA9",
+  "mensajes": [
+    { "de": "centralito", "notificacion": true, "texto": "Buen día, Caro. Hoy: 3 leads de anoche sin asignar, 11:00 visita en Thames 400 con Lucía, la tasación de Marta y mañana vence la reserva de Acoyte 300.", "typing_ms": 900,
+      "panel": { "tipo": "agenda", "titulo": "Tu día · jueves", "filas": [
+        { "hora": "Anoche", "tag": "Leads", "texto": "3 leads nuevos sin asignar", "sub": "Zonaprop · Thames 400 y PH Palermo" },
+        { "hora": "11:00", "tag": "Visita", "texto": "Thames 400 con Lucía", "sub": "3 ambientes · confirmada" },
+        { "hora": "Hoy", "tag": "Pendiente", "texto": "Tasación para Marta", "sub": "3 ambientes en Caballito" },
+        { "hora": "Mañana", "tag": "Vencimiento", "texto": "Vence la reserva de Acoyte 300", "sub": "reserva del 14-sep", "estado": "ambar" } ],
+        "nueva": { "hora": "17:00", "tag": "Recordatorio nuevo", "texto": "Llamar a Jorge", "sub": "por la contraoferta" },
+        "rutinas": [ ["08:30", "Qué pasó anoche"], ["4 veces al día", "Leads sin atender"] ] },
+      "hold_ms": 2200 },
+    { "de": "asesor", "texto": "recordame a las 17 llamar a Jorge por la contraoferta" },
+    { "de": "centralito", "texto": "Agendado: hoy 17:00, llamar a Jorge por la contraoferta. A esa hora te aviso.", "typing_ms": 1000, "panel_accion": "agenda-nueva",
+      "artefacto": { "tipo": "rutina", "icono": "reloj", "cuando": "Hoy 17:00", "que": "Llamar a Jorge · por la contraoferta", "estado": "Recordatorio nuevo" }, "hold_ms": 1400 }
+  ],
+  "sugerencia": "quien-consulto",
+  "antes": "depende de tu memoria",
+  "despues": "aparece solo, a horario",
+  "wa_text": "Centralito, todos los días a las 8:30 pasame qué leads entraron anoche en Tokko, cuáles siguen sin atender y mis pendientes del día.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración",
+  "variante_hero": {
+    "mensajes": [
+      { "de": "asesor", "texto": "qué entró anoche?" },
+      { "de": "centralito", "texto": "3 leads nuevos en Tokko, todos de Zonaprop: dos por Thames 400 y uno por el PH de Palermo. Te paso nombre, teléfono y estado. El primer mensaje lo mandás vos.", "typing_ms": 1300,
+        "artefacto": { "tipo": "tabla", "titulo": "Leads de anoche · 3", "filas": [ ["Lucía P.", "11 5555 0142", "Thames 400", "nuevo"], ["Martín R.", "11 5555 0177", "Thames 400", "nuevo"], ["Sol A.", "11 5555 0199", "PH Palermo", "pide cochera"] ] },
+        "read": "tokko: 3 de 3 leídos", "hold_ms": 1800 },
+      { "de": "centralito", "texto": "¿Querés que te lo pase todos los días a las 8:30?", "typing_ms": 900, "respuestas_rapidas": ["Dale", "Ahora no"], "rama_stand": "Dale" }
+    ],
+    "ramas": {
+      "Dale": [
+        { "de": "asesor", "texto": "dale" },
+        { "de": "centralito", "texto": "Listo: todos los días a las 8:30, lo de anoche y tus pendientes del día.", "typing_ms": 1000, "artefacto": { "tipo": "rutina", "cuando": "Todos los días 8:30", "que": "Qué pasó anoche", "estado": "activa" } }
+      ],
+      "Ahora no": [
+        { "de": "asesor", "texto": "ahora no" },
+        { "de": "centralito", "texto": "Perfecto. Cuando quieras, me lo pedís.", "typing_ms": 800 }
+      ]
+    }
+  }
+}

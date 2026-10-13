@@ -1,0 +1,36 @@
+---
+import Base from '@/layouts/Base.astro';
+import WaLink from '@/components/WaLink.astro';
+import contact from '@/data/contact.json';
+const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.replace(' minutos', ' min');
+---
+<Base title="Contacto | Centralize" description="WhatsApp, demo y email." path="/contacto" active="contacto">
+  <section class="page">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Contacto</p>
+        <h1>Para empezar o preguntar.</h1>
+        <p class="lead">Te responde el equipo, {contact.horario}.</p>
+      </div>
+      <div class="empezar-grid">
+        <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+          <WaLink section="contacto" variant="btn" />
+          <p>Para {v}: <a class="link" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="contacto">Agendar demo de {dur}</a></p>
+          {contact.email.confirmado && <p><a class="link" href={`mailto:${contact.email.direccion}`}>{contact.email.direccion}</a></p>}
+          <p><a class="link" href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a> · <a class="link" href={contact.redes.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a class="link" href={contact.platform}>Ingresar</a></p>
+        </div>
+        <form class="form card" style="padding:24px" method="post" action="/api/empezar" data-contacto>
+          <input type="hidden" name="plan" value="contacto"><input type="hidden" name="pais" value=""><input type="hidden" name="prefijo" value="54">
+          <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" required></div>
+          <div class="field"><label for="c-inmo">Inmobiliaria</label><input id="c-inmo" name="inmobiliaria" required></div>
+          <div class="field"><label for="c-tel">WhatsApp</label><input id="c-tel" name="whatsapp" type="tel" required></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required></div>
+          <div class="field"><label for="c-tema">Tema</label><select id="c-tema" name="equipo"><option>Centralito</option><option>{v}</option><option>A medida</option><option value="baja">Dar de baja</option><option value="arrepentimiento">Botón de arrepentimiento</option></select></div>
+          <div class="field"><label for="c-msg">Mensaje</label><textarea id="c-msg" name="pedido" rows="3"></textarea></div>
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script>const t = new URLSearchParams(location.search).get('tema'); const s = document.getElementById('c-tema') as HTMLSelectElement | null; if (t && s) { for (const o of s.options) if (o.value === t) s.value = t; }</script>
+</Base>

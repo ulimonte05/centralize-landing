@@ -1,0 +1,35 @@
+---
+import WaLink from '@/components/WaLink.astro';
+import Proof from '@/components/Proof.astro';
+import contact from '@/data/contact.json';
+const v = contact.productos.ventas.nombre;
+---
+<section class="section ventas" id="ventas" data-surface="dark" aria-labelledby="ventas-h">
+  <div class="wrap grid-2 ventas-grid">
+    <div>
+      <p class="eyebrow">Otro producto · {v}</p>
+      <h2 id="ventas-h">Y cuando querés que la IA también hable con tus clientes.</h2>
+      <p class="frase-fija">{v} trabaja con tus clientes: responde, recontacta y califica tus leads. Es otro producto, se contrata aparte y viene con Centralito adentro.</p>
+      <ul class="ventas-lineas">
+        <li><b>WhatsApp:</b> campañas con templates aprobados por Meta, seguimiento hasta que responden, calificación HOT / WARM / COLD y carga al CRM.</li>
+        <li><b>Instagram y Facebook:</b> responde los mensajes directos.</li>
+        <li>Conectás tu WhatsApp en 15 minutos, sin cambiar de número. El bot sale cuando pasó nuestras pruebas sobre tu negocio.</li>
+      </ul>
+      <Proof which="ventas" />
+      <div class="cta-row"><a class="btn btn-light" href="/ventas" data-cta="ventas" data-section="ventas">Conocer {v}</a><WaLink section="ventas" variant="btn-outline" text={`Hola, vengo de centralize.dev y quiero consultar por ${v}`} /></div>
+      <p class="mono ventas-nota">Incluye Centralito para todo el equipo · Propuesta en una demo de {contact.calcom.duracion.replace(' minutos', ' min')} · Sin permanencia</p>
+    </div>
+    <div class="diagrama rv" role="img" aria-label="Dos productos, una misma base: Centralito trabaja para vos; Centralize Ventas lo contiene y trabaja con tus clientes por WhatsApp, Instagram y Facebook; los dos sobre tu CRM Tokko y tu número">
+      <p class="diag-top mono">se suma cuando quieras, nada que migrar</p>
+      <div class="marco">
+        <p class="marco-label">{v} · <span>trabaja con tus clientes</span></p>
+        <div class="tarjeta-c">
+          <img src="/assets/centralito.jpg" width="44" height="44" alt="">
+          <div><b>Centralito</b><span>trabaja para vos</span><small>busca, ordena, tasa, arma y recuerda</small></div>
+        </div>
+        <div class="canales"><span>WhatsApp</span><span>Instagram</span><span>Facebook</span></div>
+      </div>
+      <div class="base-comun">Tu CRM (Tokko) · tu número</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+{ "id": "cargar-lead", "hora": "09:05", "titulo": "Cargá un lead desde la visita", "chip": "Cargá un lead desde la visita", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "cargá en Tokko a Sol Arias, 11 5555 0199, consultó por Thames 400. fijate antes que no exista" },
+    { "de": "centralito", "texto": "No existía. La cargué en Tokko con la consulta por Thames 400, asignada a vos. Verificado, 1 de 1.", "typing_ms": 1300, "read": "tokko: contacto creado · 09:05", "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "Sol Arias", "sub": "contacto creado en Tokko · 09:05", "unidad": "pedido" },
+  "antes": "abrir Tokko al volver a la oficina", "despues": "un mensaje desde la visita",
+  "wa_text": "Centralito, cargá en Tokko a Sol Arias, 11 5555 0199, consultó por Thames 400. Fijate antes que no exista.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

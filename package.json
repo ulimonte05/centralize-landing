@@ -1,0 +1,24 @@
+{
+  "name": "centralize-landing",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:carta": "astro dev --port 4321",
+    "dev:un-dia": "node scripts/variant-proxy.mjs un-dia 4322",
+    "dev:catalogo": "node scripts/variant-proxy.mjs catalogo 4323",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^11.0.14",
+    "astro": "^7.3.8",
+    "motion": "^14.2.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.0",
+    "typescript": "^5.9.0"
+  }
+}

@@ -1,0 +1,66 @@
+---
+import Chat from '@/components/Chat.astro';
+import WaLink from '@/components/WaLink.astro';
+import Proof from '@/components/Proof.astro';
+import PriceLine from '@/components/PriceLine.astro';
+import { SCENES, DIA_IDS, MINI_IDS, TOTAL } from '@/lib/scenes';
+import { renderPanel } from '@/lib/render';
+interface Props { hero?: boolean }
+const { hero = false } = Astro.props;
+const first = SCENES['resumen-del-dia'];
+const firstPanel = first.mensajes.find(m => m.panel)?.panel || null;
+const panelHtml = renderPanel(firstPanel);
+---
+<section class={`section dia ${hero ? 'dia-hero' : ''}`} id="dia" aria-labelledby="dia-h">
+  <div class="wrap">
+    {hero ? (
+      <div class="dia-head hero-head">
+        <p class="eyebrow">Centralito · Para inmobiliarias</p>
+        <h1 id="dia-h">Operá tu Tokko desde <em>WhatsApp</em>, sin abrirlo.</h1>
+        <p class="lead">Un día de trabajo con Centralito, de 08:30 a 17:05. Le escribís como a un colega: entra a tu Tokko, hace el trabajo y te cuenta qué hizo. Caro, sus clientes y las cifras son un ejemplo.</p>
+      </div>
+    ) : (
+      <div class="dia-head">
+        <p class="eyebrow">Un día con Centralito · 08:30 a 17:05</p>
+        <h2 id="dia-h">Te devuelve el día.</h2>
+        <p class="lead">Cuatro pedidos que los asesores le hacen todos los días. Caro, sus clientes y las cifras son un ejemplo.</p>
+      </div>
+    )}
+    <div class="rail-row">
+      <div class="rail" data-rail style="--at:0">
+        <time class="clock tabular" data-clock>08:30</time>
+        <div class="rail-track" role="tablist" aria-label="Momentos del día">
+          {DIA_IDS.map((id, i) => <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-scene-trigger={id} data-target="dia" aria-controls="dia-chat"><b class="tabular">{SCENES[id].hora}</b><span>{SCENES[id].parada}</span></button>)}
+        </div>
+      </div>
+      <p class="mono vistos" data-vistos>Viste 0 de {TOTAL} pedidos</p>
+    </div>
+    <div class="dia-grid">
+      <div class="dia-chat" id="dia-chat">
+        <Chat instance="dia" scene="resumen-del-dia" mode="panel" panel="dia" class="chat-day" />
+        <p class="ba" data-ba><i>antes</i> <s>{first.antes}</s> <i>→</i> <b>{first.despues}</b></p>
+        <div class="pedir">
+          <a class="btn btn-outline" href="/empezar?pedido=resumen-del-dia" data-pedir data-cta="pedir" data-section="dia">Pedirle esto a Centralito</a>
+          <small>Después del alta, este pedido te queda listo para mandarlo tal cual.</small>
+        </div>
+      </div>
+      <div class="dia-panel">
+        <div class="panel" data-panel="dia" data-estado="base" set:html={panelHtml} />
+        <div class="otros">
+          <p class="mono up">Otros pedidos</p>
+          <div class="otros-grid">
+            {MINI_IDS.map(id => <button type="button" class="pill" data-scene-trigger={id} data-target="dia">{SCENES[id].chip}</button>)}
+          </div>
+        </div>
+      </div>
+    </div>
+    {hero && (
+      <div class="hero-bottom dia-bottom">
+        <PriceLine />
+        <div class="cta-row"><a class="btn btn-primary" href="/empezar" data-cta="empezar" data-section="hero">Empezar</a><WaLink section="hero" /></div>
+        <p class="mandas-vos">Lo que sale hacia un cliente lo mandás vos.</p>
+        <Proof />
+      </div>
+    )}
+  </div>
+</section>

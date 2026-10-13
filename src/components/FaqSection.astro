@@ -1,0 +1,23 @@
+---
+import faq from '@/data/faq.json';
+import plans from '@/data/plans.json';
+import contact from '@/data/contact.json';
+import WaLink from '@/components/WaLink.astro';
+const precio = plans.publicado ? `Desde ARS ${plans.planes[0].ar.toLocaleString('es-AR')} + IVA por asesor al mes, sin permanencia.` : 'Precio por asesor, sin permanencia.';
+const items = faq.map(f => ({ q: f.q, a: (f.a || (plans.cobro ? f.a_con_cobro : f.a_sin_cobro) || '').replace('{precio}', precio).replace('{sla_alta}', contact.sla_alta) }));
+---
+<section class="section faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <p class="eyebrow">Antes de empezar</p>
+    <h2 id="faq-h">Lo que preguntan antes de activarlo.</h2>
+    <p class="lead">Respuestas cortas. Si falta alguna, escribinos.</p>
+    <dl class="faq-list">
+      {items.map(it => <div class="faq-item rv"><dt>{it.q}</dt><dd>{it.a}</dd></div>)}
+    </dl>
+    <p class="faq-more">¿Otra pregunta? <WaLink section="faq" /></p>
+    <a class="tira-medida" href="/a-medida" data-cta="a_medida" data-section="faq">
+      <span>Automatizamos tareas de tu empresa con IA. Ejemplo: en una inmobiliaria del oeste del GBA, el informe de cada propiedad le llega solo al dueño cada martes.</span>
+      <b>Contanos qué querés automatizar <i aria-hidden="true">→</i></b>
+    </a>
+  </div>
+</section>

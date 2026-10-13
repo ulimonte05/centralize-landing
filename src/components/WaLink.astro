@@ -1,0 +1,12 @@
+---
+import contact from '@/data/contact.json';
+interface Props { section: string; label?: string; variant?: 'link' | 'btn' | 'btn-light' | 'btn-outline' | 'pill'; text?: string; class?: string }
+const { section, label = 'Consultar por WhatsApp', variant = 'link', text, class: cls = '' } = Astro.props;
+const msg = `${text || contact.texto_wa} [web-${section}]`;
+const href = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent(msg)}`;
+const classes = variant === 'link' ? 'link-wa' : variant === 'pill' ? 'pill' : `btn btn-wa ${variant === 'btn' ? 'btn-outline' : variant}`;
+---
+<a class={`${classes} ${cls}`} href={href} target="_blank" rel="noopener" data-wa data-cta="whatsapp" data-section={section} data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path fill="#fff" d="M17 14.4c-.3-.1-1.6-.8-1.9-.9s-.4-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1a7.3 7.3 0 0 1-3.6-3.2c-.3-.5.3-.4.8-1.4.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.5-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.3 5.3 5.3 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4.1c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3c.2-.6.2-1.1.2-1.3s-.3-.2-.5-.4z"/></svg>
+  <span>{label}</span>
+</a>

@@ -1,0 +1,29 @@
+{
+  "id": "informe-propietario",
+  "hora": "16:20",
+  "titulo": "El informe para el propietario",
+  "chip": "Informe al propietario",
+  "aura": "#F2A68C",
+  "mensajes": [
+    { "de": "asesor", "texto": "armame el informe para el dueño de Thames 400: consultas, visitas y difusión del mes, en pdf. me lo pasás a mí" },
+    { "de": "centralito", "texto": "Dale. Leo las consultas y visitas del mes en Tokko y dónde está publicada.", "typing_ms": 900, "hold_ms": 1800 },
+    { "de": "centralito", "texto": "Listo: 15 interesados, 4 visitas con fecha y 24 fotos publicadas en dos portales. Te lo dejo a vos y se lo mandás con tu nombre.", "typing_ms": 1500,
+      "artefacto": { "tipo": "informe", "nombre": "Informe Thames 400 · octubre.pdf", "meta": "PDF · 3 páginas", "cifras": [ ["15", "interesados"], ["4", "visitas"], ["24", "fotos"] ], "barras": [3, 5, 4, 3] },
+      "read": "tokko: 15 de 15 consultas leídas", "hold_ms": 1800 },
+    { "de": "centralito", "texto": "¿Te lo armo todos los viernes a las 9 para tus propiedades en venta?", "typing_ms": 900, "respuestas_rapidas": ["Dale", "Solo este"], "rama_stand": "Dale" }
+  ],
+  "ramas": {
+    "Dale": [
+      { "de": "asesor", "texto": "dale" },
+      { "de": "centralito", "texto": "Agendado: viernes 9:00, un informe por propiedad, te los dejo en este chat.", "typing_ms": 1000, "artefacto": { "tipo": "rutina", "cuando": "Viernes 9:00", "que": "Informes por propiedad", "estado": "activa" } }
+    ],
+    "Solo este": [
+      { "de": "asesor", "texto": "solo este" },
+      { "de": "centralito", "texto": "Perfecto. Cuando quieras otro, me lo pedís.", "typing_ms": 800 }
+    ]
+  },
+  "antes": "juntar números de tres lugares",
+  "despues": "un PDF por propiedad, cuando vos quieras",
+  "wa_text": "Centralito, armame el informe para el propietario de Thames 400: consultas, visitas y difusión, en PDF. Me lo pasás a mí y se lo mando yo.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

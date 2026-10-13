@@ -1,0 +1,39 @@
+---
+import contact from '@/data/contact.json';
+import plans from '@/data/plans.json';
+import Mark from '@/components/Mark.astro';
+const legal = contact.legal;
+---
+<footer class="footer" data-surface="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Centralize, inicio"><Mark /><span>Centralize</span></a>
+        <p>Agentes de IA para inmobiliarias de Argentina y Uruguay.</p>
+      </div>
+      <nav class="foot-col" aria-label="Producto">
+        <a href="/">Centralito</a>
+        <a href="/ventas">{contact.productos.ventas.nombre}</a>
+        <a href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="footer">Agendar demo de {contact.calcom.duracion.replace(' minutos', ' min')} ({contact.productos.ventas.nombre})</a>
+        <a href="/precios">Precios</a>
+        <a href="/a-medida">A medida</a>
+        <a href="/contacto">Contacto</a>
+        <a href={contact.platform} data-cta="ingresar" data-section="footer">Ingresar</a>
+      </nav>
+      <nav class="foot-col" aria-label="Legales y redes">
+        <a href={contact.redes.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a>
+        <a href="/terminos">Términos</a>
+        <a href="/privacidad">Privacidad</a>
+        {plans.cobro && <a href="/contacto?tema=arrepentimiento">Botón de arrepentimiento</a>}
+        <a href="/contacto?tema=baja">Dar de baja</a>
+        <button type="button" class="foot-toggle" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
+      </nav>
+    </div>
+    <p class="foot-legal mono">
+      {legal.razon_social ? <span>{legal.razon_social} · {legal.cuit} · {legal.domicilio}</span> : null}
+      <span>© 2026 Centralize · Argentina y Uruguay</span>
+      <span>Medimos visitas sin cookies ni identificadores</span>
+    </p>
+  </div>
+</footer>
