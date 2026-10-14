@@ -1,6 +1,6 @@
 // Motor de escenas (plan §6.5). Vanilla TS, sin dependencias. Dos instancias por página (hero y Un día), DOM separado.
 import { SCENES, TOTAL, DIA_IDS, MINI_IDS, AUTO_IDS, type Escena, type Mensaje, type Artefacto } from '@/lib/scenes';
-import { renderMessages, renderPanel, sceneMessages, ICONS } from '@/lib/render';
+import { renderMessages, renderPanel, sceneMessages, ICONS, SYS_ROW } from '@/lib/render';
 
 type Mode = 'hero' | 'panel';
 interface Token { dead: boolean }
@@ -56,7 +56,7 @@ class ChatInstance {
     this.pendingBranch = ramas; this.msgCount = mensajes.length;
     const anim = play && !reduced();
     this.msgs.setAttribute('aria-busy', 'true');
-    this.msgs.innerHTML = renderMessages(mensajes, scene.hora, this.mode, anim ? 'pending' : 'show');
+    this.msgs.innerHTML = renderMessages(mensajes, scene.hora, this.mode, anim ? 'pending' : 'show') + SYS_ROW;
     this.msgs.style.setProperty('--ty', '0px');
     this.root.classList.remove('is-done');
     this.hideFoot();
@@ -132,7 +132,7 @@ class ChatInstance {
   }
   reveal(el: HTMLElement) { el.classList.remove('pending'); el.classList.add('show'); this.fit(el); }
   fit(last?: HTMLElement) {
-    const l = last || [...$$('.m.show, .typing', this.msgs)].pop(); if (!l) return;
+    const l = last || [...$$('.m.show, .typing, .sys.show', this.msgs)].pop(); if (!l) return;
     const bottom = l.offsetTop + l.offsetHeight + 14;
     const over = bottom - this.msgs.parentElement!.clientHeight;
     this.msgs.style.setProperty('--ty', `${-Math.max(0, over)}px`);
@@ -164,7 +164,8 @@ class ChatInstance {
   appendBranch(reply: string, pending: boolean) {
     const branch = this.pendingBranch[reply]; if (!branch) return;
     const offset = $$('.m', this.msgs).length;
-    this.msgs.insertAdjacentHTML('beforeend', renderMessages(branch, this.scene.hora, this.mode, pending ? 'pending' : 'show', offset));
+    const sys = $('.sys', this.msgs); const html = renderMessages(branch, this.scene.hora, this.mode, pending ? 'pending' : 'show', offset);
+    if (sys) sys.insertAdjacentHTML('beforebegin', html); else this.msgs.insertAdjacentHTML('beforeend', html);
     if (!pending) this.fit();
   }
   finish(animated: boolean) {
@@ -174,6 +175,7 @@ class ChatInstance {
     if (this.scene.mini && this.scene.pila) { this.pila.push(this.scene.pila); if (this.panel) { this.panel.innerHTML = renderPanel({ tipo: 'pila' }, { pila: this.pila }); } }
     this.showFoot('done');
     this.root.dispatchEvent(new CustomEvent('chat:done', { bubbles: true, detail: { id: this.sceneId, instance: this.name } }));
+    if (this.name === 'hero' && !reduced()) { $$('.pill.sugerida').forEach(p => p.classList.remove('sugerida')); const next = $$(`[data-scene-trigger][data-target="hero"]`).find(b => !vistos().includes(b.dataset.sceneTrigger || '')); if (next) { next.classList.add('sugerida'); setTimeout(() => next.classList.remove('sugerida'), 3400); } }
     if (AUTO && this.onNext) this.autoTimer = window.setTimeout(() => this.onNext && this.onNext(), 5000);
   }
   showAll() {
@@ -202,10 +204,12 @@ class ChatInstance {
   }
   inView() { const r = this.root.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
   showFoot(which: 'next' | 'done') {
-    const rep = $('[data-act="replay"]', this.root)!, next = $('[data-act="next"]', this.root)!;
-    rep.hidden = which !== 'done'; next.hidden = !this.onNext; if (which === 'done') next.textContent = this.nextLabel; else next.textContent = this.nextLabel;
+    const sys = $('.sys', this.msgs); if (!sys) return;
+    const rep = $('[data-act="replay"]', sys)!, next = $('[data-act="next"]', sys)!;
+    rep.hidden = which !== 'done'; next.hidden = !this.onNext; next.textContent = this.nextLabel;
+    if (!rep.hidden || !next.hidden) { sys.classList.remove('pending'); sys.classList.add('show'); this.fit(sys); }
   }
-  hideFoot() { ($('[data-act="replay"]', this.root)!).hidden = true; ($('[data-act="next"]', this.root)!).hidden = true; }
+  hideFoot() { const sys = $('.sys', this.msgs); if (!sys) return; sys.classList.remove('show'); sys.classList.add('pending'); }
   nextLabel = 'Siguiente momento →';
   say(t: string) { if (!this.inView()) return; this.announce.textContent = ''; setTimeout(() => { this.announce.textContent = t; }, 30); }
 

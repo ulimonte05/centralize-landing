@@ -42,6 +42,7 @@ export function renderMessage(m: Mensaje, i: number, hora: string, mode: 'hero' 
 export function renderMessages(list: Mensaje[], hora: string, mode: 'hero' | 'panel', state: 'pending' | 'show' = 'show', offset = 0) {
   return list.map((m, i) => renderMessage(m, i + offset, hora, mode, state)).join('');
 }
+export const SYS_ROW = '<div class="sys pending"><button type="button" class="pill" data-act="replay" hidden>Repetir</button><button type="button" class="pill on" data-act="next" hidden>Siguiente momento →</button></div>';
 
 /* ---------- artefactos (tarjetas dentro del chat) ---------- */
 export function renderArtifact(a: Artefacto): string {
@@ -51,7 +52,7 @@ export function renderArtifact(a: Artefacto): string {
     case 'rutina':
       return `<div class="art art-rutina"><span class="ico" aria-hidden="true">${a.icono === 'reloj' ? ICON.reloj : ICON.repeat}</span><div><b>${esc(a.cuando)}</b><span>${esc(a.que)}</span></div>${a.estado ? `<em>${esc(a.estado)}</em>` : ''}</div>`;
     case 'archivo':
-      return renderAdjunto(a as Adjunto);
+      return renderAdjunto(a as unknown as Adjunto);
     case 'texto':
       return `<div class="art art-texto">${a.texto ? `<p>${esc(a.texto)}</p><button type="button" class="copy" data-copy="${esc(a.texto)}">Copiar</button>` : ''}${a.links ? `<ul class="links">${(a.links as string[]).map(l => `<li>tokko.com/ficha/${esc(l.toLowerCase().replace(/\s+/g, '-'))}</li>`).join('')}</ul>` : ''}</div>`;
     case 'chips':
@@ -171,7 +172,6 @@ export function renderChatShell(opts: { instance: string; mode: 'hero' | 'panel'
     <div class="chat-ctl"><button type="button" data-act="pause" aria-pressed="false"><span class="i" aria-hidden="true">${ICON.pause}</span><span class="t">Pausar</span></button><button type="button" data-act="all"><span aria-hidden="true">${ICON.all}</span><span class="t">Ver todo</span></button></div>
   </div>
   <div class="chat-body"><div class="notif" aria-hidden="true"><img src="/assets/centralito.jpg" width="28" height="28" alt=""><div><b>Centralito</b><span>Buen día, Caro. Hoy: 3 leads de anoche…</span></div></div><div class="msgs" role="log" aria-label="Conversación de ejemplo con Centralito">${opts.inner}</div></div>
-  <div class="chat-foot"><button type="button" class="pill" data-act="replay" hidden>Repetir</button><button type="button" class="pill on" data-act="next" hidden>Siguiente momento →</button></div>
   <div class="composer" aria-hidden="true"><span class="c-plus"></span><div class="c-field"><span class="c-txt"></span><i class="c-caret"></i><em>Mensaje</em></div><span class="c-mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="c-send"><svg viewBox="0 0 24 24"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span></div>
   <div class="sr-only" aria-live="polite" data-announce></div>
 </div>`;

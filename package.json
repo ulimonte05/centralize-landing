@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "dev:carta": "astro dev --port 4321",
+    "dev:carta": "node scripts/variant-proxy.mjs carta 4324",
     "dev:un-dia": "node scripts/variant-proxy.mjs un-dia 4322",
     "dev:catalogo": "node scripts/variant-proxy.mjs catalogo 4323",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "dev:simple": "astro dev --port 4321"
   },
   "dependencies": {
     "@astrojs/vercel": "^11.0.14",

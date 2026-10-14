@@ -67,8 +67,10 @@
 .c-send svg{stroke:#fff}
 .composer.typing .c-send{background:var(--green-text)}
 .composer.sending .c-send{transform:scale(.84)}
-.chat-foot{position:absolute;left:0;right:0;bottom:58px;z-index:2;display:flex;justify-content:center;gap:6px;padding:0 12px;pointer-events:none}
-.chat-foot .pill{pointer-events:auto;min-height:36px;font-size:13px;box-shadow:0 8px 20px -10px rgba(23,22,27,.4)}
+.sys{flex:none;display:flex;justify-content:center;gap:6px;padding:2px 0 0}
+.sys .pill{min-height:34px;font-size:13px;padding:0 14px;background:#fff}
+.sys.pending{visibility:hidden;opacity:0}
+.sys.show{visibility:visible;opacity:1;transition:opacity .3s}
 
 /* artefactos dentro del chat */
 .art{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;line-height:1.35;transform-origin:50% 100%}

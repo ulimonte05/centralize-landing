@@ -9,7 +9,7 @@ import contact from '@/data/contact.json';
 interface Props { title: string; description: string; noindex?: boolean; path?: string; nav?: 'full' | 'min' | 'none'; surface?: 'light' | 'dark'; active?: string; ogTitle?: string }
 const { title, description, noindex = false, path = '/', nav = 'full', surface = 'light', active = '', ogTitle } = Astro.props;
 const canonical = `https://centralize.dev${path === '/' ? '/' : path}`;
-const variant = import.meta.env.PUBLIC_VARIANT || 'carta';
+const variant = import.meta.env.PUBLIC_VARIANT || 'simple';
 ---
 <!doctype html>
 <html lang="es-AR" data-variant={variant}>

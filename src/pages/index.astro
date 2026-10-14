@@ -1,7 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Home from '@/components/Home.astro';
-const variant = (import.meta.env.PUBLIC_VARIANT || 'carta') as 'carta' | 'un-dia' | 'catalogo';
+const variant = (import.meta.env.PUBLIC_VARIANT || 'simple') as 'simple' | 'carta' | 'un-dia' | 'catalogo';
 const ld = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'Organization', name: 'Centralize', url: 'https://centralize.dev/', logo: 'https://centralize.dev/assets/centralize-mark-black.png', sameAs: ['https://www.linkedin.com/company/centralize-ai', 'https://www.instagram.com/centralize.dev/'] },
   { '@type': 'WebSite', name: 'Centralize', alternateName: 'Centralito', url: 'https://centralize.dev/' },

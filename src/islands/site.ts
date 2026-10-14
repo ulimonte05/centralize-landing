@@ -45,7 +45,7 @@ if (nav) {
   }
   // la nav se oscurece mientras Ventas domina el viewport y el pill pasa a Agendar demo
   const ventas = $('#ventas'); const pill = $<HTMLAnchorElement>('[data-nav-pill]', nav);
-  if (ventas && 'IntersectionObserver' in window) {
+  if (ventas && ventas.tagName === 'SECTION' && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
       const dark = entries[0].intersectionRatio >= 0.5;
       nav.toggleAttribute('data-surface', dark); if (dark) nav.setAttribute('data-surface', 'dark');
@@ -122,3 +122,5 @@ function rs(data: number[], ec: number): number[] {
   for (let i = 0; i < data.length; i++) { const c = msg[i]; if (!c) continue; for (let j = 1; j < gen.length; j++) msg[i + j] ^= exp[(log[gen[j]] + log[c]) % 255]; }
   return msg.slice(data.length);
 }
+
+export {};

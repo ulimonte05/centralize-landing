@@ -1,22 +1,24 @@
 ---
 import HeroCarta from '@/components/HeroCarta.astro';
 import HeroCatalogo from '@/components/HeroCatalogo.astro';
+import HeroSimple from '@/components/HeroSimple.astro';
+import StripSimple from '@/components/StripSimple.astro';
 import DaySection from '@/components/DaySection.astro';
 import ControlPrecio from '@/components/ControlPrecio.astro';
 import VentasSection from '@/components/VentasSection.astro';
 import FaqSection from '@/components/FaqSection.astro';
 import ContactBlock from '@/components/ContactBlock.astro';
-interface Props { variant: 'carta' | 'un-dia' | 'catalogo' }
+interface Props { variant: 'simple' | 'carta' | 'un-dia' | 'catalogo' }
 const { variant } = Astro.props;
 ---
+{variant === 'simple' && <><HeroSimple /><StripSimple /></>}
 {variant === 'carta' && <><HeroCarta /><DaySection /><ControlPrecio /></>}
 {variant === 'un-dia' && <><DaySection hero /><ControlPrecio /></>}
 {variant === 'catalogo' && <><HeroCatalogo /><DaySection /><ControlPrecio precio={false} /></>}
-<VentasSection />
-<FaqSection />
-<ContactBlock />
+{variant !== 'simple' && <><VentasSection /><FaqSection /><ContactBlock /></>}
 {import.meta.env.DEV && (
   <nav class="variantes" aria-label="Variantes (solo en desarrollo)">
+    <a href="/v/simple" class={variant === 'simple' ? 'on' : ''}>D · simple</a>
     <a href="/v/carta" class={variant === 'carta' ? 'on' : ''}>A · carta</a>
     <a href="/v/un-dia" class={variant === 'un-dia' ? 'on' : ''}>B · un día</a>
     <a href="/v/catalogo" class={variant === 'catalogo' ? 'on' : ''}>C · catálogo</a>
