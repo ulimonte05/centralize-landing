@@ -10,6 +10,8 @@ interface Props { title: string; description: string; noindex?: boolean; path?: 
 const { title, description, noindex = false, path = '/', nav = 'full', surface = 'light', active = '', ogTitle } = Astro.props;
 const canonical = `https://centralize.dev${path === '/' ? '/' : path}`;
 const variant = import.meta.env.PUBLIC_VARIANT || 'simple';
+// PUBLIC_NOINDEX=1 en deploys de muestra (vercel.app) para no competir con centralize.dev en Google
+const noindexAll = import.meta.env.PUBLIC_NOINDEX === '1';
 ---
 <!doctype html>
 <html lang="es-AR" data-variant={variant}>
@@ -27,7 +29,7 @@ const variant = import.meta.env.PUBLIC_VARIANT || 'simple';
 <meta name="twitter:card" content="summary_large_image">
 <title>{title}</title>
 <meta name="description" content={description}>
-{noindex ? <meta name="robots" content="noindex, nofollow"> : <meta name="robots" content="index, follow, max-image-preview:large">}
+{(noindex || noindexAll) ? <meta name="robots" content="noindex, nofollow"> : <meta name="robots" content="index, follow, max-image-preview:large">}
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/centralize-mark-black.png">
