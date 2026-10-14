@@ -1,5 +1,6 @@
 ---
+// Logo original de Centralize (el mismo PNG que usa centralize.dev en la nav y el footer)
 interface Props { size?: number }
-const { size = 28 } = Astro.props;
+const { size = 30 } = Astro.props;
 ---
-<svg class="mark" width={size} height={size} viewBox="0 0 120 120" aria-hidden="true"><path d="M105 60a45 45 0 1 1-13.18-31.82" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="60" cy="60" r="15" fill="#DF1E02"/></svg>
+<img class="mark" src="/assets/centralize-mark-white.png" width={size} height={size} alt="" style="object-fit:contain" />
