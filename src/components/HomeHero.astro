@@ -1,0 +1,25 @@
+---
+import Chat from '@/components/Chat.astro';
+import WaLink from '@/components/WaLink.astro';
+import claims from '@/data/claims.json';
+import plans from '@/data/plans.json';
+const p = plans.planes[0];
+const precio = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IVA por asesor al mes · sin permanencia` : 'Precio por asesor · sin permanencia';
+---
+<section class="hero" id="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <p class="badge in"><i aria-hidden="true"></i>{claims.centralito.pedidos} · {claims.corte_visible}</p>
+    <h1 id="h1" class="in">Operá tu Tokko desde <em>WhatsApp</em>, sin abrirlo.</h1>
+    <p class="lead in">Centralito es un colega de IA que vive en tu <code>WhatsApp</code>: entra a tu <code>Tokko</code>, hace el trabajo y te cuenta qué hizo. Lo que sale hacia un cliente lo mandás vos.</p>
+    <div class="hero-cta in">
+      <a class="btn btn-primary" href="/sandbox" data-cta="sandbox" data-section="hero">Probá Centralito →</a>
+      <a class="btn btn-outline" href="/empezar" data-cta="empezar" data-section="hero">Empezar</a>
+    </div>
+    <p class="hero-sub in">{precio} · <WaLink section="hero" label="o escribinos por WhatsApp" /></p>
+    <div class="hero-chat in">
+      <Chat instance="hero" scene="resumen-del-dia" mode="hero" controls={false} />
+      <a class="btn btn-light btn-sm chat-cta" href="/sandbox" data-cta="sandbox" data-section="hero-chat">Probá los 15 pedidos en el sandbox →</a>
+    </div>
+    <p class="hero-foot in"><span>Funciona con <b>Tokko Broker</b></span><span>Pide <b>OK antes</b> de cambiar en lote</span><span>Te dice <b>cuánto leyó</b></span><span>Mensajes a clientes: <b>0</b></span></p>
+  </div>
+</section>

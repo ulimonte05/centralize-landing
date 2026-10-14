@@ -4,7 +4,7 @@ import plans from '@/data/plans.json';
 import Mark from '@/components/Mark.astro';
 const legal = contact.legal;
 ---
-<footer class="footer" data-surface="dark">
+<footer class="footer">
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
@@ -13,6 +13,7 @@ const legal = contact.legal;
       </div>
       <nav class="foot-col" aria-label="Producto">
         <a href="/">Centralito</a>
+        <a href="/sandbox">Sandbox</a>
         <a href="/ventas">{contact.productos.ventas.nombre}</a>
         <a href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="footer">Agendar demo de {contact.calcom.duracion.replace(' minutos', ' min')} ({contact.productos.ventas.nombre})</a>
         <a href="/precios">Precios</a>

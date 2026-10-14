@@ -1,6 +1,7 @@
 // Motor de escenas (plan §6.5). Vanilla TS, sin dependencias. Dos instancias por página (hero y Un día), DOM separado.
 import { SCENES, TOTAL, DIA_IDS, MINI_IDS, AUTO_IDS, type Escena, type Mensaje, type Artefacto } from '@/lib/scenes';
 import { renderMessages, renderPanel, sceneMessages, ICONS, SYS_ROW } from '@/lib/render';
+import { matchScene } from '@/lib/match';
 
 type Mode = 'hero' | 'panel';
 interface Token { dead: boolean }
@@ -44,13 +45,20 @@ class ChatInstance {
     this.sceneId = root.dataset.scene || '';
     if (this.sceneId) { this.scene = SCENES[this.sceneId]; this.pendingBranch = sceneMessages(this.scene, this.mode).ramas; }
     root.addEventListener('click', e => this.onClick(e));
+    const form = $<HTMLFormElement>('form[data-composer]', root);
+    if (form) { form.addEventListener('submit', e => { e.preventDefault(); const inp = $<HTMLInputElement>('.c-input', form)!; const v = inp.value; inp.value = ''; this.enviar(v); }); const inp = $<HTMLInputElement>('.c-input', form)!; inp.addEventListener('input', () => form.classList.toggle('has-text', !!inp.value)); }
     root.addEventListener('keydown', e => { if (e.key === 'Escape') this.setPaused(true); });
     if (this.panel && this.sceneId) this.setPanel(this.scene);
   }
 
   /* ---- carga ---- */
-  load(id: string, play: boolean, branch?: string) {
-    const scene = SCENES[id]; if (!scene) return;
+  load(id: string, play: boolean, branch?: string, propio?: string) {
+    let scene = SCENES[id]; if (!scene) return;
+    if (propio) { const src = sceneMessages(scene, this.mode); const i = src.mensajes.findIndex(m => m.de === 'asesor'); const mensajes = src.mensajes.map((m, k) => k === i ? { ...m, texto: propio, adjuntos: undefined, instant: true } : m); scene = { ...scene, mensajes, variante_hero: undefined, ramas: src.ramas } as Escena; }
+    this.loadScene(scene, play, branch);
+  }
+  loadScene(scene: Escena, play: boolean, branch?: string) {
+    const id = scene.id;
     this.kill(); this.scene = scene; this.sceneId = id; this.root.dataset.scene = id; this.atQuestion = false;
     const { mensajes, ramas } = sceneMessages(scene, this.mode);
     this.pendingBranch = ramas; this.msgCount = mensajes.length;
@@ -106,6 +114,7 @@ class ChatInstance {
     for (let i = 0; i < list.length; i++) {
       const m = list[i]; const el = $(`.m[data-i="${i + offset}"]`, this.msgs); if (!el || token.dead) return;
       if (m.de === 'asesor') {
+        if ((m as any).instant) { this.reveal(el); await this.wait(500, token); if (token.dead) return; continue; }
         await this.wait(350, token); if (token.dead) return;
         await this.typeOut(m, token); if (token.dead) return;
         this.reveal(el);
@@ -138,7 +147,7 @@ class ChatInstance {
     this.msgs.style.setProperty('--ty', `${-Math.max(0, over)}px`);
   }
   async typeOut(m: Mensaje, token: Token) {
-    const txt = $('.c-txt', this.composer)!; const text = m.adjuntos?.length ? `Adjuntando ${m.adjuntos.length} archivo${m.adjuntos.length > 1 ? 's' : ''}… ${m.texto}` : m.texto;
+    const inp = $<HTMLInputElement>('.c-input', this.composer); const txtEl = $('.c-txt', this.composer); const txt = { set textContent(v: string) { if (inp) inp.value = v; else if (txtEl) txtEl.textContent = v; } }; const text = m.adjuntos?.length ? `Adjuntando ${m.adjuntos.length} archivo${m.adjuntos.length > 1 ? 's' : ''}… ${m.texto}` : m.texto;
     this.composer.classList.add('typing');
     const dur = m.type_ms ?? Math.max(400, Math.min(1200, text.length * 20)); const t0 = performance.now();
     while (!token.dead) {
@@ -149,6 +158,20 @@ class ChatInstance {
     if (token.dead) return;
     await this.wait(220, token); this.composer.classList.add('sending'); await this.wait(140, token);
     this.composer.classList.remove('typing', 'sending'); txt.textContent = '';
+  }
+  /* el visitante escribe su propio pedido (sandbox) */
+  enviar(texto: string) {
+    const t = texto.trim(); if (!t) return;
+    const id = matchScene(t);
+    track('demo_interact', { section: id || 'sin-match', cta: 'escribio' });
+    if (id) { $$(`[data-scene-trigger][data-target="${this.name}"]`).forEach(x => x.setAttribute('aria-pressed', String(x.dataset.sceneTrigger === id))); this.load(id, true, undefined, t); return; }
+    const noVistos = Object.keys(SCENES).filter(k => !vistos().includes(k)).slice(0, 3);
+    const labels = Object.fromEntries(noVistos.map(k => [k, SCENES[k].chip]));
+    const fallback: Escena = { id: 'fallback', hora: SCENES['resumen-del-dia'].hora, titulo: 'Eso no está en la demo', chip: '', mensajes: [
+      { de: 'asesor', texto: t, instant: true } as Mensaje,
+      { de: 'centralito', texto: 'Eso todavía no lo muestro en esta demo. En tu Centralito real lo pedís así nomás. Acá podés probar, por ejemplo:', typing_ms: 1100, artefacto: { tipo: 'sugerencias', ids: noVistos, labels, target: this.name } },
+    ], antes: '', despues: '', wa_text: t, etiqueta: SCENES['resumen-del-dia'].etiqueta };
+    this.loadScene(fallback, true);
   }
   async choose(reply: string, auto = false) {
     if (!this.atQuestion) return; this.atQuestion = false; clearTimeout(this.autoTimer);
@@ -170,12 +193,12 @@ class ChatInstance {
   }
   finish(animated: boolean) {
     this.playing = false; this.root.classList.remove('is-playing'); this.root.classList.add('is-done');
-    if (animated || !this.played.has(this.sceneId)) { track('demo_complete', { section: this.sceneId }); }
-    this.played.add(this.sceneId); marcarVisto(this.sceneId);
+    if (SCENES[this.sceneId] && (animated || !this.played.has(this.sceneId))) { track('demo_complete', { section: this.sceneId }); }
+    if (SCENES[this.sceneId]) { this.played.add(this.sceneId); marcarVisto(this.sceneId); }
     if (this.scene.mini && this.scene.pila) { this.pila.push(this.scene.pila); if (this.panel) { this.panel.innerHTML = renderPanel({ tipo: 'pila' }, { pila: this.pila }); } }
     this.showFoot('done');
     this.root.dispatchEvent(new CustomEvent('chat:done', { bubbles: true, detail: { id: this.sceneId, instance: this.name } }));
-    if (this.name === 'hero' && !reduced()) { $$('.pill.sugerida').forEach(p => p.classList.remove('sugerida')); const next = $$(`[data-scene-trigger][data-target="hero"]`).find(b => !vistos().includes(b.dataset.sceneTrigger || '')); if (next) { next.classList.add('sugerida'); setTimeout(() => next.classList.remove('sugerida'), 3400); } }
+    if ((this.name === 'hero' || this.name === 'sandbox') && !reduced()) { $$('.pill.sugerida').forEach(p => p.classList.remove('sugerida')); const next = $$(`[data-scene-trigger][data-target="${this.name}"]`).find(b => !vistos().includes(b.dataset.sceneTrigger || '')); if (next) { next.classList.add('sugerida'); setTimeout(() => next.classList.remove('sugerida'), 3400); } }
     if (AUTO && this.onNext) this.autoTimer = window.setTimeout(() => this.onNext && this.onNext(), 5000);
   }
   showAll() {
@@ -192,16 +215,21 @@ class ChatInstance {
     this.paused = p; const b = $('[data-act="pause"]', this.root); if (!b) return;
     b.setAttribute('aria-pressed', String(p)); ($('.t', b)!).textContent = p ? 'Seguir' : 'Pausar'; ($('.i', b)!).innerHTML = p ? ICONS.play : ICONS.pause;
     this.root.classList.toggle('is-paused', p);
-    if (!p) { this.waiters.splice(0).forEach(w => w()); }
+    if (!p) this.wake();
   }
   sleep(ms: number) { return new Promise<void>(r => setTimeout(r, ms)); }
+  blocked() { return this.paused || document.hidden || !this.inView(); }
+  /* espera con un solo temporizador (sin polling: en pestañas en segundo plano Chrome frena los timers a 1/s) */
   async wait(ms: number, token: Token) {
     let left = ms;
     while (left > 0 && !token.dead) {
-      if (this.paused || document.hidden || !this.inView()) { await new Promise<void>(r => { this.waiters.push(r); setTimeout(r, 250); }); continue; }
-      const step = Math.min(80, left); await this.sleep(step); left -= step;
+      if (this.blocked()) { await new Promise<void>(r => { this.waiters.push(r); setTimeout(r, 1000); }); continue; }
+      const t0 = performance.now();
+      await new Promise<void>(r => { const t = setTimeout(r, left); this.waiters.push(() => { clearTimeout(t); r(); }); });
+      left -= performance.now() - t0;
     }
   }
+  wake() { this.waiters.splice(0).forEach(w => w()); }
   inView() { const r = this.root.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }
   showFoot(which: 'next' | 'done') {
     const sys = $('.sys', this.msgs); if (!sys) return;
@@ -227,21 +255,28 @@ class ChatInstance {
   }
   /* primera reproducción al entrar en vista */
   arm(delay: number) {
+    this.fit();
     if (this.seen || reduced()) return;
-    const io = new IntersectionObserver(entries => {
-      if (!entries.some(en => en.intersectionRatio >= 0.5)) return;
-      io.disconnect(); if (this.seen) return; this.seen = true;
+    const start = () => {
+      if (this.seen) return; this.seen = true;
       const go = () => { if (!this.played.has(this.sceneId) && !this.playing) this.load(this.sceneId, true); };
       if (isMobile()) { let fired = false; const f = () => { if (fired) return; fired = true; removeEventListener('scroll', f); go(); }; addEventListener('scroll', f, { passive: true, once: true }); setTimeout(f, 1800); }
       else setTimeout(go, delay);
-    }, { threshold: [0.5] });
+    };
+    // si ya está a la vista, arranca sin esperar al observer (que en algunas pestañas en segundo plano no dispara)
+    const r = this.root.getBoundingClientRect(); const vis = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0);
+    if (vis >= r.height * 0.5) { start(); return; }
+    const io = new IntersectionObserver(entries => { if (!entries.some(en => en.intersectionRatio >= 0.5)) return; io.disconnect(); start(); }, { threshold: [0.5] });
     io.observe(this.root);
   }
 }
 
 /* ---------- arranque ---------- */
 const instances: Record<string, ChatInstance> = {};
+const wakeAll = () => Object.values(instances).forEach(i => i.wake());
 export function init() {
+  document.addEventListener('visibilitychange', wakeAll);
+  let st = 0; addEventListener('scroll', () => { if (st) return; st = window.setTimeout(() => { st = 0; wakeAll(); }, 200); }, { passive: true });
   $$('[data-chat]').forEach(root => { const i = new ChatInstance(root); instances[i.name] = i; });
   pintarVistos();
   const vs = vistos(); vs.forEach(id => $$(`[data-scene-trigger="${id}"]`).forEach(b => b.classList.add('done')));
@@ -250,6 +285,7 @@ export function init() {
   document.addEventListener('click', e => {
     const b = (e.target as HTMLElement).closest('[data-scene-trigger]') as HTMLElement | null; if (!b) return;
     const id = b.dataset.sceneTrigger!, target = b.dataset.target || 'hero', inst = instances[target]; if (!inst) return;
+    const dlg = b.closest('dialog') as HTMLDialogElement | null; if (dlg) dlg.close();
     if (b.closest('[data-rail]')) { (window as any).__railGo?.(id, true); return; }
     $$(`[data-scene-trigger][data-target="${target}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     const first = !inst.played.has(id);
@@ -299,7 +335,9 @@ export function init() {
   else {
     instances['hero']?.arm(600);
     instances['dia']?.arm(300);
+    instances['sandbox']?.arm(400);
   }
   $$('[data-chat]').forEach(r => r.classList.add('js-anim'));
+  Object.values(instances).forEach(i => i.fit());
 }
 init();

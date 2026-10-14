@@ -69,6 +69,8 @@ export function renderArtifact(a: Artefacto): string {
       return `<div class="art art-acm"><div class="art-title">ACM · 3 amb · Caballito · 70 m²</div><div class="range">USD 152.000 — 164.000</div><div class="axis" aria-hidden="true"><span class="band"></span><span class="pt own" style="left:36%"></span><span class="pt" style="left:41%"></span><span class="pt own" style="left:45%"></span><span class="pt" style="left:52%"></span><span class="pt own" style="left:58%"></span><span class="pt" style="left:22%"></span><span class="pt" style="left:72%"></span><span class="me"></span></div><div class="lbl"><span>USD 1.900/m²</span><span>tu 3 amb · 2.250</span><span>2.600</span></div></div>`;
     case 'base-mini':
       return `<div class="art art-base"><b>128</b><small>de 1.940 contactos revisados</small><b>41</b><small>sin respuesta hace más de 30 días</small><b>17</b><small>piden cochera</small></div>`;
+    case 'sugerencias':
+      return `<div class="art art-sug">${(a.ids as string[]).map(id => `<button type="button" class="sug" data-scene-trigger="${esc(id)}" data-target="${esc(a.target || 'hero')}">${esc(a.labels?.[id] || id)}</button>`).join('')}</div>`;
     case 'agenda-mini':
       return `<div class="art art-agenda"><div class="art-title">${esc(a.titulo)}</div><ul>${(a.filas as any[]).map(f => `<li class="${f.estado || ''}"><time>${esc(f.hora)}</time><div><b>${esc(f.texto)}</b><small>${esc(f.sub)}</small></div></li>`).join('')}</ul></div>`;
     default:
@@ -164,15 +166,19 @@ export function renderPilaItem(a: Artefacto) {
 }
 
 /* ---------- cáscara del chat ---------- */
-export function renderChatShell(opts: { instance: string; mode: 'hero' | 'panel'; etiqueta: string; inner: string; sceneId: string; classes?: string; panel?: string }) {
+export function renderChatShell(opts: { instance: string; mode: 'hero' | 'panel'; etiqueta: string; inner: string; sceneId: string; classes?: string; panel?: string; input?: boolean; chips?: string; controls?: boolean }) {
+  const composer = opts.input
+    ? `<form class="composer" data-composer><span class="c-plus" aria-hidden="true"></span><div class="c-field"><input class="c-input" type="text" name="m" placeholder="Escribile como a un colega" autocomplete="off" maxlength="200" aria-label="Escribile a Centralito"><i class="c-caret" aria-hidden="true"></i></div><button type="submit" class="c-send" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M5 12h13M12 6l6 6-6 6"/></svg></button></form>`
+    : `<div class="composer" aria-hidden="true"><span class="c-plus"></span><div class="c-field"><span class="c-txt"></span><i class="c-caret"></i><em>Mensaje</em></div><span class="c-mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="c-send"><svg viewBox="0 0 24 24"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span></div>`;
   return `<div class="chat ${opts.classes || ''}" data-chat="${opts.instance}" data-mode="${opts.mode}" data-scene="${opts.sceneId}"${opts.panel ? ` data-panel-for="${opts.panel}"` : ''}>
   <div class="chat-head">
     <img src="/assets/centralito.jpg" width="36" height="36" alt="Centralito">
     <div class="who"><b>Centralito</b><small>en línea</small><span class="tag">${esc(opts.etiqueta)}</span></div>
-    <div class="chat-ctl"><button type="button" data-act="pause" aria-pressed="false"><span class="i" aria-hidden="true">${ICON.pause}</span><span class="t">Pausar</span></button><button type="button" data-act="all"><span aria-hidden="true">${ICON.all}</span><span class="t">Ver todo</span></button></div>
+    <div class="chat-ctl ${opts.controls === false ? 'ctl-min' : ''}"><button type="button" data-act="pause" aria-pressed="false"><span class="i" aria-hidden="true">${ICON.pause}</span><span class="t">Pausar</span></button><button type="button" data-act="all"><span aria-hidden="true">${ICON.all}</span><span class="t">Ver todo</span></button></div>
   </div>
   <div class="chat-body"><div class="notif" aria-hidden="true"><img src="/assets/centralito.jpg" width="28" height="28" alt=""><div><b>Centralito</b><span>Buen día, Caro. Hoy: 3 leads de anoche…</span></div></div><div class="msgs" role="log" aria-label="Conversación de ejemplo con Centralito">${opts.inner}</div></div>
-  <div class="composer" aria-hidden="true"><span class="c-plus"></span><div class="c-field"><span class="c-txt"></span><i class="c-caret"></i><em>Mensaje</em></div><span class="c-mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="c-send"><svg viewBox="0 0 24 24"><path d="M5 12h13M12 6l6 6-6 6"/></svg></span></div>
+  ${opts.chips ? `<div class="chat-chips" aria-label="Pedidos sugeridos">${opts.chips}</div>` : ''}
+  ${composer}
   <div class="sr-only" aria-live="polite" data-announce></div>
 </div>`;
 }

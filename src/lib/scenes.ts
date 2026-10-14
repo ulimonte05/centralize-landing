@@ -34,6 +34,7 @@ export interface Mensaje {
   rama_stand?: string;
   anuncio?: string;
   notificacion?: boolean;
+  instant?: boolean;
 }
 export interface Escena {
   id: string;

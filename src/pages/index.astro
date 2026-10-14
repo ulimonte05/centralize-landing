@@ -1,7 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
-import Home from '@/components/Home.astro';
-const variant = (import.meta.env.PUBLIC_VARIANT || 'simple') as 'simple' | 'carta' | 'un-dia' | 'catalogo';
+import HomeHero from '@/components/HomeHero.astro';
+import HomeBlocks from '@/components/HomeBlocks.astro';
 const ld = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'Organization', name: 'Centralize', url: 'https://centralize.dev/', logo: 'https://centralize.dev/assets/centralize-mark-black.png', sameAs: ['https://www.linkedin.com/company/centralize-ai', 'https://www.instagram.com/centralize.dev/'] },
   { '@type': 'WebSite', name: 'Centralize', alternateName: 'Centralito', url: 'https://centralize.dev/' },
@@ -9,5 +9,8 @@ const ld = { '@context': 'https://schema.org', '@graph': [
 ---
 <Base title="Centralito: tu colega de IA en WhatsApp para operar Tokko | Centralize" description="Centralito es un colega de IA que vive en tu WhatsApp: entra a tu Tokko, busca, segmenta, arma tasaciones y fichas, y te deja todo listo para que lo mandes vos. Para inmobiliarias de Argentina y Uruguay." path="/" active="home">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
-  <Home variant={variant} />
+  <HomeHero />
+  <HomeBlocks />
+  <script src="@/islands/chat-engine.ts"></script>
+  <script src="@/islands/plan-selector.ts"></script>
 </Base>

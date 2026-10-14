@@ -22,7 +22,7 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
         <div class="nav-right">
           <button type="button" class="motion-btn" data-motion-toggle aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="t">Menos animación</span></button>
           <a class="ingresar" href={contact.platform} title="Panel de Centralize Ventas. Si usás Centralito, todo pasa por WhatsApp." data-cta="ingresar" data-section="nav">Ingresar</a>
-          <a class="btn btn-primary btn-sm nav-pill" href="/empezar" data-nav-pill data-demo={contact.calcom.url} data-cta="empezar" data-section="nav">Empezar</a>
+          <a class="btn btn-primary nav-pill" href="/empezar" data-nav-pill data-demo={contact.calcom.url} data-cta="empezar" data-section="nav">Empezar</a>
           <button type="button" class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="menu" aria-label="Menú"><span></span><span></span><span></span></button>
         </div>
         <div class="menu" id="menu" data-menu hidden>
@@ -36,8 +36,9 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
       </>
     ) : (
       <div class="nav-right nav-min">
-        <a class="link" href="/">Volver a Centralito</a>
-        <a class="link-wa" href={waHref} target="_blank" rel="noopener" data-wa data-section="empezar" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>Consultar por WhatsApp</span></a>
+        <a class="ingresar" href="/">← Volver</a>
+        <a class="link-wa" href={waHref} target="_blank" rel="noopener" data-wa data-section="min" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>WhatsApp</span></a>
+        <a class="btn btn-primary nav-pill" href="/empezar" data-cta="empezar" data-section="nav">Empezar</a>
       </div>
     )}
   </div>

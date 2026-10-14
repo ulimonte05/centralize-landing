@@ -1,0 +1,48 @@
+---
+import PlanCard from '@/components/PlanCard.astro';
+import WaLink from '@/components/WaLink.astro';
+import Proof from '@/components/Proof.astro';
+import faq from '@/data/faq.json';
+import plans from '@/data/plans.json';
+import contact from '@/data/contact.json';
+const v = contact.productos.ventas.nombre;
+const familias = [
+  { nombre: 'Leads', items: ['Qué entró anoche, con teléfono y estado', 'Cargá un lead desde la visita', '¿Quién consultó por Thames 400?', 'Que te avise si hay leads sin atender'] },
+  { nombre: 'Buscar', items: ['Buscá en tu cartera como lo dirías', 'Tres opciones en la Red Tokko', '¿Quién de tus contactos busca algo así?'] },
+  { nombre: 'Tasar y armar', items: ['Una tasación con comparables y PDF', 'El informe para el propietario', 'La landing de un emprendimiento', 'Ficha en PDF con tu marca'] },
+  { nombre: 'Fichas y base', items: ['Cambios en lote, con tu OK antes', 'Segmentar contactos y etiquetarlos', 'Leer un plano o una foto', 'Planillas que se actualizan solas'] },
+];
+const precio = plans.publicado ? `Desde ARS ${plans.planes[0].ar.toLocaleString('es-AR')} + IVA por asesor al mes, sin permanencia.` : 'Precio por asesor, sin permanencia.';
+const items = faq.map(f => ({ q: f.q, a: (f.a || (plans.cobro ? f.a_con_cobro : f.a_sin_cobro) || '').replace('{precio}', precio).replace('{sla_alta}', contact.sla_alta) }));
+---
+<section class="block" id="pedidos" aria-labelledby="ped-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Qué le pedís</p><h2 id="ped-h">Quince pedidos reales, <em>en castellano.</em></h2><p class="lead">Son los que los asesores le hacen todos los días. Cada uno se puede probar en el sandbox, con nombres y cifras de ejemplo.</p></div>
+    <div class="familias">
+      {familias.map(f => <a class="fam rv" href="/sandbox" data-cta="sandbox" data-section="pedidos"><b>{f.nombre}</b><ul>{f.items.map(i => <li>{i}</li>)}</ul><span class="more">Probar →</span></a>)}
+    </div>
+  </div>
+</section>
+<section class="block" id="precio" aria-labelledby="pre-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Precio y el otro producto</p><h2 id="pre-h">Un precio por asesor. <em>Sin permanencia.</em></h2></div>
+    <div class="precio-ventas">
+      <div class="rv"><PlanCard /></div>
+      <div class="ventas-box rv" id="ventas">
+        <p class="eyebrow">Otro producto · {v}</p>
+        <h2>Y cuando querés que la IA también hable con tus clientes.</h2>
+        <p class="frase-fija">{v} trabaja con tus clientes: responde, recontacta y califica tus leads. Es otro producto, se contrata aparte y viene con Centralito adentro.</p>
+        <p>WhatsApp con templates aprobados por Meta, Instagram y Facebook. Conectás tu número en 15 minutos.</p>
+        <Proof which="ventas" />
+        <div class="cta"><a class="btn btn-light btn-sm" href="/ventas" data-cta="ventas" data-section="home">Conocer {v}</a><a class="link" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="home">Agendar demo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="block" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Antes de empezar</p><h2 id="faq-h">Lo que preguntan <em>antes de activarlo.</em></h2></div>
+    <div class="faq-cols">{items.map(it => <details class="faq-d"><summary>{it.q}</summary><p>{it.a}</p></details>)}</div>
+    <p class="faq-more">¿Otra pregunta? <WaLink section="faq" /> <span class="sep">·</span> <a class="link" href="/a-medida" data-cta="a_medida" data-section="faq">Automatizamos tareas a medida →</a></p>
+  </div>
+</section>

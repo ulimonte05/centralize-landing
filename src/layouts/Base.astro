@@ -9,12 +9,11 @@ import contact from '@/data/contact.json';
 interface Props { title: string; description: string; noindex?: boolean; path?: string; nav?: 'full' | 'min' | 'none'; surface?: 'light' | 'dark'; active?: string; ogTitle?: string }
 const { title, description, noindex = false, path = '/', nav = 'full', surface = 'light', active = '', ogTitle } = Astro.props;
 const canonical = `https://centralize.dev${path === '/' ? '/' : path}`;
-const variant = import.meta.env.PUBLIC_VARIANT || 'simple';
 // PUBLIC_NOINDEX=1 en deploys de muestra (vercel.app) para no competir con centralize.dev en Google
 const noindexAll = import.meta.env.PUBLIC_NOINDEX === '1';
 ---
 <!doctype html>
-<html lang="es-AR" data-variant={variant}>
+<html lang="es-AR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -33,15 +32,17 @@ const noindexAll = import.meta.env.PUBLIC_NOINDEX === '1';
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/centralize-mark-black.png">
-<meta name="theme-color" content={surface === 'dark' ? '#151319' : '#FFFFFF'}>
-<link rel="preload" as="font" type="font/woff2" href="/fonts/BricolageGrotesque-latin.woff2" crossorigin>
+<meta name="theme-color" content="#0A0908">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <script is:inline>
 // antes del primer paint: preferencia de movimiento guardada
 try{var m=localStorage.getItem('motion');if(m==='reduced'||(m===null&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-reduced')}catch(e){}
 </script>
 <slot name="head" />
 </head>
-<body data-surface={surface === 'dark' ? 'dark' : undefined}>
+<body>
 <a class="skip" href="#main">Ir al contenido</a>
 {nav !== 'none' && <Nav mode={nav} active={active} />}
 <main id="main"><slot /></main>
