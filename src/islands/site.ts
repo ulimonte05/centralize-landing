@@ -55,6 +55,17 @@ if (nav) {
   }
 }
 
+/* ---- móvil: barra fija de acciones cuando el botón del hero sale de la vista; puntos del riel ---- */
+const bar = $('[data-m-bar]'), sent = $('[data-bar-sentinel]');
+if (bar && sent && 'IntersectionObserver' in window) {
+  new IntersectionObserver(es => { const e = es[0]; bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); }, { threshold: 0 }).observe(sent);
+}
+const railM = $('[data-rail-m]'), dots = $$('.rail-dots span');
+if (railM && dots.length) {
+  const cards = $$('.rail-card', railM); const upd = () => { const k = Math.round(railM.scrollLeft / (railM.scrollWidth - railM.clientWidth) * (dots.length - 1)) || 0; dots.forEach((d, i) => d.classList.toggle('on', i === k)); };
+  railM.addEventListener('scroll', upd, { passive: true }); upd(); void cards;
+}
+
 /* ---- WhatsApp: en desktop, popover con QR y número ---- */
 const fine = matchMedia('(pointer: fine) and (min-width: 1024px)').matches;
 document.addEventListener('click', e => {

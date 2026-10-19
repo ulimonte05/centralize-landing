@@ -8,18 +8,22 @@ const precio = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IV
 ---
 <section class="hero" id="hero" aria-labelledby="h1">
   <div class="wrap">
-    <p class="badge in"><i aria-hidden="true"></i>{claims.centralito.pedidos} · {claims.corte_visible}</p>
+    <p class="badge in"><i aria-hidden="true"></i><span class="only-d">{claims.centralito.pedidos} · {claims.corte_visible}</span><span class="only-m">{claims.centralito.pedidos_corto} · {claims.corte_visible}</span></p>
     <h1 id="h1" class="in">Operá tu Tokko desde <em>WhatsApp</em>, sin abrirlo.</h1>
-    <p class="lead in">Centralito es un colega de IA que vive en tu <code>WhatsApp</code>: entra a tu <code>Tokko</code>, hace el trabajo y te cuenta qué hizo. Lo que sale hacia un cliente lo mandás vos.</p>
-    <div class="hero-cta in">
+    <p class="lead in"><span class="only-d">Centralito es un colega de IA que vive en tu <code>WhatsApp</code>: entra a tu <code>Tokko</code>, hace el trabajo y te cuenta qué hizo. Lo que sale hacia un cliente lo mandás vos.</span><span class="only-m">Un colega de IA en tu WhatsApp. Entra a tu Tokko, hace el trabajo y te cuenta qué hizo.</span></p>
+    <div class="hero-cta in" data-bar-sentinel>
       <a class="btn btn-primary" href="/sandbox" data-cta="sandbox" data-section="hero">Probá Centralito →</a>
-      <a class="btn btn-outline" href="/empezar" data-cta="empezar" data-section="hero">Empezar</a>
+      <a class="btn btn-outline only-d" href="/empezar" data-cta="empezar" data-section="hero">Empezar</a>
     </div>
-    <p class="hero-sub in">{precio} · <WaLink section="hero" label="o escribinos por WhatsApp" /></p>
+    <p class="hero-sub in only-d">{precio} · <WaLink section="hero" label="o escribinos por WhatsApp" /></p>
     <div class="hero-chat in">
       <Chat instance="hero" scene="resumen-del-dia" mode="hero" controls={false} />
-      <a class="btn btn-light btn-sm chat-cta" href="/sandbox" data-cta="sandbox" data-section="hero-chat">Probá los 15 pedidos en el sandbox →</a>
+      <a class="btn btn-light btn-sm chat-cta" href="/sandbox" data-cta="sandbox" data-section="hero-chat"><span class="only-d">Probá los 15 pedidos en el sandbox →</span><span class="only-m">Escribile vos →</span></a>
     </div>
-    <p class="hero-foot in"><span>Funciona con <b>Tokko Broker</b></span><span>Pide <b>OK antes</b> de cambiar en lote</span><span>Te dice <b>cuánto leyó</b></span><span>Mensajes a clientes: <b>0</b></span></p>
+    <p class="hero-foot in only-d"><span>Funciona con <b>Tokko Broker</b></span><span>Pide <b>OK antes</b> de cambiar en lote</span><span>Te dice <b>cuánto leyó</b></span><span>Mensajes a clientes: <b>0</b></span></p>
   </div>
 </section>
+<div class="m-bar" data-m-bar aria-label="Acciones">
+  <a class="btn btn-primary" href="/sandbox" data-cta="sandbox" data-section="bar">Probá Centralito</a>
+  <a class="btn btn-outline" href="/empezar" data-cta="empezar" data-section="bar">Empezar</a>
+</div>

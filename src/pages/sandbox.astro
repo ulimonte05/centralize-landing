@@ -3,14 +3,7 @@ import Base from '@/layouts/Base.astro';
 import Chat from '@/components/Chat.astro';
 import { SCENES, TOTAL } from '@/lib/scenes';
 import { esc } from '@/lib/render';
-const corto: Record<string, string> = { 'resumen-del-dia': 'Qué entró anoche', 'cargar-lead': 'Cargá un lead', 'quien-consulto': '¿Quién consultó por Thames 400?', 'rutina-leads-sin-cargar': 'Avisame si hay leads sin atender', 'buscar-cartera': 'Buscá en tu cartera', 'buscar-red': '3 opciones en la Red Tokko', 'quien-busca-algo-asi': '¿Quién busca algo así?', 'tasacion-acm': 'Una tasación', 'informe-propietario': 'Informe al propietario', 'landing-emprendimiento': 'Landing de un proyecto', 'ficha-con-tu-marca': 'Ficha PDF con tu marca', 'cambios-en-lote': 'Aviso legal en 23 fichas', 'segmentar-contactos': 'Los de Palermo sin visita', 'leer-fotos-planos': 'Mandale un plano', 'planillas-al-dia': 'Planillas al día' };
-const familias = [
-  { nombre: 'Leads', ids: ['resumen-del-dia', 'cargar-lead', 'quien-consulto', 'rutina-leads-sin-cargar'] },
-  { nombre: 'Buscar', ids: ['buscar-cartera', 'buscar-red', 'quien-busca-algo-asi'] },
-  { nombre: 'Tasar y armar', ids: ['tasacion-acm', 'informe-propietario', 'landing-emprendimiento', 'ficha-con-tu-marca'] },
-  { nombre: 'Fichas y base', ids: ['cambios-en-lote', 'segmentar-contactos', 'leer-fotos-planos', 'planillas-al-dia'] },
-];
-const orden = familias.flatMap(f => f.ids);
+import { CORTO as corto, FAMILIAS as familias, ORDEN as orden } from '@/lib/pedidos';
 const chips = orden.map(id => `<button type="button" class="pill" data-scene-trigger="${id}" data-target="sandbox" aria-pressed="${id === 'resumen-del-dia'}">${esc(corto[id])}</button>`).join('');
 ---
 <Base title="Sandbox de Centralito | Centralize" description="Probá los 15 pedidos de Centralito en un chat de ejemplo. Escribí lo que le pedirías y mirá qué hace." path="/sandbox" nav="min" noindex>

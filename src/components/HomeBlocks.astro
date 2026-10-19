@@ -5,6 +5,7 @@ import Proof from '@/components/Proof.astro';
 import faq from '@/data/faq.json';
 import plans from '@/data/plans.json';
 import contact from '@/data/contact.json';
+import { CORTO, FAMILIAS } from '@/lib/pedidos';
 const v = contact.productos.ventas.nombre;
 const familias = [
   { nombre: 'Leads', items: ['Qué entró anoche, con teléfono y estado', 'Cargá un lead desde la visita', '¿Quién consultó por Thames 400?', 'Que te avise si hay leads sin atender'] },
@@ -12,21 +13,29 @@ const familias = [
   { nombre: 'Tasar y armar', items: ['Una tasación con comparables y PDF', 'El informe para el propietario', 'La landing de un emprendimiento', 'Ficha en PDF con tu marca'] },
   { nombre: 'Fichas y base', items: ['Cambios en lote, con tu OK antes', 'Segmentar contactos y etiquetarlos', 'Leer un plano o una foto', 'Planillas que se actualizan solas'] },
 ];
-const precio = plans.publicado ? `Desde ARS ${plans.planes[0].ar.toLocaleString('es-AR')} + IVA por asesor al mes, sin permanencia.` : 'Precio por asesor, sin permanencia.';
+const rail = FAMILIAS.flatMap(f => f.ids.map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
+const p = plans.planes[0];
+const usd = Math.round(p.ar / plans.tipo_cambio.ars_por_usd);
+const precio = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IVA por asesor al mes, sin permanencia.` : 'Precio por asesor, sin permanencia.';
 const items = faq.map(f => ({ q: f.q, a: (f.a || (plans.cobro ? f.a_con_cobro : f.a_sin_cobro) || '').replace('{precio}', precio).replace('{sla_alta}', contact.sla_alta) }));
 ---
 <section class="block" id="pedidos" aria-labelledby="ped-h">
   <div class="wrap">
-    <div class="block-head"><p class="eyebrow">Qué le pedís</p><h2 id="ped-h">Quince pedidos reales, <em>en castellano.</em></h2><p class="lead">Son los que los asesores le hacen todos los días. Cada uno se puede probar en el sandbox, con nombres y cifras de ejemplo.</p></div>
-    <div class="familias">
+    <div class="block-head"><p class="eyebrow">Qué le pedís</p><h2 id="ped-h">Quince pedidos reales, <em>en castellano.</em></h2><p class="lead only-d">Son los que los asesores le hacen todos los días. Cada uno se puede probar en el sandbox, con nombres y cifras de ejemplo.</p><p class="lead only-m">Tocá uno y miralo en el sandbox.</p></div>
+    <div class="familias only-d">
       {familias.map(f => <a class="fam rv" href="/sandbox" data-cta="sandbox" data-section="pedidos"><b>{f.nombre}</b><ul>{f.items.map(i => <li>{i}</li>)}</ul><span class="more">Probar →</span></a>)}
     </div>
   </div>
+  <div class="rail-m only-m" data-rail-m>
+    {rail.map((r, i) => <a class="rail-card" href={`/sandbox#carta-${r.id}`} data-cta="sandbox" data-section="rail" style={`--i:${i}`}><b>{r.fam}</b><span>{r.corto}</span><i aria-hidden="true">→</i></a>)}
+    <a class="rail-card rail-end" href="/sandbox" data-cta="sandbox" data-section="rail"><span>Los 15, con tu propio texto</span><i aria-hidden="true">→</i></a>
+  </div>
+  <p class="rail-dots only-m" aria-hidden="true"><span></span><span></span><span></span><span></span></p>
 </section>
 <section class="block" id="precio" aria-labelledby="pre-h">
   <div class="wrap">
     <div class="block-head"><p class="eyebrow">Precio y el otro producto</p><h2 id="pre-h">Un precio por asesor. <em>Sin permanencia.</em></h2></div>
-    <div class="precio-ventas">
+    <div class="precio-ventas only-d">
       <div class="rv"><PlanCard /></div>
       <div class="ventas-box rv" id="ventas">
         <p class="eyebrow">Otro producto · {v}</p>
@@ -37,6 +46,24 @@ const items = faq.map(f => ({ q: f.q, a: (f.a || (plans.cobro ? f.a_con_cobro : 
         <div class="cta"><a class="btn btn-light btn-sm" href="/ventas" data-cta="ventas" data-section="home">Conocer {v}</a><a class="link" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="home">Agendar demo</a></div>
       </div>
     </div>
+    <div class="precio-m only-m">
+      {plans.publicado ? (
+        <>
+          <p class="pm-num">ARS {p.ar.toLocaleString('es-AR')} <small>+ IVA</small></p>
+          <p class="pm-sub">{p.por} · ≈ USD {usd}</p>
+          <ul class="plan-bullets"><li>{p.bullets[0]}</li><li>{p.bullets[2]}</li></ul>
+          <a class="btn btn-primary btn-block" href="/empezar?plan=asesor&pais=ar" data-cta="empezar" data-section="precio-m">{plans.cobro ? 'Empezar' : 'Quiero activarlo'}</a>
+          <p class="pm-foot">Te escribimos {contact.sla_alta} para activarlo. <a class="link" href="/precios">Planes y precio en Uruguay →</a></p>
+        </>
+      ) : (
+        <>
+          <p class="pm-num">Precio por asesor</p>
+          <p class="pm-sub">sin permanencia</p>
+          <a class="btn btn-primary btn-block" href="/precios" data-cta="precios" data-section="precio-m">Ver precios</a>
+        </>
+      )}
+    </div>
+    <a class="ventas-m only-m" href="/ventas" data-cta="ventas" data-section="home-m"><b class="eyebrow">Otro producto</b><span><strong>{v}</strong> · la IA que también habla con tus clientes.</span><i aria-hidden="true">→</i></a>
   </div>
 </section>
 <section class="block" id="faq" aria-labelledby="faq-h">

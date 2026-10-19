@@ -330,7 +330,8 @@ export function init() {
 
   // permalinks
   const h = location.hash.slice(1);
-  if (h.startsWith('carta-') && instances['hero'] && SCENES[h.slice(6)]) { instances['hero'].load(h.slice(6), false); $$(`[data-scene-trigger="${h.slice(6)}"][data-target="hero"]`).forEach(b => b.setAttribute('aria-pressed', 'true')); }
+  if (h.startsWith('carta-') && instances['sandbox'] && SCENES[h.slice(6)]) { instances['sandbox'].load(h.slice(6), true); $$(`[data-scene-trigger][data-target="sandbox"]`).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sceneTrigger === h.slice(6)))); }
+  else if (h.startsWith('carta-') && instances['hero'] && SCENES[h.slice(6)]) { instances['hero'].load(h.slice(6), false); $$(`[data-scene-trigger="${h.slice(6)}"][data-target="hero"]`).forEach(b => b.setAttribute('aria-pressed', 'true')); }
   else if (h.startsWith('dia-') && instances['dia'] && SCENES[h.slice(4)]) { const id = h.slice(4); if (DIA_IDS.includes(id)) railGo(id, false); else instances['dia'].load(id, false); setTimeout(() => $('#dia')?.scrollIntoView({ block: 'start' }), 50); }
   else {
     instances['hero']?.arm(600);

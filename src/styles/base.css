@@ -67,3 +67,7 @@ em{font-style:italic;color:var(--signal-bright)}
 @keyframes rv-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 html.motion-reduced *,html.motion-reduced *::before,html.motion-reduced *::after{animation-duration:.001ms!important;transition-duration:.15s!important;scroll-behavior:auto!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.15s!important}}
+
+/* utilidades de breakpoint: el móvil (≤767px) tiene su propia versión del home */
+.only-m{display:none}
+@media (max-width:767px){.only-m{display:revert}.only-d{display:none!important}}
