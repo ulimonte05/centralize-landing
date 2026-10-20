@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import PlanCard from '@/components/PlanCard.astro';
 import WaLink from '@/components/WaLink.astro';
+import MobileBar from '@/components/MobileBar.astro';
 import plans from '@/data/plans.json';
 import contact from '@/data/contact.json';
 import { SCENES, ALL_IDS } from '@/lib/scenes';
@@ -17,8 +18,8 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
       </div>
       <div class="precios-grid">
         <div>
-          <p class="frase-fija" style="margin:0 0 16px;font-size:20px">Centralito trabaja para vos: busca, ordena, tasa, arma y recuerda. Todo lo que le llega a un cliente lo mandás vos.</p>
-          <PlanCard />
+          <p class="frase-fija only-d" style="margin:0 0 16px;font-size:20px">Centralito trabaja para vos: busca, ordena, tasa, arma y recuerda. Todo lo que le llega a un cliente lo mandás vos.</p>
+          <div data-bar-sentinel><PlanCard /></div>
         </div>
         <div class="ventas-card">
           <p class="eyebrow">{v}</p>
@@ -29,19 +30,20 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
           <div class="cta-row" style="margin-top:20px"><a class="btn btn-light" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="precios">Agendar demo de {dur}</a></div>
         </div>
       </div>
-      <h2 id="pedidos" style="margin-top:64px;font-size:clamp(24px,2.4vw,32px)">Qué cuenta como un pedido</h2>
+      <h2 id="pedidos" class="h2-sec">Qué cuenta como un pedido</h2>
       <p class="lead" style="margin-top:10px">Un pedido es un mensaje como estos. Tasación, landing e informe en PDF son pedidos pesados y cuentan aparte: {plans.publicado ? `ARS ${plans.pesado_extra.ar.toLocaleString('es-AR')} (USD ${plans.pesado_extra.uy}) cada uno` : 'te lo confirmamos antes de pagar'}. Una rutina es un pedido que se repite solo; sus corridas no descuentan pedidos.</p>
-      <ul class="pedidos-lista">{ALL_IDS.map(id => <li><b>{SCENES[id].chip}{['tasacion-acm', 'landing-emprendimiento', 'informe-propietario'].includes(id) ? ' · pesado' : ''}</b>{SCENES[id].wa_text}</li>)}</ul>
+      <details class="m-fold" open><summary class="pill">Ver los 15 pedidos de ejemplo</summary><ul class="pedidos-lista">{ALL_IDS.map(id => <li><b>{SCENES[id].chip}{['tasacion-acm', 'landing-emprendimiento', 'informe-propietario'].includes(id) ? ' · pesado' : ''}</b>{SCENES[id].wa_text}</li>)}</ul></details>
       <div class="prose" style="margin-top:56px">
         <h2>Preguntas sobre el cobro</h2>
-        <h3>¿En qué moneda pago?</h3><p>En Argentina en pesos, con IVA del 21 % aparte, al dólar BNA del primer día de cada mes. En Uruguay en dólares con IVA del 22 %.</p>
-        <h3>¿Me facturan?</h3><p>Sí. En Argentina con factura A o B según tu condición.</p>
-        <h3>¿Cómo cancelo?</h3><p>Con un mensaje al equipo. No pagás el mes siguiente.</p>
-        {plans.cobro && <><h3>¿Y si me arrepiento?</h3><p>Dentro de los 10 días (Argentina) o 5 días hábiles (Uruguay) te devolvemos lo pagado sin preguntas.</p></>}
-        <h3>¿Qué cobra Meta?</h3><p>Nada por Centralito: usás tu WhatsApp como siempre. Meta factura aparte los mensajes de {v}; para la mayoría hoy es cero o unos pocos dólares por mes.</p>
+        <details class="faq-d"><summary>¿En qué moneda pago?</summary><p>En Argentina en pesos, con IVA del 21 % aparte, al dólar BNA del primer día de cada mes. En Uruguay en dólares con IVA del 22 %.</p></details>
+        <details class="faq-d"><summary>¿Me facturan?</summary><p>Sí. En Argentina con factura A o B según tu condición.</p></details>
+        <details class="faq-d"><summary>¿Cómo cancelo?</summary><p>Con un mensaje al equipo. No pagás el mes siguiente.</p></details>
+        {plans.cobro && <details class="faq-d"><summary>¿Y si me arrepiento?</summary><p>Dentro de los 10 días (Argentina) o 5 días hábiles (Uruguay) te devolvemos lo pagado sin preguntas.</p></details>}
+        <details class="faq-d"><summary>¿Qué cobra Meta?</summary><p>Nada por Centralito: usás tu WhatsApp como siempre. Meta factura aparte los mensajes de {v}; para la mayoría hoy es cero o unos pocos dólares por mes.</p></details>
       </div>
-      <div class="cta-row" style="margin-top:32px"><a class="btn btn-primary" href="/empezar?plan=asesor&pais=ar" data-cta="empezar" data-section="precios">Empezar</a><WaLink section="precios" /></div>
+      <div class="cta-row only-d" style="margin-top:32px"><a class="btn btn-primary" href="/empezar?plan=asesor&pais=ar" data-cta="empezar" data-section="precios">Empezar</a><WaLink section="precios" /></div>
     </div>
   </section>
+  <MobileBar section="precios" primary={{ href: '/empezar?plan=asesor&pais=ar', label: plans.cobro ? 'Empezar' : 'Quiero activarlo', cta: 'empezar' }} secondary={{ wa: true, label: 'WhatsApp', cta: 'whatsapp' }} />
   <script src="@/islands/plan-selector.ts"></script>
 </Base>

@@ -9,13 +9,13 @@ const legal = contact.legal;
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="/" aria-label="Centralize, inicio"><Mark /><span>Centralize</span></a>
-        <p>Agentes de IA para inmobiliarias de Argentina y Uruguay.</p>
+        <p class="only-d">Agentes de IA para inmobiliarias de Argentina y Uruguay.</p>
       </div>
       <nav class="foot-col" aria-label="Producto">
         <a href="/">Centralito</a>
         <a href="/sandbox">Sandbox</a>
         <a href="/ventas">{contact.productos.ventas.nombre}</a>
-        <a href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="footer">Agendar demo de {contact.calcom.duracion.replace(' minutos', ' min')} ({contact.productos.ventas.nombre})</a>
+        <a class="only-d" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="footer">Agendar demo de {contact.calcom.duracion.replace(' minutos', ' min')} ({contact.productos.ventas.nombre})</a>
         <a href="/precios">Precios</a>
         <a href="/a-medida">A medida</a>
         <a href="/contacto">Contacto</a>

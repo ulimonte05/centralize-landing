@@ -17,5 +17,5 @@
       "bullets": ["100 pedidos por asesor al mes, compartidos entre el equipo", "4 pedidos pesados por asesor, compartidos", "5 rutinas programadas por asesor"],
       "nota_dia": "Un Centralito por asesor, sobre el Tokko de la inmobiliaria" }
   ],
-  "ventas": { "nombre": "Centralize Ventas", "bullets": ["Todo Centralito, para todo el equipo", "Campañas por WhatsApp con templates aprobados por Meta", "Responde en WhatsApp, Instagram y Facebook", "Califica HOT / WARM / COLD y carga al CRM"], "nota": "Incluye Centralito para todo el equipo · Propuesta en una demo de 20 min · Sin permanencia" }
+  "ventas": { "nombre": "Centralize Ventas", "bullets": ["Todo Centralito, para todo el equipo", "Campañas por WhatsApp con templates aprobados por Meta", "Responde en WhatsApp, Instagram y Facebook", "Califica HOT / WARM / COLD y carga al CRM"], "nota": "Incluye Centralito para todo el equipo · Propuesta en una demo de 15 min · Sin permanencia" }
 }

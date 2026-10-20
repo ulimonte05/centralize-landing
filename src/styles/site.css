@@ -300,3 +300,52 @@
   .foot-col a,.foot-toggle{font-size:13.5px}
   .foot-legal{margin-top:16px;font-size:11px}
 }
+
+/* ===== Páginas secundarias: títulos de sección y listas plegables ===== */
+.h2-sec{margin-top:64px;font-size:clamp(24px,2.4vw,32px)}
+.m-fold>summary{display:none}
+.m-fold>summary::-webkit-details-marker{display:none}
+.prose .faq-d{padding:0}
+.prose .faq-d p{margin:0 0 14px}
+@media (max-width:767px){
+  .page{padding:24px 0 44px}
+  .page-head{margin-bottom:20px}
+  .page-head h1{margin:10px 0 10px;font-size:clamp(30px,8.6vw,36px)}
+  .page-head .lead,.prose,.lead{font-size:16px}
+  .prose h2{font-size:22px;margin:28px 0 8px}
+  .prose h3{font-size:17px;margin:18px 0 6px}
+  .prose ul,.prose ol{padding-left:18px}
+  .frase-fija{font-size:18px}
+  .h2-sec{margin-top:36px;font-size:24px}
+  .cols-3,.cols-2{gap:10px}
+  .step{padding:16px 18px}
+  .step b{font-size:16.5px}
+  .step p{font-size:14.5px}
+  .step .n{width:26px;height:26px;font-size:11px;margin-bottom:8px}
+  .m-fold>summary{display:inline-flex;cursor:pointer;list-style:none;margin-top:14px}
+  .m-fold>summary::after{content:"+";font-family:var(--mono);color:var(--signal-bright);font-size:16px}
+  .m-fold[open]>summary::after{content:"–"}
+  .m-fold>ul{margin-top:12px}
+  .pedidos-lista li{font-size:13.5px;padding:10px 12px}
+  .contexto{padding:10px 14px;font-size:13.5px;margin-bottom:16px}
+  .page .cta-row{margin-top:20px!important}
+  .form{gap:14px}
+  .form>.btn{width:100%}
+  .field input,.field select,.field textarea{padding:11px 12px}
+  .recibo{order:1;margin-top:8px;padding:18px}
+  .recibo li{font-size:14px}
+  .estado span{font-size:13.5px;padding:7px 12px}
+  .pasos{font-size:15px}
+  /* precios: la tarjeta sin las notas largas; el resto está plegado */
+  .plan-card{padding:20px}
+  .plan-card .plan-expl,.plan-card .plan-notas,.plan-card .plan-foot,.plan-card .plan-pie,.plan-card .plan-nota{display:none}
+  .plan-card .plan-links{margin-top:12px;padding-top:12px}
+  .ventas-card{padding:20px}
+  .ventas-card ul{font-size:14.5px;gap:6px;margin:12px 0}
+  .ventas-card .cta-row{margin-top:14px!important}
+  .precios-grid{margin-top:20px;gap:12px}
+  .prueba{font-size:10.5px;line-height:1.6}
+  /* nav mínima: sin el link "WhatsApp" cuando hay barra fija */
+  body:has(.m-bar) .nav-min .link-wa{display:none}
+  .nav-min{gap:12px}
+}

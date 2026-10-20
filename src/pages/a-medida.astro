@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import WaLink from '@/components/WaLink.astro';
+import MobileBar from '@/components/MobileBar.astro';
 ---
 <Base title="Software a medida con IA para tu empresa | Centralize" description="Automatizamos tareas reales: WhatsApp sincronizado a un CRM a medida, informes con IA, acceso del equipo por chat." path="/a-medida">
   <section class="page">
@@ -14,13 +15,14 @@ import WaLink from '@/components/WaLink.astro';
         <div class="step"><b>Una inmobiliaria del oeste del GBA</b><p>El informe de cada propiedad le llega solo al dueño cada martes: consultas, visitas y difusión de la semana, en PDF, desde el CRM, sin que nadie lo arme.</p></div>
         <div class="step"><b>Una casa de subastas</b><p>El WhatsApp de cada comercial espejado en un CRM a medida: ficha por vendedor, briefing diario y acceso del equipo por Centralito.</p></div>
       </div>
-      <h2 style="margin-top:56px;font-size:clamp(24px,2.4vw,32px)">Cómo trabajamos</h2>
+      <h2 class="h2-sec">Cómo trabajamos</h2>
       <div class="cols-3" style="margin-top:20px">
         <div class="step"><span class="n">1</span><b>Contanos la tarea</b><p>Qué hace hoy tu equipo a mano y dónde vive la información.</p></div>
         <div class="step"><span class="n">2</span><b>Prototipo con tus datos</b><p>Lo ves funcionar vos primero, con casos reales.</p></div>
         <div class="step"><span class="n">3</span><b>Sale cuando lo usa tu equipo</b><p>Con registro de lo que hizo y a quién le avisó.</p></div>
       </div>
-      <div class="cta-row" style="margin-top:40px"><WaLink section="a-medida" variant="btn-light" label="Contanos qué querés automatizar" text="Hola, vengo de centralize.dev y quiero automatizar una tarea de mi empresa" class="btn-primary" /></div>
+      <div class="cta-row" style="margin-top:40px" data-bar-sentinel><WaLink section="a-medida" variant="btn-light" label="Contanos qué querés automatizar" text="Hola, vengo de centralize.dev y quiero automatizar una tarea de mi empresa" class="btn-primary" /></div>
     </div>
   </section>
+  <MobileBar section="a-medida" primary={{ wa: true, label: 'Contanos qué querés automatizar', cta: 'whatsapp', text: 'Hola, vengo de centralize.dev y quiero automatizar una tarea de mi empresa' }} />
 </Base>

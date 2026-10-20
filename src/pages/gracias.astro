@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import contact from '@/data/contact.json';
 import plans from '@/data/plans.json';
+import MobileBar from '@/components/MobileBar.astro';
 import { SCENES, ALL_IDS } from '@/lib/scenes';
 export const prerender = true;
 const wa = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent('Hola, acabo de dejar mis datos para activar Centralito [web-gracias]')}`;
@@ -11,7 +12,7 @@ const waDemora = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURI
   <section class="page">
     <div class="wrap">
       <div class="page-head">
-        <p class="eyebrow">Alta en 3 pasos · 1 Tus datos · <b>2 Activación</b> · 3 Listo</p>
+        <p class="eyebrow"><span class="only-d">Alta en 3 pasos · 1 Tus datos · <b>2 Activación</b> · 3 Listo</span><span class="only-m">Paso 2 de 3 · Activación</span></p>
         <h1>Listo. Tu Centralito se activa <em>{contact.sla_alta_corto}</em>.</h1>
         <p class="lead">Te escribimos por WhatsApp y por email cuando ya te pueda responder. No hace falta que vuelvas a esta página.</p>
       </div>
@@ -29,7 +30,7 @@ const waDemora = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURI
             <span><i></i>Listo para escribirle</span>
           </div>
           <p class="mono">Si pasó {contact.sla_alta} y no te escribimos, <a class="link" href={waDemora} target="_blank" rel="noopener" data-wa data-section="gracias-demora" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>tocá acá</a>.</p>
-          <div class="cta-row" style="margin-top:24px"><a class="btn btn-primary" href={wa} target="_blank" rel="noopener" data-wa data-section="gracias" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>Hablar con el equipo</a><a class="link" href="/terminos">Ver los Términos</a></div>
+          <div class="cta-row" style="margin-top:24px" data-bar-sentinel><a class="btn btn-primary" href={wa} target="_blank" rel="noopener" data-wa data-section="gracias" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>Hablar con el equipo</a><a class="link" href="/terminos">Ver los Términos</a></div>
           {plans.cobro && <p class="legal-mini" style="margin-top:20px"><a class="link" href="/contacto?tema=arrepentimiento">Botón de arrepentimiento</a> · <a class="link" href="/contacto?tema=baja">Dar de baja</a></p>}
         </div>
         <aside class="recibo card">
@@ -42,12 +43,13 @@ const waDemora = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURI
           </ul>
         </aside>
       </div>
-      <h2 style="margin-top:56px;font-size:clamp(24px,2.4vw,32px)">Mientras tanto, qué le podés pedir el primer día</h2>
-      <ul class="pedidos-lista">
+      <h2 class="h2-sec">Mientras tanto, qué le podés pedir el primer día</h2>
+      <details class="m-fold" open><summary class="pill">Ver los 15 pedidos</summary><ul class="pedidos-lista">
         {ALL_IDS.map(id => <li><b>{SCENES[id].chip}</b>{SCENES[id].wa_text} <button type="button" class="link-btn" data-copy={SCENES[id].wa_text} style="color:var(--green-text)">Copiar</button></li>)}
-      </ul>
+      </ul></details>
     </div>
   </section>
+  <MobileBar section="gracias" primary={{ wa: true, label: 'Hablar con el equipo', cta: 'whatsapp', text: 'Hola, acabo de dejar mis datos para activar Centralito' }} />
   <script>
     const q = new URLSearchParams(location.search);
     const pedido = q.get('pedido'); const plan = q.get('plan');

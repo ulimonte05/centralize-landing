@@ -1,6 +1,7 @@
 ---
 import Chat from '@/components/Chat.astro';
 import WaLink from '@/components/WaLink.astro';
+import MobileBar from '@/components/MobileBar.astro';
 import claims from '@/data/claims.json';
 import plans from '@/data/plans.json';
 const p = plans.planes[0];
@@ -23,7 +24,4 @@ const precio = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IV
     <p class="hero-foot in only-d"><span>Funciona con <b>Tokko Broker</b></span><span>Pide <b>OK antes</b> de cambiar en lote</span><span>Te dice <b>cuánto leyó</b></span><span>Mensajes a clientes: <b>0</b></span></p>
   </div>
 </section>
-<div class="m-bar" data-m-bar aria-label="Acciones">
-  <a class="btn btn-primary" href="/sandbox" data-cta="sandbox" data-section="bar">Probá Centralito</a>
-  <a class="btn btn-outline" href="/empezar" data-cta="empezar" data-section="bar">Empezar</a>
-</div>
+<MobileBar section="home" primary={{ href: '/sandbox', label: 'Probá Centralito', cta: 'sandbox' }} secondary={{ href: '/empezar', label: 'Empezar', cta: 'empezar' }} />

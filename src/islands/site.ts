@@ -59,7 +59,11 @@ if (nav) {
 const bar = $('[data-m-bar]'), sent = $('[data-bar-sentinel]');
 if (bar && sent && 'IntersectionObserver' in window) {
   new IntersectionObserver(es => { const e = es[0]; bar.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0); }, { threshold: 0 }).observe(sent);
+} else if (bar) {
+  const onS = () => bar.classList.toggle('on', scrollY > 160); onS(); addEventListener('scroll', onS, { passive: true });
 }
+// listas largas plegadas en móvil (en escritorio quedan abiertas, sin resumen)
+if (matchMedia('(max-width: 767px)').matches) $$('details.m-fold').forEach(d => { (d as HTMLDetailsElement).open = false; });
 const railM = $('[data-rail-m]'), dots = $$('.rail-dots span');
 if (railM && dots.length) {
   const cards = $$('.rail-card', railM); const upd = () => { const k = Math.round(railM.scrollLeft / (railM.scrollWidth - railM.clientWidth) * (dots.length - 1)) || 0; dots.forEach((d, i) => d.classList.toggle('on', i === k)); };

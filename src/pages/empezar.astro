@@ -14,14 +14,14 @@ const total = Math.round(p.ar * (1 + plans.iva.ar));
 const sugeridas = ['resumen-del-dia', 'buscar-cartera', 'tasacion-acm'];
 const v = contact.productos.ventas.nombre;
 ---
-<Base title="Empezar con Centralito | Centralize" description="Activá tu Centralito: dejás tus datos, te escribimos y le mandás el primer pedido por WhatsApp." path="/empezar" nav="min" noindex>
+<Base title="Empezar con Centralito | Centralize" description="Activá tu Centralito: dejás tus datos, te escribimos y le mandás el primer pedido por WhatsApp." path="/empezar" nav="min" active="empezar" noindex>
   <section class="page">
     <div class="wrap">
-      <a class="contexto" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="empezar">¿Venías por {v}, la IA que habla con tus clientes? <b>Eso arranca con una demo de {contact.calcom.duracion.replace(' minutos', ' min')} →</b></a>
+      <a class="contexto" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="empezar"><span class="only-d">¿Venías por {v}, la IA que habla con tus clientes? </span><span class="only-m">¿Buscabas {v}? </span><b>Eso arranca con una demo de {contact.calcom.duracion.replace(' minutos', ' min')} →</b></a>
       <div class="page-head">
-        <p class="eyebrow">Alta en 3 pasos · <b>1 Tus datos</b> · 2 Activación · 3 Listo</p>
+        <p class="eyebrow"><span class="only-d">Alta en 3 pasos · <b>1 Tus datos</b> · 2 Activación · 3 Listo</span><span class="only-m">Paso 1 de 3 · Tus datos</span></p>
         <h1>Activá tu <em>Centralito</em>.</h1>
-        <p class="lead">Te lo activa una persona del equipo. Te escribimos {contact.sla_alta} por WhatsApp y por email cuando ya te pueda responder.</p>
+        <p class="lead"><span class="only-d">Te lo activa una persona del equipo. Te escribimos {contact.sla_alta} por WhatsApp y por email cuando ya te pueda responder.</span><span class="only-m">Te lo activa una persona del equipo y te avisa {contact.sla_alta_corto} por WhatsApp.</span></p>
       </div>
       <div class="empezar-grid">
         <form class="form" method="post" action="/api/empezar" data-empezar>
