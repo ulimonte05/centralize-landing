@@ -332,3 +332,17 @@
 .contratar-pago .legal-mini{margin-top:12px}
 .btn[disabled]{opacity:.7;cursor:progress}
 @media (max-width:1023px){.contratar-grid{grid-template-columns:1fr}}
+
+/* ===== /gracias ===== */
+.gracias{max-width:560px;margin:0 auto}
+.gracias h1{margin-bottom:16px}
+.gracias [hidden]{display:none!important}
+.gracias-cta{margin-top:20px;height:56px;font-size:17px}
+.gracias-code{margin-top:20px;padding:20px;text-align:center}
+.gracias-codigo{font-family:var(--mono,ui-monospace,monospace);font-weight:700;font-size:clamp(26px,8vw,36px);letter-spacing:.06em;margin:8px 0 14px;user-select:all;overflow-wrap:anywhere}
+.gracias-aviso{margin-top:20px;font-size:16px;color:var(--amber-text)}
+.gracias-next{margin-top:12px;font-size:16px;color:var(--muted)}
+.gracias-spin{display:flex;align-items:center;gap:10px;margin-top:20px;color:var(--muted)}
+.gracias-dot{width:10px;height:10px;border-radius:50%;background:var(--green);animation:gracias-pulse 1.2s ease-in-out infinite}
+@keyframes gracias-pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.gracias-dot{animation:none}}
