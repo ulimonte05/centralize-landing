@@ -24,15 +24,21 @@ if (root && btn && priceEl && labelEl && toggle && errorEl) {
     labelEl.textContent = country === 'AR' ? 'Precios para Argentina.' : 'Precios para el resto del mundo, en dólares.';
     toggle.textContent = country === 'AR' ? '¿No estás en Argentina?' : 'Estoy en Argentina';
   };
-  toggle.addEventListener('click', () => { chosen = true; country = country === 'AR' ? 'US' : 'AR'; paint(); });
+  toggle.addEventListener('click', () => { chosen = true; geoReady(); country = country === 'AR' ? 'US' : 'AR'; paint(); });
 
-  fetch('/api/geo').then(r => r.json()).then((g: { country?: unknown }) => {
-    if (chosen || typeof g.country !== 'string' || !/^[A-Za-z]{2}$/.test(g.country)) return;
+  // El botón espera a la geo (máx. ~1,5 s) para no cobrar en la moneda equivocada; si vence, queda AR por defecto.
+  const GEO_TIMEOUT_MS = 1500;
+  let geoDone = false;
+  const geoReady = () => { if (geoDone) return; geoDone = true; if (!busy) btn.disabled = false; };
+  btn.disabled = true;
+  const geoTimer = setTimeout(geoReady, GEO_TIMEOUT_MS);
+  fetch('/api/geo', { signal: AbortSignal.timeout(GEO_TIMEOUT_MS) }).then(r => r.json()).then((g: { country?: unknown }) => {
+    if (geoDone || chosen || typeof g.country !== 'string' || !/^[A-Za-z]{2}$/.test(g.country)) return;
     country = g.country.toUpperCase(); paint();
-  }).catch(() => { /* sin geo: queda Argentina */ });
+  }).catch(() => { /* sin geo: queda Argentina */ }).finally(() => { clearTimeout(geoTimer); geoReady(); });
 
   const setBusy = (on: boolean) => {
-    busy = on; btn.disabled = on; btn.textContent = on ? 'Abriendo el pago…' : IDLE;
+    busy = on; btn.disabled = on || !geoDone; btn.textContent = on ? 'Abriendo el pago…' : IDLE;
     if (on) btn.setAttribute('aria-busy', 'true'); else btn.removeAttribute('aria-busy');
   };
 

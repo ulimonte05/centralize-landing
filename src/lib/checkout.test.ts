@@ -48,8 +48,8 @@ describe('startCheckout', () => {
     const d = deps({ fetch: vi.fn(async () => res(500, {})) as any });
     expect(await startCheckout(d)).toEqual({ ok: false, error: 'bad_response' });
   });
-  it('rejects non-http url', async () => {
-    for (const u of ['javascript:alert(1)', 'data:text/html,x', 'ftp://x.y', 'not a url', 42]) {
+  it('rejects non-https url', async () => {
+    for (const u of ['javascript:alert(1)', 'data:text/html,x', 'ftp://x.y', 'http://checkout.example.com/x', 'not a url', 42]) {
       const d = deps({ fetch: vi.fn(async () => res(200, { url: u })) as any });
       expect(await startCheckout(d)).toEqual({ ok: false, error: 'bad_response' });
       expect(d.navigate).not.toHaveBeenCalled();
