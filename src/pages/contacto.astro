@@ -26,9 +26,10 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
           <div class="field"><label for="c-inmo">Inmobiliaria</label><input id="c-inmo" name="inmobiliaria" required></div>
           <div class="field"><label for="c-tel">WhatsApp</label><input id="c-tel" name="whatsapp" type="tel" required></div>
           <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required></div>
-          <div class="field"><label for="c-tema">Tema</label><select id="c-tema" name="equipo"><option>Centralito</option><option>{v}</option><option>A medida</option><option value="baja">Dar de baja</option><option value="arrepentimiento">Botón de arrepentimiento</option></select></div>
+          <div class="field"><label for="c-tema">Tema</label><select id="c-tema" name="equipo"><option>Centralito</option><option>{v}</option><option>A medida</option></select></div>
           <div class="field"><label for="c-msg">Mensaje</label><textarea id="c-msg" name="pedido" rows="3"></textarea></div>
           <button class="btn btn-primary" type="submit">Enviar</button>
+          <p class="muted" style="margin:12px 0 0">¿Querés darte de baja o arrepentirte? Hacelo desde <a class="link" href="/cuenta">/cuenta</a>.</p>
         </form>
       </div>
     </div>
