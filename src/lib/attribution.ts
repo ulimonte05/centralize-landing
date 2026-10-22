@@ -66,9 +66,20 @@ export function storeUtm(): void {
   } catch { /* noop */ }
 }
 
+/** Deja solo claves UTM conocidas con valor string; ignora cualquier otra cosa guardada. */
+export function parseStoredUtm(raw: unknown): Partial<Record<UtmKey, string>> {
+  const out: Partial<Record<UtmKey, string>> = {};
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+  for (const k of UTM_KEYS) { const v = (raw as Record<string, unknown>)[k]; if (typeof v === 'string' && v) out[k] = v; }
+  return out;
+}
+
 /** Lee la atribución del navegador actual (URL, cookies, sessionStorage). Solo en cliente. */
 export function currentAttribution(): Attribution {
   let storedUtm: Partial<Record<UtmKey, string>> = {};
-  try { storedUtm = JSON.parse(sessionStorage.getItem(UTM_STORE) || '{}'); } catch { /* noop */ }
+  try {
+    const raw = JSON.parse(sessionStorage.getItem(UTM_STORE) || '{}');
+    storedUtm = parseStoredUtm(raw);
+  } catch { /* noop */ }
   return readAttribution({ url: location.href, cookie: document.cookie, now: Date.now(), newId: () => crypto.randomUUID(), storedUtm });
 }

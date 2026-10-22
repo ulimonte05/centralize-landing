@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readAttribution } from './attribution';
+import { parseStoredUtm, readAttribution } from './attribution';
 
 const base = { url: 'https://centralize.dev/contratar', cookie: '', now: 1700000000000, newId: () => 'evt-1' };
 
@@ -32,5 +32,14 @@ describe('readAttribution', () => {
     const a = readAttribution({ ...base, url: 'https://centralize.dev/?utm_source=' + 'a'.repeat(900) });
     expect(a.utm_source).toHaveLength(500);
     expect(a.page_url.length).toBeLessThanOrEqual(500);
+  });
+});
+
+describe('parseStoredUtm', () => {
+  it('keeps only known utm keys with string values', () => {
+    expect(parseStoredUtm({ utm_source: 'meta', utm_medium: 5, utm_term: { a: 1 }, other: 'x', utm_content: null })).toEqual({ utm_source: 'meta' });
+  });
+  it('returns empty for non-objects', () => {
+    for (const v of [null, 'x', 3, ['utm_source'], undefined]) expect(parseStoredUtm(v)).toEqual({});
   });
 });
