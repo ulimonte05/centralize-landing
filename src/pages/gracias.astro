@@ -14,6 +14,7 @@ const demo = import.meta.env.DEV;
           <h1>Estamos preparando tu <em>código</em>.</h1>
           <p class="lead">Un momento, en unos segundos aparece el botón para activar Centralito en WhatsApp.</p>
           <p class="gracias-spin mono" role="status"><span class="gracias-dot" aria-hidden="true"></span>Preparando tu acceso…</p>
+          <noscript><p class="gracias-next">Esta página necesita JavaScript para mostrar tu código. Si ya pagaste, escribinos y te activamos a mano: <WaLink section="gracias-noscript" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y no me aparece el código para activar" /></p></noscript>
         </div>
 
         <div data-view="ready" hidden>
@@ -28,6 +29,7 @@ const demo = import.meta.env.DEV;
           </div>
           <p class="gracias-aviso"><b>Si no lo mandás, la prueba se cancela.</b></p>
           <p class="gracias-next">Después, Centralito te va a pedir los datos de tu CRM.</p>
+          <p class="gracias-next">¿Algo no anda? <WaLink section="gracias-ready-soporte" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y necesito ayuda para activarla" /></p>
         </div>
 
         <div data-view="gave_up" hidden>
@@ -50,6 +52,7 @@ const demo = import.meta.env.DEV;
           <h1>Esta página es <em>para quien acaba de pagar</em>.</h1>
           <p class="lead">Si querés probar Centralito 7 días gratis, empezá desde acá.</p>
           <a class="btn btn-primary btn-block gracias-cta" href="/contratar">Probar 7 días gratis</a>
+          <p class="gracias-next">¿Ya pagaste y llegaste acá? <WaLink section="gracias-invalid-soporte" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y mi link de activación no funciona" /></p>
         </div>
       </div>
     </div>

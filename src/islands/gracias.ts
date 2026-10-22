@@ -24,10 +24,18 @@ if (root) {
     if (view.claimCode) el('[data-code]').textContent = view.claimCode;
   };
 
+  let copyTimer: ReturnType<typeof setTimeout> | undefined;
   el<HTMLButtonElement>('[data-copy]').addEventListener('click', e => {
     const b = e.currentTarget as HTMLButtonElement;
-    try { navigator.clipboard?.writeText(el('[data-code]').textContent || ''); } catch { /* sin portapapeles */ }
-    b.textContent = 'Copiado';
+    const original = b.dataset.label ?? (b.dataset.label = b.textContent || 'Copiar código');
+    const done = (text: string) => {
+      b.textContent = text;
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { b.textContent = original; }, 2500);
+    };
+    const code = el('[data-code]').textContent || '';
+    if (!navigator.clipboard?.writeText) { done('Copialo a mano'); return; }
+    navigator.clipboard.writeText(code).then(() => done('Copiado')).catch(() => done('Copialo a mano'));
   });
 
   const demo = root.dataset.demo === '1' ? q.get('demo') : null;
