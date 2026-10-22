@@ -301,15 +301,15 @@ export function init() {
   const railClear = () => { if (!rail) return; $$('[role="tab"]', rail).forEach(t => t.setAttribute('aria-selected', 'false')); };
   const railGo = (id: string, play: boolean) => {
     const inst = instances['dia']; if (!inst || !rail) return;
-    const tabs = $$('[role="tab"]', rail); const idx = DIA_IDS.indexOf(id);
+    const tabs = $$('[role="tab"]', rail); const idx = DIA_IDS.indexOf(id); const last = DIA_IDS.length - 1;
     tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === idx)); t.tabIndex = k === idx ? 0 : -1; });
-    rail.style.setProperty('--at', String(idx / 3));
+    rail.style.setProperty('--at', String(idx / last));
     const clock = $('[data-clock]'); if (clock) clock.textContent = SCENES[id].hora;
     const ba = $('[data-ba]'); if (ba) ba.innerHTML = `<i>antes</i> <s>${SCENES[id].antes}</s> <i>→</i> <b>${SCENES[id].despues}</b>`;
     const ped = $<HTMLAnchorElement>('[data-pedir]'); if (ped) ped.href = `/empezar?pedido=${id}`;
-    inst.onNext = idx < 3 ? () => railGo(DIA_IDS[idx + 1], true) : (AUTO ? () => autoNext(id) : null);
-    inst.nextLabel = idx < 3 ? 'Siguiente momento →' : 'Volver al primero';
-    if (idx === 3 && !AUTO) inst.onNext = () => railGo(DIA_IDS[0], true);
+    inst.onNext = idx < last ? () => railGo(DIA_IDS[idx + 1], true) : (AUTO ? () => autoNext(id) : null);
+    inst.nextLabel = idx < last ? 'Siguiente momento →' : 'Volver al primero';
+    if (idx === last && !AUTO) inst.onNext = () => railGo(DIA_IDS[0], true);
     const first = !inst.played.has(id);
     inst.load(id, play && first);
     if (play && !first) inst.showAll();
@@ -320,7 +320,7 @@ export function init() {
   if (rail) {
     rail.addEventListener('keydown', e => {
       const tabs = $$('[role="tab"]', rail); const cur = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const n = (cur + (e.key === 'ArrowRight' ? 1 : -1) + 4) % 4; railGo(DIA_IDS[n], true); tabs[n].focus(); }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const n = (cur + (e.key === 'ArrowRight' ? 1 : -1) + DIA_IDS.length) % DIA_IDS.length; railGo(DIA_IDS[n], true); tabs[n].focus(); }
     });
     const dia = instances['dia']; if (dia) { dia.onNext = () => railGo(DIA_IDS[1], true); }
   }

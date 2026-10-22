@@ -62,10 +62,10 @@ export const ALL_IDS = Object.keys(SCENES);
 export const TOTAL = ALL_IDS.length; // 15
 /** Los seis pedidos de la carta del hero, en orden de lectura */
 export const CARTA_IDS = ['resumen-del-dia', 'tasacion-acm', 'segmentar-contactos', 'buscar-red', 'cambios-en-lote', 'informe-propietario'];
-/** Las cuatro paradas de Un día */
-export const DIA_IDS = ['resumen-del-dia', 'tasacion-acm', 'segmentar-contactos', 'landing-emprendimiento'];
+/** Las paradas de Un día. Sin la landing de un proyecto: el plan individual no la tiene (el sandbox sí la muestra). */
+export const DIA_IDS = ['resumen-del-dia', 'tasacion-acm', 'segmentar-contactos'];
 /** Los ocho chips de "Otros pedidos" (ranking real, sin cifras) */
 export const MINI_IDS = ['cargar-lead', 'quien-consulto', 'buscar-cartera', 'ficha-con-tu-marca', 'leer-fotos-planos', 'quien-busca-algo-asi', 'planillas-al-dia', 'rutina-leads-sin-cargar'];
 /** Orden del modo stand (?auto) */
-export const AUTO_IDS = [...DIA_IDS, 'buscar-red', 'cambios-en-lote', 'informe-propietario'];
+export const AUTO_IDS = [...DIA_IDS, 'buscar-red', 'cambios-en-lote'];
 export const getScene = (id: string) => SCENES[id];

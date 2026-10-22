@@ -12,7 +12,7 @@
       "panel": { "tipo": "acm", "estado": "lleno" },
       "artefacto": { "tipo": "acm-mini" },
       "read": "cartera: 84 de 84 · red: 412 de 412 · comparables: 17 revisados, 15 usados", "hold_ms": 2200 },
-    { "de": "centralito", "texto": "Te dejo el informe para el propietario en PDF. Revisalo y, si te cierra, se lo mandás vos a Marta.", "typing_ms": 1000,
+    { "de": "centralito", "texto": "Te dejo la tasación en PDF. Revisalo y, si te cierra, se lo mandás vos a Marta.", "typing_ms": 1000,
       "artefacto": { "tipo": "archivo", "clase": "pdf", "nombre": "ACM Caballito 3 amb.pdf", "meta": "PDF · 4 páginas" }, "panel_accion": "acm-pdf", "hold_ms": 1200 }
   ],
   "antes": "1 a 2 horas por tasación",
