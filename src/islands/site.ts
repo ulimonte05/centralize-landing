@@ -45,11 +45,12 @@ if (nav) {
   }
   // la nav se oscurece mientras Ventas domina el viewport y el pill pasa a Agendar demo
   const ventas = $('#ventas'); const pill = $<HTMLAnchorElement>('[data-nav-pill]', nav);
+  const pillBase = { label: pill?.textContent || '', href: pill?.getAttribute('href') || '', cta: pill?.dataset.cta || '' };
   if (ventas && ventas.tagName === 'SECTION' && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
       const dark = entries[0].intersectionRatio >= 0.5;
       nav.toggleAttribute('data-surface', dark); if (dark) nav.setAttribute('data-surface', 'dark');
-      if (pill) { if (dark) { pill.textContent = 'Agendar demo'; pill.href = pill.dataset.demo || pill.href; pill.dataset.cta = 'demo'; } else { pill.textContent = 'Empezar'; pill.href = '/empezar'; pill.dataset.cta = 'empezar'; } }
+      if (pill) { if (dark) { pill.textContent = 'Agendar demo'; pill.href = pill.dataset.demo || pill.href; pill.dataset.cta = 'demo'; } else { pill.textContent = pillBase.label; pill.href = pillBase.href; pill.dataset.cta = pillBase.cta; } }
     }, { threshold: [0.5] });
     io.observe(ventas);
   }

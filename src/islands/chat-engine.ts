@@ -26,7 +26,7 @@ function pintarVistos() {
   const n = vistos().length;
   $$('[data-vistos]').forEach(el => {
     const done = n >= TOTAL;
-    el.innerHTML = done ? `Viste los ${TOTAL}. El siguiente lo hacés vos: <a class="link" href="/empezar">Empezar</a>` : `Viste ${n} de ${TOTAL} pedidos`;
+    el.innerHTML = done ? `Viste los ${TOTAL}. El siguiente lo hacés vos: <a class="link" href="/contratar" data-cta="contratar" data-section="vistos">Probar gratis</a>` : `Viste ${n} de ${TOTAL} pedidos`;
   });
 }
 

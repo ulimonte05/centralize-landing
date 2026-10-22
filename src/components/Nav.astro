@@ -1,14 +1,16 @@
 ---
 import contact from '@/data/contact.json';
 import Mark from '@/components/Mark.astro';
+import { priceLine } from '@/lib/pricing';
 interface Props { mode?: 'full' | 'min'; active?: string }
 const { mode = 'full', active = '' } = Astro.props;
 const items = [
   { href: '/', label: 'Centralito', id: 'home' },
-  { href: '/ventas', label: contact.productos.ventas.nombre, id: 'ventas', sub: contact.productos.ventas.descriptor },
-  { href: '/precios', label: 'Precios', id: 'precios' },
-  { href: '/contacto', label: 'Contacto', id: 'contacto' },
+  { href: '/#precio', label: 'Precio', id: 'precio' },
+  { href: '/#faq', label: 'Preguntas', id: 'faq' },
+  { href: '/inmobiliarias', label: 'Inmobiliarias', id: 'inmobiliarias' },
 ];
+const { trialDays } = priceLine('AR');
 const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent(contact.texto_wa + ' [web-nav]')}`;
 ---
 <header class="nav" data-nav>
@@ -17,19 +19,17 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
     {mode === 'full' ? (
       <>
         <nav class="nav-links" aria-label="Principal">
-          {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span>{it.sub && <small>{it.sub}</small>}</a>)}
+          {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span></a>)}
         </nav>
         <div class="nav-right">
           <button type="button" class="motion-btn" data-motion-toggle aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="t">Menos animación</span></button>
-          <a class="ingresar" href={contact.platform} title="Panel de Centralize Ventas. Si usás Centralito, todo pasa por WhatsApp." data-cta="ingresar" data-section="nav">Ingresar</a>
-          <a class="btn btn-primary nav-pill" href="/empezar" data-nav-pill data-demo={contact.calcom.url} data-cta="empezar" data-section="nav">Empezar</a>
+          <a class="btn btn-primary nav-pill" href="/contratar" data-nav-pill data-demo={contact.calcom.url} data-cta="contratar" data-section="nav">Probar gratis</a>
           <button type="button" class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="menu" aria-label="Menú"><span></span><span></span><span></span></button>
         </div>
         <div class="menu" id="menu" data-menu hidden>
           <nav aria-label="Principal (móvil)">
-            {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span>{it.sub && <small>{it.sub}</small>}</a>)}
-            <a href={contact.platform} data-cta="ingresar" data-section="menu"><span>Ingresar</span><small>Panel de Centralize Ventas. Si usás Centralito, todo pasa por WhatsApp.</small></a>
-            <a href={waHref} target="_blank" rel="noopener" data-wa data-section="menu" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>Consultar por WhatsApp</span></a>
+            {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span></a>)}
+            <a href="/contratar" data-cta="contratar" data-section="menu"><span>Probar gratis</span><small>{trialDays} días, no se cobra hoy</small></a>
             <button type="button" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
           </nav>
         </div>
@@ -38,7 +38,7 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
       <div class="nav-right nav-min">
         <a class="ingresar" href="/">← Volver</a>
         <a class="link-wa" href={waHref} target="_blank" rel="noopener" data-wa data-section="min" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>WhatsApp</span></a>
-        {active !== 'empezar' && <a class="btn btn-primary nav-pill" href="/empezar" data-cta="empezar" data-section="nav">Empezar</a>}
+        {active !== 'empezar' && active !== 'contratar' && <a class="btn btn-primary nav-pill" href="/contratar" data-cta="contratar" data-section="nav">Probar gratis</a>}
       </div>
     )}
   </div>

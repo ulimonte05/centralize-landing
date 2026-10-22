@@ -2,5 +2,8 @@
   "corte": "2026-10-13",
   "corte_visible": "al 13-oct-2026",
   "centralito": { "pedidos": "Más de 15.000 pedidos de asesores desde marzo de 2026", "pedidos_corto": "+15.000 pedidos de asesores", "pedidos_valor": 15942, "inmobiliarias_activas": null },
-  "ventas": { "leads": "Más de 30.000 leads recontactados por WhatsApp", "conversaciones": "Más de 80.000 conversaciones", "inmobiliarias": "Más de 25 inmobiliarias en Argentina y Uruguay" }
+  "ventas": { "leads": "Más de 30.000 leads recontactados por WhatsApp", "conversaciones": "Más de 80.000 conversaciones", "inmobiliarias": "Más de 25 inmobiliarias en Argentina y Uruguay" },
+  "showClientLogos": false,
+  "_showClientLogos": "Logos de clientes de Centralize en la home: false hasta tener permiso escrito de cada inmobiliaria.",
+  "clientLogos": ["Gardiol", "Toribio Achával", "Echart", "Marceca", "Grupo Oslo", "Lepore"]
 }

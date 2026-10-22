@@ -1,10 +1,10 @@
 [
-  { "id": "usuario-tokko", "q": "¿Tengo que darle mi usuario de Tokko?", "a": "Sí, uno a tu nombre: lo creás vos en Tokko y lo das de baja desde Tokko cuando quieras. Trabaja solo sobre ese usuario: tus contactos siguen siendo tuyos." },
-  { "id": "clientes-ia", "q": "¿Mis clientes hablan con una IA?", "a": "Hablan con vos. Centralito nunca les escribe a tus clientes: te deja el texto o el PDF listo y lo mandás desde tu WhatsApp." },
-  { "id": "aprender", "q": "¿Mi equipo tiene que aprender algo?", "a": "Si sabés escribir un WhatsApp, ya sabés usarlo. No hay app ni panel nuevo." },
-  { "id": "se-equivoca", "q": "¿Y si se equivoca?", "a": "Te dice cuánto leyó, 1.940 de 1.940, y qué cambió. Nada en lote se ejecuta sin tu sí, y cada cambio queda registrado para que lo revises." },
-  { "id": "crm", "q": "¿Funciona con mi CRM?", "a": "Hoy funciona sobre Tokko Broker, con tu usuario. Lee las fotos, los planos y los PDF que le mandás." },
-  { "id": "pedido", "q": "¿Qué es un pedido y cuánto cuesta?", "a": "Un mensaje como los de esta página. Tasación, landing e informe en PDF son pedidos pesados y cuentan aparte. {precio}" },
-  { "id": "cuando", "q": "¿Cuándo empieza a funcionar?", "a": "Dejás tus datos y te escribimos {sla_alta}. Con tu usuario de Tokko cargado, ya le podés pedir cosas." },
-  { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Lo das de baja con un mensaje al equipo y no pagás el mes siguiente. {garantia}" }
+  { "id": "prueba", "q": "¿Cómo funciona la prueba? ¿Cuándo me cobran?", "a": "Hoy no se cobra nada. Antes del primer cobro te avisamos por WhatsApp; si no te convence, cancelás antes y no pagás nada. {precio}" },
+  { "id": "seguro", "q": "¿Es seguro darle mi usuario del CRM?", "a": "Te conviene darle un usuario a tu nombre. Se guarda en el entorno aislado de tu Centralito, no aparece en el chat y lo revocás cuando quieras cambiando la contraseña en tu CRM. Trabaja solo con ese usuario y no le manda nada a tus clientes." },
+  { "id": "crm", "q": "¿Funciona con mi CRM?", "a": "Integrado con Tokko. ¿Usás otro CRM? Lo conectamos para vos." },
+  { "id": "clientes-ia", "q": "¿Mis clientes hablan con una IA?", "a": "No. Centralito nunca les escribe a tus clientes ni manda mensajes masivos: te deja el texto o el PDF listo y lo mandás vos desde tu WhatsApp." },
+  { "id": "chatgpt", "q": "Ya uso ChatGPT, ¿qué cambia?", "a": "ChatGPT te escribe un texto. Centralito lo hace en tu CRM: carga, edita, tasa, arma el PDF y te recuerda los seguimientos." },
+  { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Te das de baja cuando quieras, sin permanencia: le escribís \"Mi cuenta\" a Centralito y te manda el link para cancelar. {garantia}" },
+  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Se paga con tarjeta, de crédito o de débito. Mercado Pago y transferencia, por ahora no." },
+  { "id": "inmobiliaria", "q": "¿Y para mi inmobiliaria con equipo?", "a": "Para inmobiliarias con equipo tenemos otra propuesta.", "link": { "href": "/inmobiliarias", "label": "Ver la propuesta para inmobiliarias →", "cta": "inmobiliarias" } }
 ]
