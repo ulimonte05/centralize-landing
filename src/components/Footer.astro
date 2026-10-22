@@ -25,14 +25,15 @@ const legal = contact.legal;
         <a href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a>
         <a href="/terminos">Términos</a>
         <a href="/privacidad">Privacidad</a>
-        <a href="/contacto?tema=baja">Dar de baja</a>
+        <a href="/cuenta" data-cta="baja" data-section="footer">Botón de baja</a>
+        <a href="/cuenta" data-cta="arrepentimiento" data-section="footer">Botón de arrepentimiento</a>
         <button type="button" class="foot-toggle" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
       </nav>
     </div>
     <p class="foot-legal mono">
       {legal.razon_social ? <span>{legal.razon_social} · {legal.cuit} · {legal.domicilio}</span> : null}
       <span>© 2026 Centralize · Argentina y Uruguay</span>
-      <span>Medimos visitas sin cookies ni identificadores</span>
+      <span>Usamos el Pixel de Meta para medir la publicidad. Más en <a href="/privacidad">Privacidad</a></span>
     </p>
   </div>
 </footer>

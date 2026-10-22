@@ -346,3 +346,15 @@
 .gracias-dot{width:10px;height:10px;border-radius:50%;background:var(--green);animation:gracias-pulse 1.2s ease-in-out infinite}
 @keyframes gracias-pulse{50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){.gracias-dot{animation:none}}
+
+/* ===== /cuenta ===== */
+.cuenta{max-width:560px}
+.cuenta-list{margin:0 0 8px;padding-left:20px;color:var(--muted);font-size:17px;line-height:1.6}
+.cuenta-list li{margin:0 0 8px}
+.cuenta-list b{color:#fff}
+.cuenta-cta{margin-top:20px;height:56px;font-size:17px}
+.cuenta-nota{margin-top:14px;font-size:15px;color:var(--muted)}
+.cuenta-soporte{margin-top:28px;padding:20px}
+.cuenta-soporte h2{font-size:20px;margin:0 0 6px}
+.cuenta-soporte p{margin:0 0 14px;color:var(--muted)}
+.foot-legal a{text-decoration:underline;text-underline-offset:3px}

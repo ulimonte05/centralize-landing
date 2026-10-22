@@ -1,5 +1,6 @@
 {
   "whatsapp_ventas": { "e164": "5492994104866", "visible": "+54 9 299 410-4866" },
+  "whatsapp_centralito": { "e164": "5491140792205", "visible": "+54 9 11 4079-2205", "texto_cuenta": "Mi cuenta" },
   "texto_wa": "Hola, vengo de centralize.dev y quiero consultar por Centralito",
   "calcom": { "url": "https://cal.com/umontenegro", "duracion": "15 minutos", "_nota": "crear evento de 20 min y cambiar acá (§16 #6)" },
   "email": { "direccion": "hola@centralize.dev", "confirmado": false },
