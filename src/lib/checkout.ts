@@ -10,6 +10,8 @@ export interface CheckoutDeps {
   navigate: (url: string) => void;
 }
 
+const CHECKOUT_TIMEOUT_MS = 15000;
+
 function isHttpUrl(v: unknown): v is string {
   if (typeof v !== 'string') return false;
   try { const p = new URL(v).protocol; return p === 'https:' || p === 'http:'; } catch { return false; }
@@ -23,6 +25,7 @@ export async function startCheckout({ fetch: doFetch, apiUrl, country, attributi
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ country, attribution }),
+      signal: AbortSignal.timeout(CHECKOUT_TIMEOUT_MS),
     });
   } catch {
     return { ok: false, error: 'network' };

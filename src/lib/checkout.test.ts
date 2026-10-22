@@ -55,4 +55,14 @@ describe('startCheckout', () => {
       expect(d.navigate).not.toHaveBeenCalled();
     }
   });
+  it('passes an abort signal so a hung API times out', async () => {
+    const d = deps();
+    await startCheckout(d);
+    expect(d.fetch.mock.calls[0][1].signal).toBeInstanceOf(AbortSignal);
+  });
+  it('fetch rejects with abort/timeout → network', async () => {
+    const d = deps({ fetch: vi.fn(async () => { throw new DOMException('timeout', 'TimeoutError'); }) as any });
+    expect(await startCheckout(d)).toEqual({ ok: false, error: 'network' });
+    expect(d.navigate).not.toHaveBeenCalled();
+  });
 });
