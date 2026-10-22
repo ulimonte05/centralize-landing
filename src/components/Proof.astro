@@ -1,0 +1,8 @@
+---
+import claims from '@/data/claims.json';
+interface Props { which?: 'centralito' | 'ventas' }
+const { which = 'centralito' } = Astro.props;
+---
+{which === 'centralito'
+  ? <p class="prueba mono up green">{claims.centralito.pedidos}{claims.centralito.inmobiliarias_activas ? ` · en ${claims.centralito.inmobiliarias_activas} inmobiliarias` : ''} · <span class="muted">{claims.corte_visible}</span></p>
+  : <p class="prueba mono up">{claims.ventas.leads} · {claims.ventas.conversaciones} · {claims.ventas.inmobiliarias} · <span class="muted">{claims.corte_visible}</span></p>}

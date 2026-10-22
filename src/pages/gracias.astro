@@ -1,0 +1,61 @@
+---
+import Base from '@/layouts/Base.astro';
+import WaLink from '@/components/WaLink.astro';
+export const prerender = true;
+const api = (import.meta.env.PUBLIC_BILLING_API_URL || 'https://api.centralize.dev').trim();
+const demo = import.meta.env.DEV;
+---
+<Base title="Listo | Centralize" description="Activá tu Centralito desde WhatsApp." path="/gracias" nav="min" noindex>
+  <section class="page">
+    <div class="wrap">
+      <div class="gracias" data-gracias data-api={api} data-demo={demo ? '1' : '0'}>
+        <div data-view="pending" aria-live="polite">
+          <p class="eyebrow">Pago confirmado</p>
+          <h1>Estamos preparando tu <em>código</em>.</h1>
+          <p class="lead">Un momento, en unos segundos aparece el botón para activar Centralito en WhatsApp.</p>
+          <p class="gracias-spin mono" role="status"><span class="gracias-dot" aria-hidden="true"></span>Preparando tu acceso…</p>
+          <noscript><p class="gracias-next">Esta página necesita JavaScript para mostrar tu código. Si ya pagaste, escribinos y te activamos a mano: <WaLink section="gracias-noscript" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y no me aparece el código para activar" /></p></noscript>
+        </div>
+
+        <div data-view="ready" hidden>
+          <p class="eyebrow">Paso final</p>
+          <h1 data-nombre>¡Listo!</h1>
+          <p class="lead">Mandá el mensaje que te armamos por WhatsApp para activar tu prueba.</p>
+          <a class="btn btn-primary btn-block gracias-cta" data-wa-btn href="#" target="_blank" rel="noopener">Activar en WhatsApp</a>
+          <div class="card gracias-code" data-code-box hidden>
+            <p class="mono up">Tu código</p>
+            <p class="gracias-codigo" data-code>ALTA-XXXXXX</p>
+            <button type="button" class="pill" data-copy>Copiar código</button>
+          </div>
+          <p class="gracias-aviso"><b>Si no lo mandás, la prueba se cancela.</b></p>
+          <p class="gracias-next">Después, Centralito te va a pedir los datos de tu CRM.</p>
+          <p class="gracias-next">¿Algo no anda? <WaLink section="gracias-ready-soporte" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y necesito ayuda para activarla" /></p>
+        </div>
+
+        <div data-view="gave_up" hidden>
+          <p class="eyebrow">Casi listo</p>
+          <h1>Tu pago está, pero tu código <em>está tardando</em>.</h1>
+          <p class="lead">No te preocupes: no tenés que pagar de nuevo. Escribinos y te activamos a mano.</p>
+          <WaLink section="gracias-demora" variant="btn" label="Escribir al soporte por WhatsApp" text="Hola, pagué la prueba de Centralito y no me aparece el código para activar" class="btn-block gracias-cta" />
+          <p class="gracias-next"><button type="button" class="link-btn" data-retry>Probar de nuevo</button></p>
+        </div>
+
+        <div data-view="not_found" hidden>
+          <p class="eyebrow">No encontramos tu pago</p>
+          <h1>Este link <em>no es válido</em>.</h1>
+          <p class="lead">Puede que haya vencido o que esté incompleto. Si ya pagaste, escribinos y lo resolvemos.</p>
+          <WaLink section="gracias-no-encontrado" variant="btn" label="Escribir al soporte por WhatsApp" text="Hola, pagué la prueba de Centralito pero mi link de activación no funciona" class="btn-block gracias-cta" />
+        </div>
+
+        <div data-view="invalid" hidden>
+          <p class="eyebrow">Gracias</p>
+          <h1>Esta página es <em>para quien acaba de pagar</em>.</h1>
+          <p class="lead">Si querés probar Centralito 7 días gratis, empezá desde acá.</p>
+          <a class="btn btn-primary btn-block gracias-cta" href="/contratar">Probar 7 días gratis</a>
+          <p class="gracias-next">¿Ya pagaste y llegaste acá? <WaLink section="gracias-invalid-soporte" label="Escribir al soporte" text="Hola, pagué la prueba de Centralito y mi link de activación no funciona" /></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>import '@/islands/gracias';</script>
+</Base>

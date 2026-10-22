@@ -1,0 +1,80 @@
+---
+import PlanCard from '@/components/PlanCard.astro';
+import WaLink from '@/components/WaLink.astro';
+import faq from '@/data/faq.json';
+import claims from '@/data/claims.json';
+import { priceLine, priceSummary, guarantee } from '@/lib/pricing';
+import { CORTO, FAMILIAS, FUERA_DEL_PLAN } from '@/lib/pedidos';
+const { trialDays } = priceLine('AR');
+// "Tasar y armar" va primero: es el diferencial (tasación con comparables de la Red Tokko).
+const PRIMERO = 'Tasar y armar';
+const familias = [
+  { nombre: 'Tasar y armar', items: ['Una tasación con comparables y PDF', 'Ficha en PDF con tu marca', 'Comparables de la Red Tokko para tu cliente'] },
+  { nombre: 'Leads', items: ['Qué entró anoche, con teléfono y estado', 'Cargá un lead desde la visita', '¿Quién consultó por Thames 400?', 'Que te avise si hay leads sin atender'] },
+  { nombre: 'Buscar', items: ['Buscá en tu cartera como lo dirías', 'Tres opciones en la Red Tokko', '¿Quién de tus contactos busca algo así?'] },
+  { nombre: 'Fichas y base', items: ['Cambios en lote, con tu OK antes', 'Segmentar contactos y etiquetarlos', 'Leer un plano o una foto', 'Planillas que se actualizan solas'] },
+];
+const ordenFam = [...FAMILIAS].sort((a, b) => Number(b.nombre === PRIMERO) - Number(a.nombre === PRIMERO));
+// Fuera de la home: pedidos que el plan individual (asesor_ss) no tiene. El sandbox los sigue mostrando.
+const rail = ordenFam.flatMap(f => f.ids.filter(id => !FUERA_DEL_PLAN.includes(id)).map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
+const pasos = [
+  { t: 'Te suscribís a la prueba', d: `${trialDays} días gratis. Cargás la tarjeta, pero hoy no se cobra nada.` },
+  { t: 'Mandás tu código por WhatsApp', d: 'Después de suscribirte te damos un código. Se lo mandás a Centralito desde tu WhatsApp y queda activo en tu número.' },
+  { t: 'Conectás tu CRM', d: 'Le pasás tu usuario de Tokko y ya le podés pedir cosas. ¿Usás otro CRM? Lo conectamos para vos.' },
+];
+const precio = `En Argentina: ${priceSummary('AR')}. Fuera de Argentina: ${priceSummary('UY')}.`;
+const items = faq.map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', precio).replace('{garantia}', guarantee), link: 'link' in f ? f.link : undefined }));
+---
+<section class="block" id="pedidos" aria-labelledby="ped-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Lo que le podés pedir</p><h2 id="ped-h">Le escribís como a un colega. <em>Lo hace en tu CRM.</em></h2><p class="lead only-d">Son los pedidos que los asesores le hacen todos los días. Cada uno se puede ver en el sandbox, con nombres y cifras de ejemplo.</p><p class="lead only-m">Tocá uno y miralo en el sandbox.</p></div>
+    <div class="familias only-d">
+      {familias.map(f => <a class="fam rv" href="/sandbox" data-cta="sandbox" data-section="pedidos"><b>{f.nombre}</b><ul>{f.items.map(i => <li>{i}</li>)}</ul><span class="more">Ver en el sandbox →</span></a>)}
+    </div>
+  </div>
+  <div class="rail-m only-m" data-rail-m>
+    {rail.map((r, i) => <a class="rail-card" href={`/sandbox#carta-${r.id}`} data-cta="sandbox" data-section="rail" style={`--i:${i}`}><b>{r.fam}</b><span>{r.corto}</span><i aria-hidden="true">→</i></a>)}
+    <a class="rail-card rail-end" href="/sandbox" data-cta="sandbox" data-section="rail"><span>Probalos con tu propio texto</span><i aria-hidden="true">→</i></a>
+  </div>
+  <p class="rail-dots only-m" aria-hidden="true"><span></span><span></span><span></span><span></span></p>
+</section>
+<section class="block" id="como" aria-labelledby="como-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Cómo funciona</p><h2 id="como-h">En tres pasos, <em>desde el celular.</em></h2></div>
+    <ol class="cols-3 pasos-home">
+      {pasos.map((p, i) => <li class="step"><span class="n">{i + 1}</span><b>{p.t}</b><p>{p.d}</p></li>)}
+    </ol>
+  </div>
+</section>
+<section class="block" id="confianza" aria-labelledby="conf-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Quiénes lo usan</p><h2 id="conf-h">{claims.centralito.pedidos_corto}.</h2><p class="lead">{claims.centralito.pedidos}, contados {claims.corte_visible}.</p></div>
+    <div class="cols-3">
+      <div class="step"><b>Integrado con Tokko.</b><p>¿Usás otro CRM? Lo conectamos para vos.</p></div>
+      <div class="step"><b>Mensajes a tus clientes: 0.</b><p>Centralito nunca les escribe. Te deja el texto o el PDF listo y lo mandás vos.</p></div>
+      <div class="step"><b>Sin sorpresas con la tarjeta.</b><p>No se cobra hoy, te avisamos por WhatsApp antes de cobrar y cancelás cuando quieras.</p></div>
+    </div>
+    {claims.showClientLogos && <div class="clientes"><p class="eyebrow muted">Inmobiliarias que ya trabajan con Centralize</p><ul>{claims.clientLogos.map(c => <li>{c}</li>)}</ul></div>}
+  </div>
+</section>
+<section class="block" id="precio" aria-labelledby="pre-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Precio de lanzamiento</p><h2 id="pre-h">Un solo plan. <em>Sin permanencia.</em></h2><p class="lead">Es el precio para los primeros asesores que lo usan.</p></div>
+    <div class="precio-home"><PlanCard section="precio" /></div>
+  </div>
+</section>
+<section class="block" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="block-head"><p class="eyebrow">Preguntas</p><h2 id="faq-h">Lo que preguntan <em>antes de probarlo.</em></h2></div>
+    <div class="faq-cols">{items.map(it => <details class="faq-d" id={`faq-${it.id}`}><summary>{it.q}</summary><p>{it.a}{it.link && <> <a class="link" href={it.link.href} data-cta={it.link.cta} data-section="faq">{it.link.label}</a></>}</p></details>)}</div>
+    <p class="faq-more">¿Otra pregunta? <WaLink section="faq" /></p>
+  </div>
+</section>
+<section class="block final" id="final" aria-labelledby="fin-h">
+  <div class="wrap">
+    <h2 id="fin-h">Probalo {trialDays} días <em>en tu WhatsApp.</em></h2>
+    <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="final">Probar {trialDays} días gratis</a>
+    <p class="hero-sub">No se cobra hoy · Te avisamos antes de cobrar · Cancelás cuando quieras</p>
+    <p class="final-inmo"><a class="link" href="/inmobiliarias" data-cta="inmobiliarias" data-section="final">¿Tenés una inmobiliaria con equipo? →</a></p>
+  </div>
+</section>

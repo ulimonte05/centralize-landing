@@ -1,0 +1,29 @@
+{
+  "id": "buscar-red",
+  "hora": "10:42",
+  "titulo": "Tres opciones en la Red Tokko",
+  "chip": "3 opciones en la Red",
+  "aura": "#F7C7A1",
+  "mensajes": [
+    { "de": "asesor", "texto": "buscame en la Red Tokko 3 amb en Caballito hasta 180 mil, con balcón" },
+    { "de": "centralito", "texto": "Encontré 3 en la Red que te sirven, todas con balcón y abajo de 180. Te las paso con lo que comparte cada inmobiliaria:", "typing_ms": 1400,
+      "artefacto": { "tipo": "tabla", "titulo": "Red Tokko · 3 fichas", "filas": [ ["Pedro Goyena 900", "72 m²", "USD 172.000", "comparte 50 %"], ["Rosario 500", "68 m²", "USD 165.000", "comparte 50 %"], ["Rojas 1100", "75 m²", "USD 179.000", "comparte 30 %"] ] },
+      "read": "red: 412 de 412 fichas leídas", "hold_ms": 1800 },
+    { "de": "centralito", "texto": "¿Te redacto el texto para que se lo mandes vos?", "typing_ms": 900, "respuestas_rapidas": ["Dale, es para Lucía", "No hace falta"], "rama_stand": "Dale, es para Lucía" }
+  ],
+  "ramas": {
+    "Dale, es para Lucía": [
+      { "de": "asesor", "texto": "dale, es para Lucía" },
+      { "de": "centralito", "texto": "Listo, copialo y mandáselo vos. Van los 3 links de ficha.", "typing_ms": 1100,
+        "artefacto": { "tipo": "texto", "texto": "Hola Lucía, te paso 3 opciones de 3 ambientes con balcón en Caballito, todas por debajo de USD 180.000. ¿Coordinamos para verlas esta semana?", "links": ["Pedro Goyena 900", "Rosario 500", "Rojas 1100"] } }
+    ],
+    "No hace falta": [
+      { "de": "asesor", "texto": "no hace falta" },
+      { "de": "centralito", "texto": "Dale. Te dejo los 3 links acá por si los querés reenviar.", "typing_ms": 900, "artefacto": { "tipo": "texto", "links": ["Pedro Goyena 900", "Rosario 500", "Rojas 1100"] } }
+    ]
+  },
+  "antes": "media hora entre la Red y el chat con el cliente",
+  "despues": "un pedido, y el mensaje lo mandás vos",
+  "wa_text": "Centralito, buscá en la Red Tokko 3 ambientes en Caballito hasta USD 180.000 con balcón y decime de qué inmobiliaria es y cuánto comparten.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

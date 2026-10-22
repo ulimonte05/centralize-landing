@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /gracias
+Disallow: /api/
+Disallow: /v/
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://centralize.dev/sitemap.xml

@@ -1,0 +1,39 @@
+---
+import contact from '@/data/contact.json';
+import Mark from '@/components/Mark.astro';
+const legal = contact.legal;
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Centralize, inicio"><Mark /><span>Centralize</span></a>
+        <p class="only-d">Centralito, el asistente que opera tu CRM inmobiliario desde WhatsApp.</p>
+      </div>
+      <nav class="foot-col" aria-label="Producto">
+        <a href="/">Centralito</a>
+        <a href="/#precio">Precio</a>
+        <a href="/#faq">Preguntas</a>
+        <a href="/sandbox">Sandbox</a>
+        <a href="/contratar" data-cta="contratar" data-section="footer">Probar gratis</a>
+        <a href="/inmobiliarias">Inmobiliarias</a>
+        <a href="/contacto">Contacto</a>
+        <a href={contact.platform} data-cta="ingresar" data-section="footer">Ingresar</a>
+      </nav>
+      <nav class="foot-col" aria-label="Legales y redes">
+        <a href={contact.redes.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a>
+        <a href="/terminos">Términos</a>
+        <a href="/privacidad">Privacidad</a>
+        <a href="/cuenta" data-cta="baja" data-section="footer">Botón de baja</a>
+        <a href="/cuenta" data-cta="arrepentimiento" data-section="footer">Botón de arrepentimiento</a>
+        <button type="button" class="foot-toggle" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
+      </nav>
+    </div>
+    <p class="foot-legal mono">
+      {legal.razon_social ? <span>{legal.razon_social} · {legal.cuit} · {legal.domicilio}</span> : null}
+      <span>© 2026 Centralize · Argentina y Uruguay</span>
+      <span>Usamos el Pixel de Meta para medir la publicidad. Más en <a href="/privacidad">Privacidad</a></span>
+    </p>
+  </div>
+</footer>

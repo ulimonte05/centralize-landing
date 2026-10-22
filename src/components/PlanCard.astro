@@ -1,0 +1,18 @@
+---
+// Tarjeta del plan único: precio de lanzamiento (3 meses de pago además de la prueba) y precio después.
+import { priceLine, guarantee } from '@/lib/pricing';
+interface Props { section?: string }
+const { section = 'precio' } = Astro.props;
+const ar = priceLine('AR');
+const usd = priceLine('UY');
+---
+<div class="plan-card card">
+  <p class="plan-nombre">Centralito · precio de lanzamiento</p>
+  <p class="plan-neto"><b>{ar.trialDays} días gratis</b></p>
+  <p class="plan-total">Después <strong>{ar.promo} al mes</strong> por {ar.promoMonths} meses, y {ar.list} al mes.</p>
+  <p class="plan-total muted">Fuera de Argentina: {usd.promo} al mes por {usd.promoMonths} meses, y {usd.list} al mes.</p>
+  <p class="plan-total muted">La promo dura {ar.promoMonths} meses de pago, además de la semana gratis. Precios finales.</p>
+  <p class="mono up plan-cond">Sin permanencia · {guarantee}</p>
+  <a class="btn btn-primary btn-block" href="/contratar" data-cta="contratar" data-section={section}>Probar {ar.trialDays} días gratis</a>
+  <p class="plan-sub muted">No se cobra hoy · Te avisamos antes de cobrar · Cancelás cuando quieras</p>
+</div>

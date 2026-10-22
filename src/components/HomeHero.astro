@@ -1,0 +1,27 @@
+---
+import Chat from '@/components/Chat.astro';
+import MobileBar from '@/components/MobileBar.astro';
+import claims from '@/data/claims.json';
+import { CORTO } from '@/lib/pedidos';
+import { priceLine } from '@/lib/pricing';
+const { trialDays } = priceLine('AR');
+// La demo arranca con la tasación (el gancho más fuerte); los chips cambian a la Red Tokko y al recordatorio del día.
+const demo = ['tasacion-acm', 'buscar-red', 'resumen-del-dia'];
+const chips = demo.map(id => `<button type="button" class="pill" data-scene-trigger="${id}" data-target="hero" aria-pressed="${id === demo[0]}">${CORTO[id]}</button>`).join('');
+---
+<section class="hero" id="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <p class="badge in"><i aria-hidden="true"></i><span class="only-d">{claims.centralito.pedidos} · {claims.corte_visible}</span><span class="only-m">{claims.centralito.pedidos_corto} · {claims.corte_visible}</span></p>
+    <h1 id="h1" class="in">Pedile lo que quieras a tu CRM <em>por WhatsApp.</em></h1>
+    <p class="lead in"><span class="only-d">Centralito es el asistente que opera tu CRM inmobiliario: tasa con comparables de la Red Tokko, edita una ficha con un audio, arma el PDF de una propiedad y te recuerda los seguimientos.</span><span class="only-m">El asistente que opera tu CRM inmobiliario: tasa, edita fichas, arma PDFs y te recuerda los seguimientos.</span></p>
+    <div class="hero-cta in" data-bar-sentinel>
+      <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="hero">Probar {trialDays} días gratis</a>
+    </div>
+    <p class="hero-sub in">No se cobra hoy · Te avisamos antes de cobrar · Cancelás cuando quieras</p>
+    <div class="hero-chat in">
+      <Chat instance="hero" scene={demo[0]} mode="hero" controls={false} chips={chips} />
+    </div>
+    <p class="hero-foot in only-d"><span>Integrado con <b>Tokko</b></span><span>Pide <b>OK antes</b> de cambiar en lote</span><span>Te dice <b>cuánto leyó</b></span><span>Mensajes a tus clientes: <b>0</b></span></p>
+  </div>
+</section>
+<MobileBar section="home" primary={{ href: '/contratar', label: `Probar ${trialDays} días gratis`, cta: 'contratar' }} />

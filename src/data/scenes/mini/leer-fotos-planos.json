@@ -1,0 +1,10 @@
+{ "id": "leer-fotos-planos", "hora": "15:00", "titulo": "Mandale un plano", "chip": "Mandale un plano", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "adjuntos": [ { "clase": "img", "nombre": "plano.jpg", "meta": "IMG · 1,2 MB" } ], "texto": "sacame superficie, ambientes y dormitorios de este plano" },
+    { "de": "centralito", "texto": "Del plano: 72 m² cubiertos, 3 ambientes, 2 dormitorios, baño completo y balcón al frente. ¿Lo cargo en la ficha o te lo dejo así?", "typing_ms": 1500,
+      "artefacto": { "tipo": "chips", "items": ["72 m²", "3 ambientes", "2 dormitorios"] }, "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "plano.jpg leído", "sub": "72 m² · 3 ambientes · 2 dormitorios", "unidad": "pedido" },
+  "antes": "medir y tipear", "despues": "le mandás la foto",
+  "wa_text": "Centralito, te paso una foto del plano para que me saques superficie, ambientes y dormitorios.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

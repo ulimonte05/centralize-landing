@@ -1,0 +1,10 @@
+{ "id": "planillas-al-dia", "hora": "16:40", "titulo": "Planillas al día", "chip": "Planillas al día", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "pasá a una planilla mis operaciones cerradas del año con origen y fecha, y mantenela al día cada viernes" },
+    { "de": "centralito", "texto": "Lista: 14 operaciones con origen y fecha de cierre, en Google Sheets. Cada viernes a las 9 la actualizo y te aviso solo si cambió algo.", "typing_ms": 1500,
+      "artefacto": { "tipo": "archivo", "clase": "sheets", "nombre": "Operaciones 2026", "meta": "Google Sheets · 14 filas" }, "read": "rutina: viernes 9:00", "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "archivo", "clase": "sheets", "nombre": "Operaciones 2026", "meta": "14 filas · se actualiza los viernes", "unidad": "pedido + rutina" },
+  "antes": "la planilla que nadie actualiza", "despues": "se actualiza sola los viernes",
+  "wa_text": "Centralito, pasá a una planilla mis operaciones cerradas de este año con origen y fecha de cierre, y mantenela actualizada cada viernes.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

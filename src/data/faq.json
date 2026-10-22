@@ -1,0 +1,10 @@
+[
+  { "id": "prueba", "q": "¿Cómo funciona la prueba? ¿Cuándo me cobran?", "a": "Hoy no se cobra nada. Antes del primer cobro te avisamos por WhatsApp; si no te convence, cancelás antes y no pagás nada. {precio}" },
+  { "id": "seguro", "q": "¿Es seguro darle mi usuario del CRM?", "a": "Te conviene darle un usuario a tu nombre. Se guarda en el entorno aislado de tu Centralito, no aparece en el chat y lo revocás cuando quieras cambiando la contraseña en tu CRM. Trabaja solo con ese usuario y no le manda nada a tus clientes." },
+  { "id": "crm", "q": "¿Funciona con mi CRM?", "a": "Integrado con Tokko. ¿Usás otro CRM? Lo conectamos para vos." },
+  { "id": "clientes-ia", "q": "¿Mis clientes hablan con una IA?", "a": "No. Centralito nunca les escribe a tus clientes ni manda mensajes masivos: te deja el texto o el PDF listo y lo mandás vos desde tu WhatsApp." },
+  { "id": "chatgpt", "q": "Ya uso ChatGPT, ¿qué cambia?", "a": "ChatGPT te escribe un texto. Centralito lo hace en tu CRM: carga, edita, tasa, arma el PDF y te recuerda los seguimientos." },
+  { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Te das de baja cuando quieras, sin permanencia: le escribís \"Mi cuenta\" a Centralito y te manda el link para cancelar. {garantia}" },
+  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Se paga con tarjeta." },
+  { "id": "inmobiliaria", "q": "¿Y para mi inmobiliaria con equipo?", "a": "Para inmobiliarias con equipo tenemos otra propuesta.", "link": { "href": "/inmobiliarias", "label": "Ver la propuesta para inmobiliarias →", "cta": "inmobiliarias" } }
+]

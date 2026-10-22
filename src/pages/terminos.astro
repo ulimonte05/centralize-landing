@@ -1,0 +1,32 @@
+---
+import Base from '@/layouts/Base.astro';
+import { priceLine, guarantee } from '@/lib/pricing';
+const ar = priceLine('AR');
+const us = priceLine('UY');
+---
+<Base title="Términos y condiciones | Centralize" description="Términos de la suscripción a Centralito y de Centralize Ventas." path="/terminos" noindex>
+  <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Términos y condiciones</h1></div>
+  <div class="prose">
+    <div class="card" style="padding:16px 20px;margin-bottom:24px">
+      <p class="mono up" style="margin:0 0 8px">Datos del vendedor</p>
+      <p style="margin:0"><strong>Razón social:</strong> {'{{RAZON_SOCIAL}}'} <span class="mono">TODO</span></p>
+      <p style="margin:0"><strong>CUIT:</strong> {'{{CUIT}}'} <span class="mono">TODO</span></p>
+      <p style="margin:0"><strong>Domicilio:</strong> {'{{DOMICILIO}}'} <span class="mono">TODO</span></p>
+    </div>
+    <h2>1. Partes y aceptación</h2><p>Estos términos aplican a los clientes de Argentina, Uruguay y el resto del mundo (precios en dólares). Quien contrata es el titular de la suscripción y acepta estos términos al iniciar la prueba.</p>
+    <h2>2. Qué es Centralito y qué no hace</h2><p>Centralito es un asistente que opera tu CRM inmobiliario y te responde por WhatsApp. No les escribe a los clientes del asesor ni manda campañas: solo trabaja con vos, pide tu OK antes de cualquier cambio en lote y registra lo que hizo.</p>
+    <h2>3. Alta y cuenta</h2><p>Tu número de WhatsApp es tu identificador. Al terminar el pago, activás Centralito mandando el mensaje con tu código desde ese número.</p>
+    <h2>4. Prueba gratis</h2><p>Empezás con {ar.trialDays} días gratis. Para activarla cargás una tarjeta; no se cobra nada durante la prueba. Si no querés seguir, te das de baja antes de que termine y no pagás.</p>
+    <h2>5. Precio y renovación automática</h2>
+    <p>Terminada la prueba, la suscripción se cobra todos los meses de forma automática con la tarjeta cargada, hasta que te des de baja. Los precios son finales y por mes:</p>
+    <ul>
+      <li>Argentina: {ar.promo} al mes durante los primeros {ar.promoMonths} meses de pago (además de la semana gratis) y {ar.list} al mes desde entonces.</li>
+      <li>Resto del mundo, Uruguay incluido: {us.promo} al mes durante los primeros {us.promoMonths} meses de pago y {us.list} al mes desde entonces.</li>
+    </ul>
+    <h2>6. Garantía del primer pago</h2><p>{guarantee} Escribinos desde <a class="link" href="/cuenta">Mi cuenta</a> y la devolución se hace a mano a la misma tarjeta.</p>
+    <h2>7. Baja</h2><p>Das de baja cuando quieras desde <a class="link" href="/cuenta">/cuenta</a>: Centralito te manda por WhatsApp un link personal de gestión. La baja corta los cobros siguientes; no hay permanencia mínima.</p>
+    <h2>8. Botón de arrepentimiento</h2><p>Podés arrepentirte dentro de los 10 días corridos de contratar y te devolvemos lo pagado. Lo pedís desde el mismo botón, en <a class="link" href="/cuenta">/cuenta</a>.</p>
+    <h2>9. Credenciales y acceso al CRM</h2><p>Para operar le das a Centralito un usuario de tu CRM, a tu nombre, que podés revocar desde el CRM cuando quieras. Usamos esas credenciales solo para lo que pedís. Si tu CRM todavía no está integrado, el equipo de Centralize también puede usarlas para conectarlo. Tus contactos siguen siendo tuyos.</p>
+    <h2>10. Datos</h2><p>Ver la <a class="link" href="/privacidad">Política de privacidad</a>.</p>
+  </div></div></section>
+</Base>

@@ -1,0 +1,10 @@
+{ "id": "rutina-leads-sin-cargar", "hora": "09:00", "titulo": "Leads sin atender", "chip": "Que te avise si hay leads sin atender", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "fijate cuatro veces por día si tengo leads nuevos en Tokko sin atender y avisame solo si hay" },
+    { "de": "centralito", "texto": "Listo: a las 11, 13, 15 y 17 reviso tus leads nuevos en Tokko y te escribo solo si hay alguno sin atender.", "typing_ms": 1300,
+      "artefacto": { "tipo": "rutina", "cuando": "4 veces al día", "que": "Leads sin atender", "estado": "activa" }, "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "Rutina · Leads sin atender", "sub": "11, 13, 15 y 17 · avisa solo si hay", "unidad": "rutina" },
+  "antes": "mirar Tokko por las dudas", "despues": "te avisa solo si hay novedad",
+  "wa_text": "Centralito, fijate cuatro veces por día si tengo leads nuevos en Tokko sin atender y avisame solo si hay.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }
