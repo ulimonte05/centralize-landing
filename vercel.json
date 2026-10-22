@@ -2,6 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/ventas", "destination": "/inmobiliarias", "permanent": true },
+    { "source": "/a-medida", "destination": "/inmobiliarias", "permanent": true },
     { "source": "/centralito", "destination": "/", "permanent": true },
     { "source": "/privacy-policy/", "destination": "/privacy-policy", "permanent": true }
   ],
