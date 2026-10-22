@@ -1,6 +1,5 @@
 ---
 import contact from '@/data/contact.json';
-import plans from '@/data/plans.json';
 import Mark from '@/components/Mark.astro';
 const legal = contact.legal;
 ---
@@ -26,7 +25,6 @@ const legal = contact.legal;
         <a href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a>
         <a href="/terminos">Términos</a>
         <a href="/privacidad">Privacidad</a>
-        {plans.cobro && <a href="/contacto?tema=arrepentimiento">Botón de arrepentimiento</a>}
         <a href="/contacto?tema=baja">Dar de baja</a>
         <button type="button" class="foot-toggle" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
       </nav>

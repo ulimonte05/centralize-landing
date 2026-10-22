@@ -3,18 +3,18 @@ import Base from '@/layouts/Base.astro';
 import PlanCard from '@/components/PlanCard.astro';
 import WaLink from '@/components/WaLink.astro';
 import MobileBar from '@/components/MobileBar.astro';
-import plans from '@/data/plans.json';
+import { priceSummary, guarantee } from '@/lib/pricing';
 import contact from '@/data/contact.json';
 import { SCENES, ALL_IDS } from '@/lib/scenes';
 const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.replace(' minutos', ' min');
 ---
-<Base title="Precios de Centralito | Centralize" description={`Precio por asesor por mes, sin permanencia. ${v} a medida, en una demo de ${dur}.`} path="/precios" active="precios">
+<Base title="Precios de Centralito | Centralize" description={`${priceSummary('AR')}. ${v} a medida, en una demo de ${dur}.`} path="/precios" active="precios">
   <section class="page">
     <div class="wrap">
       <div class="page-head">
         <p class="eyebrow">Precios</p>
-        <h1>Un precio por asesor. <em>Sin permanencia.</em></h1>
-        <p class="lead">Centralito se activa desde la web. {v} se arma a medida y se vende en una demo de {dur}.</p>
+        <h1>Un solo plan. <em>Sin permanencia.</em></h1>
+        <p class="lead">Centralito se activa desde la web: {priceSummary('AR')}. {v} se arma a medida y se vende en una demo de {dur}.</p>
       </div>
       <div class="precios-grid">
         <div>
@@ -24,26 +24,24 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
         <div class="ventas-card">
           <p class="eyebrow">{v}</p>
           <p class="frase-fija" style="margin:0;font-size:20px">{v} trabaja con tus clientes: responde, recontacta y califica tus leads. Es otro producto, se contrata aparte y viene con Centralito adentro.</p>
-          <p style="margin-top:16px;font-weight:600">Todo Centralito, más:</p>
-          <ul>{plans.ventas.bullets.slice(1).map(b => <li>{b}</li>)}</ul>
-          <p class="mono">{plans.ventas.nota}</p>
+          <p style="margin-top:16px;font-weight:600">Incluye Centralito.</p>
+          <p class="mono">Propuesta en una demo · Sin permanencia</p>
           <div class="cta-row" style="margin-top:20px"><a class="btn btn-light" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="precios">Agendar demo de {dur}</a></div>
         </div>
       </div>
       <h2 id="pedidos" class="h2-sec">Qué cuenta como un pedido</h2>
-      <p class="lead" style="margin-top:10px">Un pedido es un mensaje como estos. Tasación, landing e informe en PDF son pedidos pesados y cuentan aparte: {plans.publicado ? `ARS ${plans.pesado_extra.ar.toLocaleString('es-AR')} (USD ${plans.pesado_extra.uy}) cada uno` : 'te lo confirmamos antes de pagar'}. Una rutina es un pedido que se repite solo; sus corridas no descuentan pedidos.</p>
+      <p class="lead" style="margin-top:10px">Un pedido es un mensaje como estos. Tasación, landing e informe en PDF son pedidos pesados y cuentan aparte; te lo confirmamos antes de pagar. Una rutina es un pedido que se repite solo; sus corridas no descuentan pedidos.</p>
       <details class="m-fold" open><summary class="pill">Ver los 15 pedidos de ejemplo</summary><ul class="pedidos-lista">{ALL_IDS.map(id => <li><b>{SCENES[id].chip}{['tasacion-acm', 'landing-emprendimiento', 'informe-propietario'].includes(id) ? ' · pesado' : ''}</b>{SCENES[id].wa_text}</li>)}</ul></details>
       <div class="prose" style="margin-top:56px">
         <h2>Preguntas sobre el cobro</h2>
-        <details class="faq-d"><summary>¿En qué moneda pago?</summary><p>En Argentina en pesos, con IVA del 21 % aparte, al dólar BNA del primer día de cada mes. En Uruguay en dólares con IVA del 22 %.</p></details>
+        <details class="faq-d"><summary>¿En qué moneda pago?</summary><p>En Argentina en pesos. En el resto del mundo, Uruguay incluido, en dólares.</p></details>
         <details class="faq-d"><summary>¿Me facturan?</summary><p>Sí. En Argentina con factura A o B según tu condición.</p></details>
         <details class="faq-d"><summary>¿Cómo cancelo?</summary><p>Con un mensaje al equipo. No pagás el mes siguiente.</p></details>
-        {plans.cobro && <details class="faq-d"><summary>¿Y si me arrepiento?</summary><p>Dentro de los 10 días (Argentina) o 5 días hábiles (Uruguay) te devolvemos lo pagado sin preguntas.</p></details>}
+        <details class="faq-d"><summary>¿Y si no me sirve?</summary><p>{guarantee}</p></details>
         <details class="faq-d"><summary>¿Qué cobra Meta?</summary><p>Nada por Centralito: usás tu WhatsApp como siempre. Meta factura aparte los mensajes de {v}; para la mayoría hoy es cero o unos pocos dólares por mes.</p></details>
       </div>
-      <div class="cta-row only-d" style="margin-top:32px"><a class="btn btn-primary" href="/empezar?plan=asesor&pais=ar" data-cta="empezar" data-section="precios">Empezar</a><WaLink section="precios" /></div>
+      <div class="cta-row only-d" style="margin-top:32px"><a class="btn btn-primary" href="/empezar" data-cta="empezar" data-section="precios">Empezar</a><WaLink section="precios" /></div>
     </div>
   </section>
-  <MobileBar section="precios" primary={{ href: '/empezar?plan=asesor&pais=ar', label: plans.cobro ? 'Empezar' : 'Quiero activarlo', cta: 'empezar' }} secondary={{ wa: true, label: 'WhatsApp', cta: 'whatsapp' }} />
-  <script src="@/islands/plan-selector.ts"></script>
+  <MobileBar section="precios" primary={{ href: '/empezar?plan=asesor&pais=ar', label: 'Quiero activarlo', cta: 'empezar' }} secondary={{ wa: true, label: 'WhatsApp', cta: 'whatsapp' }} />
 </Base>

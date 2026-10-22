@@ -1,21 +1,9 @@
 {
-  "_nota": "Precio PROPUESTO (plan §9), no confirmado por Laucha. publicado=false => la tarjeta muestra 'Precio por asesor, sin permanencia' y 'Pedir precio por WhatsApp'. cobro=false => botón 'Quiero activarlo' sin pago ni promesa de devolución.",
-  "publicado": true,
-  "cobro": false,
-  "tipo_cambio": { "fecha": "2026-10-01", "fuente": "BNA", "ars_por_usd": 1535 },
-  "iva": { "ar": 0.21, "uy": 0.22 },
-  "pesado_extra": { "ar": 4600, "uy": 3 },
-  "default": { "plan": "asesor", "pais": "ar" },
-  "planes": [
-    { "id": "asesor", "nombre": "Asesor", "ar": 59900, "uy": 39, "pedidos": 40, "pesados": 0, "rutinas": 2, "por": "por asesor, por mes",
-      "bullets": ["40 pedidos al mes: leads, fichas, segmentos, recordatorios", "Tasación, landing e informe en PDF: pedidos pesados, {pesado} cada uno, aparte", "2 rutinas programadas"],
-      "nota_dia": "El día de arriba son 9 pedidos, 3 pesados y 4 rutinas: entra en Asesor Pro" },
-    { "id": "asesor-pro", "nombre": "Asesor Pro", "ar": 119900, "uy": 79, "pedidos": 120, "pesados": 6, "rutinas": 6, "por": "por asesor, por mes",
-      "bullets": ["120 pedidos al mes, como los de esta página, con 6 pesados incluidos", "Tasación, landing e informe en PDF: 6 incluidos, después {pesado} cada uno", "6 rutinas programadas"],
-      "nota_dia": "El día de arriba entra entero en este plan" },
-    { "id": "inmobiliaria", "nombre": "Inmobiliaria", "sub": "desde 3 asesores", "ar": 89900, "uy": 59, "pedidos": 100, "pesados": 4, "rutinas": 5, "por": "por asesor, por mes",
-      "bullets": ["100 pedidos por asesor al mes, compartidos entre el equipo", "4 pedidos pesados por asesor, compartidos", "5 rutinas programadas por asesor"],
-      "nota_dia": "Un Centralito por asesor, sobre el Tokko de la inmobiliaria" }
-  ],
-  "ventas": { "nombre": "Centralize Ventas", "bullets": ["Todo Centralito, para todo el equipo", "Campañas por WhatsApp con templates aprobados por Meta", "Responde en WhatsApp, Instagram y Facebook", "Califica HOT / WARM / COLD y carga al CRM"], "nota": "Incluye Centralito para todo el equipo · Propuesta en una demo de 15 min · Sin permanencia" }
+  "trialDays": 7,
+  "promoMonths": 3,
+  "prices": {
+    "ARS": { "promo": 47500, "list": 75000 },
+    "USD": { "promo": 30, "list": 50 }
+  },
+  "guarantee": "Si en el primer mes no te sirvió, te devolvemos el primer pago."
 }

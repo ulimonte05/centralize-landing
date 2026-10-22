@@ -1,16 +1,14 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Chat from '@/components/Chat.astro';
-import plans from '@/data/plans.json';
+import { priceLine, guarantee } from '@/lib/pricing';
 import contact from '@/data/contact.json';
 import { SCENES, ALL_IDS } from '@/lib/scenes';
 export const prerender = true;
 const q = Astro.url.searchParams;
 const pedidoId = q.get('pedido') && SCENES[q.get('pedido')!] ? q.get('pedido')! : '';
-const planId = plans.planes.some(p => p.id === q.get('plan')) ? q.get('plan')! : 'asesor';
 const pais = q.get('pais') === 'uy' ? 'uy' : 'ar';
-const p = plans.planes.find(x => x.id === planId)!;
-const total = Math.round(p.ar * (1 + plans.iva.ar));
+const precio = priceLine(pais === 'uy' ? 'UY' : 'AR');
 const sugeridas = ['resumen-del-dia', 'buscar-cartera', 'tasacion-acm'];
 const v = contact.productos.ventas.nombre;
 ---
@@ -40,16 +38,16 @@ const v = contact.productos.ventas.nombre;
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"><small>Para la factura y la confirmación.</small></div>
           <div class="field"><span class="label" id="eq-l" style="font-weight:600">¿Cuántos son en el equipo?</span><div class="seg-group" role="radiogroup" aria-labelledby="eq-l">{['Solo yo', '2 a 5', '6 a 15', 'Más de 15'].map((t, i) => <label><input type="radio" name="equipo" value={t} checked={i === 0}>{t}</label>)}</div></div>
           <div class="field"><label for="tokko">Usuario de Tokko a tu nombre</label><input id="tokko" name="tokko_usuario" autocomplete="off" placeholder="opcional, lo podés cargar después"><small>Si no lo tenés, lo pedís en Tokko y lo cargás después; sin esto Centralito no puede entrar a tu CRM. Acá no te pedimos la contraseña.</small></div>
-          <div class="field"><span class="label" style="font-weight:600">Plan</span><div class="seg-group" role="radiogroup" aria-label="Plan">{plans.planes.map(x => <label><input type="radio" name="plan" value={x.id} checked={x.id === planId}>{x.nombre}{x.sub ? ` (${x.sub})` : ''}</label>)}</div><div class="seg-group" role="radiogroup" aria-label="País"><label><input type="radio" name="pais" value="ar" checked={pais === 'ar'}>Argentina</label><label><input type="radio" name="pais" value="uy" checked={pais === 'uy'}>Uruguay</label></div></div>
-          <button class="btn btn-primary btn-block" type="submit" data-cta="checkout" data-section={planId}>{plans.cobro ? `Ir a pagar ARS ${total.toLocaleString('es-AR')}` : 'Quiero activarlo'}</button>
-          <p class="legal-mini">{plans.cobro ? 'Al pagar aceptás los Términos y la Política de privacidad. Podés arrepentirte dentro de los 10 días (Argentina) o 5 días hábiles (Uruguay).' : `No se cobra nada ahora. Te escribimos ${contact.sla_alta} para activarlo. Al enviar aceptás los `}<a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>
+          <input type="hidden" name="plan" value="centralito"><div class="field"><span class="label" style="font-weight:600">País</span><div class="seg-group" role="radiogroup" aria-label="País"><label><input type="radio" name="pais" value="ar" checked={pais === 'ar'}>Argentina</label><label><input type="radio" name="pais" value="uy" checked={pais === 'uy'}>Uruguay</label></div></div>
+          <button class="btn btn-primary btn-block" type="submit" data-cta="checkout" data-section="centralito">Quiero activarlo</button>
+          <p class="legal-mini">No se cobra nada ahora. Te escribimos {contact.sla_alta} para activarlo. Al enviar aceptás los <a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>
         </form>
         <aside class="recibo card">
           <p class="mono up">Lo que vas a recibir</p>
           <ul>
-            {plans.publicado && <li><b>Plan</b><span>{p.nombre}: {plans.cobro ? `ARS ${p.ar.toLocaleString('es-AR')} + IVA = ARS ${total.toLocaleString('es-AR')}` : `ARS ${p.ar.toLocaleString('es-AR')} + IVA por asesor al mes (te lo confirmamos antes de cobrar)`}</span></li>}
-            <li><b>Recibís</b><span>un Centralito en tu WhatsApp, sobre tu Tokko; {p.pedidos} pedidos por mes; {p.rutinas} rutinas</span></li>
-            {plans.cobro && <li><b>Podés</b><span>cancelar con un mensaje; devolución total en 10 días, sin preguntas</span></li>}
+            <li><b>Plan</b><span>{precio.trialDays} días gratis, después {precio.promo} al mes por {precio.promoMonths} meses y {precio.list} al mes</span></li>
+            <li><b>Recibís</b><span>un Centralito en tu WhatsApp, sobre tu Tokko</span></li>
+            <li><b>Podés</b><span>cancelar con un mensaje. {guarantee}</span></li>
             <li><b>Te activa</b><span>una persona del equipo, {contact.sla_alta}</span></li>
           </ul>
           <div class="chips"><span class="chip">Pide tu OK antes</span><span class="chip">Te dice cuánto leyó</span><span class="chip">Queda registrado</span></div>
@@ -62,9 +60,9 @@ const v = contact.productos.ventas.nombre;
     try { const o = sessionStorage.getItem('centralize.ref'); if (o) (document.querySelector('[data-origen]') as HTMLInputElement).value = o; } catch {}
     { const q = new URLSearchParams(location.search); const map = JSON.parse(document.getElementById('wa-map')!.textContent || '{}'); const id = q.get('pedido') || '';
       if (map[id]) { (document.getElementById('pedido') as HTMLTextAreaElement).value = map[id]; (document.querySelector('input[name=pedido_id]') as HTMLInputElement).value = id; }
-      const plan = q.get('plan'), pais = q.get('pais'); const r = (n: string, v: string | null) => { const el = document.querySelector(`input[name=${n}][value="${v}"]`) as HTMLInputElement | null; if (el) el.checked = true; }; r('plan', plan); r('pais', pais); }
+      const pais = q.get('pais'); const el = document.querySelector(`input[name=pais][value="${pais}"]`) as HTMLInputElement | null; if (el) el.checked = true; }
     document.querySelector('[data-sugeridas]')?.addEventListener('click', e => { const b = (e.target as HTMLElement).closest('[data-sug]') as HTMLElement | null; if (!b) return; (document.getElementById('pedido') as HTMLTextAreaElement).value = b.dataset.sug || ''; });
-    document.querySelector('[data-empezar]')?.addEventListener('submit', () => { try { (window as any).va?.('event', { name: 'checkout_start', data: { cta: (document.querySelector('input[name=plan]:checked') as HTMLInputElement)?.value, section: (document.querySelector('input[name=pais]:checked') as HTMLInputElement)?.value } }); } catch {} });
+    document.querySelector('[data-empezar]')?.addEventListener('submit', () => { try { (window as any).va?.('event', { name: 'checkout_start', data: { cta: 'centralito', section: (document.querySelector('input[name=pais]:checked') as HTMLInputElement)?.value } }); } catch {} });
   </script>
 </Base>
 <style>.recibo-chat .chat{height:420px;max-width:none}@media (max-width:1023px){.recibo-chat{display:none}}</style>

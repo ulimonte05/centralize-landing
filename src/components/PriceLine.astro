@@ -1,6 +1,4 @@
 ---
-import plans from '@/data/plans.json';
-const p = plans.planes[0];
-const txt = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IVA por asesor al mes · sin permanencia` : 'Precio por asesor, sin permanencia.';
+import { priceSummary } from '@/lib/pricing';
 ---
-<p class="precio-linea">{txt}</p>
+<p class="precio-linea">{priceSummary('AR')}.</p>

@@ -3,9 +3,8 @@ import Chat from '@/components/Chat.astro';
 import WaLink from '@/components/WaLink.astro';
 import MobileBar from '@/components/MobileBar.astro';
 import claims from '@/data/claims.json';
-import plans from '@/data/plans.json';
-const p = plans.planes[0];
-const precio = plans.publicado ? `Desde ARS ${p.ar.toLocaleString('es-AR')} + IVA por asesor al mes · sin permanencia` : 'Precio por asesor · sin permanencia';
+import { priceSummary } from '@/lib/pricing';
+const precio = priceSummary('AR');
 ---
 <section class="hero" id="hero" aria-labelledby="h1">
   <div class="wrap">

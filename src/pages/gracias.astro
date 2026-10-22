@@ -1,7 +1,6 @@
 ---
 import Base from '@/layouts/Base.astro';
 import contact from '@/data/contact.json';
-import plans from '@/data/plans.json';
 import MobileBar from '@/components/MobileBar.astro';
 import { SCENES, ALL_IDS } from '@/lib/scenes';
 export const prerender = true;
@@ -31,7 +30,6 @@ const waDemora = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURI
           </div>
           <p class="mono">Si pasó {contact.sla_alta} y no te escribimos, <a class="link" href={waDemora} target="_blank" rel="noopener" data-wa data-section="gracias-demora" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>tocá acá</a>.</p>
           <div class="cta-row" style="margin-top:24px" data-bar-sentinel><a class="btn btn-primary" href={wa} target="_blank" rel="noopener" data-wa data-section="gracias" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>Hablar con el equipo</a><a class="link" href="/terminos">Ver los Términos</a></div>
-          {plans.cobro && <p class="legal-mini" style="margin-top:20px"><a class="link" href="/contacto?tema=arrepentimiento">Botón de arrepentimiento</a> · <a class="link" href="/contacto?tema=baja">Dar de baja</a></p>}
         </div>
         <aside class="recibo card">
           <p class="mono up">Registro</p>

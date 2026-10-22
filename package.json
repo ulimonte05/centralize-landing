@@ -5,13 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "dev:carta": "node scripts/variant-proxy.mjs carta 4324",
-    "dev:un-dia": "node scripts/variant-proxy.mjs un-dia 4322",
-    "dev:catalogo": "node scripts/variant-proxy.mjs catalogo 4323",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "dev:simple": "astro dev --port 4321"
+    "dev:simple": "astro dev --port 4321",
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/vercel": "^11.0.14",
@@ -19,7 +17,9 @@
     "motion": "^14.2.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "sharp": "^0.34.0",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.5"
   }
 }

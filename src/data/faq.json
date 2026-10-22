@@ -6,5 +6,5 @@
   { "id": "crm", "q": "¿Funciona con mi CRM?", "a": "Hoy funciona sobre Tokko Broker, con tu usuario. Lee las fotos, los planos y los PDF que le mandás." },
   { "id": "pedido", "q": "¿Qué es un pedido y cuánto cuesta?", "a": "Un mensaje como los de esta página. Tasación, landing e informe en PDF son pedidos pesados y cuentan aparte. {precio}" },
   { "id": "cuando", "q": "¿Cuándo empieza a funcionar?", "a": "Dejás tus datos y te escribimos {sla_alta}. Con tu usuario de Tokko cargado, ya le podés pedir cosas." },
-  { "id": "no-sirve", "q": "¿Y si no me sirve?", "a_con_cobro": "Lo das de baja con un mensaje al equipo y no pagás el mes siguiente. Dentro de los 10 días, te devolvemos lo pagado sin preguntas.", "a_sin_cobro": "Lo das de baja con un mensaje al equipo y no pagás el mes siguiente." }
+  { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Lo das de baja con un mensaje al equipo y no pagás el mes siguiente. {garantia}" }
 ]

@@ -1,50 +1,17 @@
 ---
-import plans from '@/data/plans.json';
 import contact from '@/data/contact.json';
+import { priceLine, guarantee } from '@/lib/pricing';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
-const p = plans.planes[0];
-const total = Math.round(p.ar * (1 + plans.iva.ar));
-const usd = Math.round(p.ar / plans.tipo_cambio.ars_por_usd);
-const waPrecio = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent('Hola, vengo de centralize.dev y quiero saber el precio de Centralito [web-precio]')}`;
+const ar = priceLine('AR');
+const usd = priceLine('UY');
 ---
-<div class={`plan-card card ${compact ? 'compact' : ''}`} data-plan-card>
-  <script type="application/json" set:html={JSON.stringify(plans)} />
-  <div class="plan-top">
-    <div class="seg" role="group" aria-label="País">
-      <button type="button" class="pill" data-pais="ar" aria-pressed="true">Argentina (ARS)</button>
-      <button type="button" class="pill" data-pais="uy" aria-pressed="false">Uruguay (USD)</button>
-    </div>
-  </div>
-  <p class="plan-nombre" data-f="nombre">{p.nombre}</p>
-  {plans.publicado ? (
-    <>
-      <p class="plan-neto"><b data-f="neto">ARS {p.ar.toLocaleString('es-AR')} + IVA</b> <span class="mono" data-f="ref">≈ USD {usd}</span></p>
-      <p class="plan-total muted" data-f="total">ARS {total.toLocaleString('es-AR')} con IVA · {p.por}</p>
-      <ul class="plan-bullets">
-        <li data-f="bullet">{p.bullets[0]}</li>
-        <li data-f="bullet">{p.bullets[1].replace('{pesado}', `ARS ${plans.pesado_extra.ar.toLocaleString('es-AR')} (USD ${plans.pesado_extra.uy})`)}</li>
-        <li data-f="bullet">{p.bullets[2]}</li>
-      </ul>
-      {!compact && <button type="button" class="plan-nota mono up" data-go="asesor-pro" data-f="nota_dia">{p.nota_dia}</button>}
-      {!compact && <p class="plan-expl muted">Un pedido es un mensaje como los de esta página. Una rutina es un pedido que se repite solo; sus corridas no descuentan pedidos. Si te pasás de los 40, te avisamos y elegís: pedidos sueltos o Asesor Pro.</p>}
-      <p class="mono up plan-cond" data-f="cond">{plans.cobro ? 'Sin permanencia · Lo das de baja con un mensaje · 10 días de devolución' : 'Sin permanencia · Lo das de baja con un mensaje'}</p>
-      <a class="btn btn-primary btn-block" href="/empezar?plan=asesor&pais=ar" data-f="btn" data-cta="empezar" data-section="precio">{plans.cobro ? 'Empezar' : 'Quiero activarlo'}</a>
-      <p class="plan-sub muted" data-f="aviso" hidden={plans.cobro}>Te escribimos {contact.sla_alta} para activarlo.</p>
-      <p class="plan-sub muted" data-f="btn_sub" hidden>o <a class="link" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="precio">coordiná {contact.calcom.duracion.replace(' minutos', ' min')} con el equipo</a></p>
-      <div class="plan-links">
-        {plans.planes.map(x => <button type="button" class="link-btn" data-plan={x.id} aria-pressed={x.id === 'asesor' ? 'true' : 'false'}>{x.nombre}{x.sub ? ` (${x.sub})` : ''}</button>)}
-        <a class="link" href="/precios">Ver todos los planes</a>
-      </div>
-    </>
-  ) : (
-    <>
-      <p class="plan-neto"><b>Precio por asesor, sin permanencia</b></p>
-      <p class="mono up plan-cond">Sin permanencia</p>
-      <a class="btn btn-primary btn-block" href={waPrecio} target="_blank" rel="noopener" data-wa data-section="precio" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}>Pedir precio por WhatsApp</a>
-    </>
-  )}
-  {!compact && <p class="plan-foot muted">¿Más de 5 asesores? Te armamos el alta en equipo: <a class="link" href={contact.calcom.url} target="_blank" rel="noopener" data-cta="demo" data-section="precio">coordiná {contact.calcom.duracion.replace(' minutos', ' min')}</a>.</p>}
-  {!compact && <p class="plan-notas mono">Precio en pesos al dólar BNA del {plans.tipo_cambio.fecha}; se recalcula el 1 de cada mes y el que ves es el que pagás este mes · Funciona sobre tu Tokko: necesitás un usuario de Tokko a tu nombre</p>}
-  <p class="plan-pie">Si sabés escribir un WhatsApp, ya sabés usarlo.</p>
+<div class={`plan-card card ${compact ? 'compact' : ''}`}>
+  <p class="plan-nombre">Centralito</p>
+  <p class="plan-neto"><b>{ar.trialDays} días gratis</b></p>
+  <p class="plan-total muted">Después {ar.promo} al mes por {ar.promoMonths} meses, y {ar.list} al mes.</p>
+  <p class="plan-total muted">Fuera de Argentina: {usd.promo} al mes por {usd.promoMonths} meses, y {usd.list} al mes.</p>
+  <p class="mono up plan-cond">Sin permanencia · {guarantee}</p>
+  <a class="btn btn-primary btn-block" href="/empezar" data-cta="empezar" data-section="precio">Quiero activarlo</a>
+  <p class="plan-sub muted">Te escribimos {contact.sla_alta} para activarlo.</p>
 </div>
