@@ -1,5 +1,5 @@
 // Motor de escenas (plan §6.5). Vanilla TS, sin dependencias. Dos instancias por página (hero y Un día), DOM separado.
-import { SCENES, TOTAL, DIA_IDS, MINI_IDS, AUTO_IDS, type Escena, type Mensaje, type Artefacto } from '@/lib/scenes';
+import { SCENES, TOTAL, type Escena, type Mensaje, type Artefacto } from '@/lib/scenes';
 import { renderMessages, renderPanel, sceneMessages, ICONS, SYS_ROW } from '@/lib/render';
 import { matchScene } from '@/lib/match';
 
@@ -13,7 +13,7 @@ const isMobile = () => matchMedia('(max-width: 1023px)').matches;
 const track = (name: string, data: Record<string, string>) => { try { (window as any).va?.('event', { name, data }); } catch { /* noop */ } };
 const AUTO = new URLSearchParams(location.search).has('auto') && !reduced();
 
-/* "Viste n de 15 pedidos" */
+/* "Viste n de TOTAL pedidos" */
 const VISTOS_KEY = 'centralito.vistos';
 const vistos = (): string[] => { try { return JSON.parse(sessionStorage.getItem(VISTOS_KEY) || '[]'); } catch { return []; } };
 function marcarVisto(id: string) {
@@ -286,56 +286,23 @@ export function init() {
     const b = (e.target as HTMLElement).closest('[data-scene-trigger]') as HTMLElement | null; if (!b) return;
     const id = b.dataset.sceneTrigger!, target = b.dataset.target || 'hero', inst = instances[target]; if (!inst) return;
     const dlg = b.closest('dialog') as HTMLDialogElement | null; if (dlg) dlg.close();
-    if (b.closest('[data-rail]')) { (window as any).__railGo?.(id, true); return; }
     $$(`[data-scene-trigger][data-target="${target}"]`).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     const first = !inst.played.has(id);
     inst.load(id, first, undefined);
     if (!first) inst.showAll();
-    if (inst.name === 'dia') { inst.onNext = null; if (SCENES[id].mini) railClear(); }
     track('demo_interact', { section: id, cta: b.closest('.otros') ? 'chip' : 'click' });
     if (isMobile()) { const r = inst.root.getBoundingClientRect(); const vis = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0); if (vis < r.height * 0.5) inst.root.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'nearest' }); }
   });
 
-  // riel de Un día
-  const rail = $('[data-rail]');
-  const railClear = () => { if (!rail) return; $$('[role="tab"]', rail).forEach(t => t.setAttribute('aria-selected', 'false')); };
-  const railGo = (id: string, play: boolean) => {
-    const inst = instances['dia']; if (!inst || !rail) return;
-    const tabs = $$('[role="tab"]', rail); const idx = DIA_IDS.indexOf(id); const last = DIA_IDS.length - 1;
-    tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === idx)); t.tabIndex = k === idx ? 0 : -1; });
-    rail.style.setProperty('--at', String(idx / last));
-    const clock = $('[data-clock]'); if (clock) clock.textContent = SCENES[id].hora;
-    const ba = $('[data-ba]'); if (ba) ba.innerHTML = `<i>antes</i> <s>${SCENES[id].antes}</s> <i>→</i> <b>${SCENES[id].despues}</b>`;
-    const ped = $<HTMLAnchorElement>('[data-pedir]'); if (ped) ped.href = `/contratar?pedido=${id}`;
-    inst.onNext = idx < last ? () => railGo(DIA_IDS[idx + 1], true) : (AUTO ? () => autoNext(id) : null);
-    inst.nextLabel = idx < last ? 'Siguiente momento →' : 'Volver al primero';
-    if (idx === last && !AUTO) inst.onNext = () => railGo(DIA_IDS[0], true);
-    const first = !inst.played.has(id);
-    inst.load(id, play && first);
-    if (play && !first) inst.showAll();
-    history.replaceState(null, '', `${location.pathname}${location.search}#dia-${id}`);
-    track('demo_interact', { section: id, cta: 'tab' });
-  };
-  (window as any).__railGo = railGo;
-  if (rail) {
-    rail.addEventListener('keydown', e => {
-      const tabs = $$('[role="tab"]', rail); const cur = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const n = (cur + (e.key === 'ArrowRight' ? 1 : -1) + DIA_IDS.length) % DIA_IDS.length; railGo(DIA_IDS[n], true); tabs[n].focus(); }
-    });
-    const dia = instances['dia']; if (dia) { dia.onNext = () => railGo(DIA_IDS[1], true); }
-  }
   // modo stand
-  const autoNext = (id: string) => { const k = AUTO_IDS.indexOf(id); const nid = AUTO_IDS[(k + 1) % AUTO_IDS.length]; if (DIA_IDS.includes(nid)) railGo(nid, true); else { const inst = instances['dia']; inst.onNext = () => autoNext(nid); inst.load(nid, true); } };
-  if (AUTO) { (window as any).__autoCancel = () => { Object.values(instances).forEach(i => { i.onNext = null; clearTimeout(i.autoTimer); }); }; const dia = instances['dia']; if (dia) dia.onNext = () => autoNext('resumen-del-dia'); }
+  if (AUTO) { (window as any).__autoCancel = () => { Object.values(instances).forEach(i => { i.onNext = null; clearTimeout(i.autoTimer); }); }; }
 
   // permalinks
   const h = location.hash.slice(1);
   if (h.startsWith('carta-') && instances['sandbox'] && SCENES[h.slice(6)]) { instances['sandbox'].load(h.slice(6), true); $$(`[data-scene-trigger][data-target="sandbox"]`).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sceneTrigger === h.slice(6)))); }
   else if (h.startsWith('carta-') && instances['hero'] && SCENES[h.slice(6)]) { instances['hero'].load(h.slice(6), false); $$(`[data-scene-trigger="${h.slice(6)}"][data-target="hero"]`).forEach(b => b.setAttribute('aria-pressed', 'true')); }
-  else if (h.startsWith('dia-') && instances['dia'] && SCENES[h.slice(4)]) { const id = h.slice(4); if (DIA_IDS.includes(id)) railGo(id, false); else instances['dia'].load(id, false); setTimeout(() => $('#dia')?.scrollIntoView({ block: 'start' }), 50); }
   else {
     instances['hero']?.arm(600);
-    instances['dia']?.arm(300);
     instances['sandbox']?.arm(400);
   }
   $$('[data-chat]').forEach(r => r.classList.add('js-anim'));
