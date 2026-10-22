@@ -5,6 +5,7 @@ import '@/styles/chat.css';
 import '@/styles/site.css';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import MetaPixel from '@/components/MetaPixel.astro';
 import contact from '@/data/contact.json';
 interface Props { title: string; description: string; noindex?: boolean; path?: string; nav?: 'full' | 'min' | 'none'; surface?: 'light' | 'dark'; active?: string; ogTitle?: string }
 const { title, description, noindex = false, path = '/', nav = 'full', surface = 'light', active = '', ogTitle } = Astro.props;
@@ -40,6 +41,7 @@ const noindexAll = import.meta.env.PUBLIC_NOINDEX === '1';
 // antes del primer paint: preferencia de movimiento guardada
 try{var m=localStorage.getItem('motion');if(m==='reduced'||(m===null&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-reduced')}catch(e){}
 </script>
+<MetaPixel />
 <slot name="head" />
 </head>
 <body>

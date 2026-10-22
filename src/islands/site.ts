@@ -1,10 +1,24 @@
 // Islands chicas de todas las páginas: nav (móvil + superficie), toggle "Menos animación", WhatsApp, eventos cta_click.
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector(s) as T | null;
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll(s)] as T[];
-const track = (name: string, data: Record<string, string>) => { try { (window as any).va?.('event', { name, data }); } catch { /* noop */ } };
+import { track } from '@/lib/track';
+import { storeUtm } from '@/lib/attribution';
 
 /* ---- atribución ?ref= ---- */
 try { const ref = new URLSearchParams(location.search).get('ref'); if (ref) sessionStorage.setItem('centralize.ref', ref); } catch { /* noop */ }
+
+/* ---- atribución UTM (primera página de la sesión) ---- */
+storeUtm();
+
+/* ---- ViewContent: la sección #precio entra en pantalla (una vez) y /contratar al cargar ---- */
+if (location.pathname.replace(/\/$/, '') === '/contratar') track('ViewContent', { content_name: 'contratar' });
+const precio = $('#precio');
+if (precio && 'IntersectionObserver' in window) {
+  const vio = new IntersectionObserver(entries => {
+    if (entries.some(e => e.isIntersecting)) { vio.disconnect(); track('ViewContent', { content_name: 'precio' }); }
+  }, { rootMargin: '0px 0px -25% 0px' }); // la sección puede ser más alta que el viewport: un ratio fijo no sirve
+  vio.observe(precio);
+}
 
 /* ---- eventos cta_click ---- */
 document.addEventListener('click', e => {

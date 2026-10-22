@@ -5,7 +5,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://centralize.dev',
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({ webAnalytics: { enabled: true } }),
   trailingSlash: 'never',
   build: { inlineStylesheets: 'auto', format: 'file' },
   devToolbar: { enabled: false },
