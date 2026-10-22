@@ -16,6 +16,5 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   } else {
     console.log('[empezar] lead (sin webhook configurado):', JSON.stringify({ token, ...lead }));
   }
-  const p = new URLSearchParams({ t: token, plan: lead.plan, pais: lead.pais }); if (lead.pedido_id) p.set('pedido', lead.pedido_id);
-  return redirect(`/gracias?${p}`, 303);
+  return redirect('/contacto?enviado=1', 303);
 };

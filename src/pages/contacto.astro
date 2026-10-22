@@ -19,6 +19,7 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
           {contact.email.confirmado && <p><a class="link" href={`mailto:${contact.email.direccion}`}>{contact.email.direccion}</a></p>}
           <p><a class="link" href={contact.redes.instagram} target="_blank" rel="noopener">Instagram</a> · <a class="link" href={contact.redes.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a class="link" href={contact.platform}>Ingresar</a></p>
         </div>
+        <div class="card" style="padding:24px" data-enviado hidden role="status"><h2 style="margin:0 0 8px">¡Gracias! Te escribimos pronto.</h2><p style="margin:0">Respondemos {contact.horario}.</p></div>
         <form class="form card" style="padding:24px" method="post" action="/api/empezar" data-contacto>
           <input type="hidden" name="plan" value="contacto"><input type="hidden" name="pais" value=""><input type="hidden" name="prefijo" value="54">
           <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" required></div>
@@ -33,4 +34,5 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
     </div>
   </section>
   <script>const t = new URLSearchParams(location.search).get('tema'); const s = document.getElementById('c-tema') as HTMLSelectElement | null; if (t && s) { for (const o of s.options) if (o.value === t) s.value = t; }</script>
+  <script>if (new URLSearchParams(location.search).get('enviado') === '1') { const ok = document.querySelector<HTMLElement>('[data-enviado]'); const f = document.querySelector<HTMLElement>('[data-contacto]'); if (ok && f) { ok.hidden = false; f.hidden = true; ok.scrollIntoView({ block: 'center' }); } }</script>
 </Base>
