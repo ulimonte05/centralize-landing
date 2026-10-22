@@ -1,4 +1,4 @@
-// Los 15 pedidos agrupados por familia, con su etiqueta corta (la que se ve en chips, rail móvil y sandbox).
+// Los pedidos agrupados por familia, con su etiqueta corta (la que se ve en chips, rail móvil y sandbox).
 export const CORTO: Record<string, string> = {
   'resumen-del-dia': 'Qué entró anoche', 'cargar-lead': 'Cargá un lead', 'quien-consulto': '¿Quién consultó por Thames 400?', 'rutina-leads-sin-cargar': 'Avisame si hay leads sin atender',
   'buscar-cartera': 'Buscá en tu cartera', 'buscar-red': '3 opciones en la Red Tokko', 'quien-busca-algo-asi': '¿Quién busca algo así?',
@@ -12,3 +12,7 @@ export const FAMILIAS = [
   { nombre: 'Fichas y base', ids: ['cambios-en-lote', 'segmentar-contactos', 'leer-fotos-planos', 'planillas-al-dia'] },
 ];
 export const ORDEN = FAMILIAS.flatMap(f => f.ids);
+/** Pedidos que el plan individual (asesor_ss) no tiene: no se muestran ni en la home ni en el sandbox. */
+export const FUERA_DEL_PLAN = ['informe-propietario', 'landing-emprendimiento'];
+export const FAMILIAS_PLAN = FAMILIAS.map(f => ({ ...f, ids: f.ids.filter(id => !FUERA_DEL_PLAN.includes(id)) }));
+export const ORDEN_PLAN = ORDEN.filter(id => !FUERA_DEL_PLAN.includes(id));

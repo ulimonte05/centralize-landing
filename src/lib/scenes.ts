@@ -1,3 +1,4 @@
+import { FUERA_DEL_PLAN } from './pedidos';
 // Carga de escenas (un JSON por pedido; ids = datos/capabilities.json)
 import resumen from '@/data/scenes/resumen-del-dia.json';
 import buscarRed from '@/data/scenes/buscar-red.json';
@@ -59,7 +60,7 @@ export const SCENES: Record<string, Escena> = Object.fromEntries(
   ([resumen, buscarRed, tasacion, segmentar, landing, lote, informe, cargarLead, quienConsulto, buscarCartera, fichaMarca, planos, quienBusca, planillas, rutinaLeads] as Escena[]).map(s => [s.id, s])
 );
 export const ALL_IDS = Object.keys(SCENES);
-export const TOTAL = ALL_IDS.length; // 15
+export const TOTAL = ALL_IDS.filter(id => !FUERA_DEL_PLAN.includes(id)).length; // 13 (sin los de fuera del plan)
 /** Los seis pedidos de la carta del hero, en orden de lectura */
 export const CARTA_IDS = ['resumen-del-dia', 'tasacion-acm', 'segmentar-contactos', 'buscar-red', 'cambios-en-lote', 'informe-propietario'];
 /** Las paradas de Un día. Sin la landing de un proyecto: el plan individual no la tiene (el sandbox sí la muestra). */

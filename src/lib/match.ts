@@ -1,4 +1,5 @@
-// Emparejar lo que escribe el visitante en el sandbox con una de las 15 escenas (sin IA: palabras clave).
+import { FUERA_DEL_PLAN } from './pedidos';
+// Emparejar lo que escribe el visitante en el sandbox con una de las escenas del plan (sin IA: palabras clave).
 export const CLAVES: Record<string, string[]> = {
   'resumen-del-dia': ['anoche', 'entró', 'entro', 'qué entró', 'que entro', 'leads nuevos', 'resumen', 'pendientes', '8:30', 'mi día', 'mi dia', 'todos los días', 'buen día'],
   'cargar-lead': ['cargá', 'carga', 'cargar', 'cargame', 'cargá en tokko', 'nuevo contacto', 'sol arias', 'dar de alta', 'alta un lead'],
@@ -21,6 +22,7 @@ const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,
 export function matchScene(texto: string): string | null {
   const t = norm(texto); let best: string | null = null; let score = 0;
   for (const [id, claves] of Object.entries(CLAVES)) {
+    if (FUERA_DEL_PLAN.includes(id)) continue;
     let s = 0; for (const k of claves) if (t.includes(norm(k))) s += k.length;
     if (s > score) { score = s; best = id; }
   }

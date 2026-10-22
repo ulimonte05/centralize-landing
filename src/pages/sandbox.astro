@@ -3,10 +3,10 @@ import Base from '@/layouts/Base.astro';
 import Chat from '@/components/Chat.astro';
 import { SCENES, TOTAL } from '@/lib/scenes';
 import { esc } from '@/lib/render';
-import { CORTO as corto, FAMILIAS as familias, ORDEN as orden } from '@/lib/pedidos';
+import { CORTO as corto, FAMILIAS_PLAN as familias, ORDEN_PLAN as orden } from '@/lib/pedidos';
 const chips = orden.map(id => `<button type="button" class="pill" data-scene-trigger="${id}" data-target="sandbox" aria-pressed="${id === 'resumen-del-dia'}">${esc(corto[id])}</button>`).join('');
 ---
-<Base title="Sandbox de Centralito | Centralize" description="Probá los 15 pedidos de Centralito en un chat de ejemplo. Escribí lo que le pedirías y mirá qué hace." path="/sandbox" nav="min" noindex>
+<Base title="Sandbox de Centralito | Centralize" description={`Probá los ${TOTAL} pedidos de Centralito en un chat de ejemplo. Escribí lo que le pedirías y mirá qué hace.`} path="/sandbox" nav="min" noindex>
   <section class="sandbox" aria-labelledby="sb-h">
     <div class="wrap sb-grid">
       <aside class="sb-side">
@@ -22,13 +22,13 @@ const chips = orden.map(id => `<button type="button" class="pill" data-scene-tri
         <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="sandbox">Quiero uno en mi WhatsApp</a>
       </aside>
       <div class="sb-main">
-        <div class="sb-top"><h1>Pedile algo a Centralito</h1><button type="button" class="pill" data-open-sheet>Los 15 pedidos</button></div>
+        <div class="sb-top"><h1>Pedile algo a Centralito</h1><button type="button" class="pill" data-open-sheet>Los {TOTAL} pedidos</button></div>
         <Chat instance="sandbox" scene="resumen-del-dia" mode="hero" input={true} chips={chips} />
         <p class="sb-hint">Ejemplo con nombres y cifras de demostración · Lo que sale hacia un cliente lo mandás vos · <a class="link" href="/contratar">Quiero uno en mi WhatsApp</a></p>
       </div>
     </div>
     <dialog class="sb-sheet" data-sheet>
-      <h2>Los 15 pedidos <button type="button" class="close" data-close-sheet aria-label="Cerrar">×</button></h2>
+      <h2>Los {TOTAL} pedidos <button type="button" class="close" data-close-sheet aria-label="Cerrar">×</button></h2>
       {familias.map(f => <div class="sb-fam"><b>{f.nombre}</b>{f.ids.map(id => <button type="button" class="sb-item" data-scene-trigger={id} data-target="sandbox">{corto[id]}</button>)}</div>)}
     </dialog>
   </section>

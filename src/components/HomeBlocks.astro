@@ -4,7 +4,7 @@ import WaLink from '@/components/WaLink.astro';
 import faq from '@/data/faq.json';
 import claims from '@/data/claims.json';
 import { priceLine, priceSummary, guarantee } from '@/lib/pricing';
-import { CORTO, FAMILIAS } from '@/lib/pedidos';
+import { CORTO, FAMILIAS, FUERA_DEL_PLAN } from '@/lib/pedidos';
 const { trialDays } = priceLine('AR');
 // "Tasar y armar" va primero: es el diferencial (tasación con comparables de la Red Tokko).
 const PRIMERO = 'Tasar y armar';
@@ -16,7 +16,6 @@ const familias = [
 ];
 const ordenFam = [...FAMILIAS].sort((a, b) => Number(b.nombre === PRIMERO) - Number(a.nombre === PRIMERO));
 // Fuera de la home: pedidos que el plan individual (asesor_ss) no tiene. El sandbox los sigue mostrando.
-const FUERA_DEL_PLAN = ['informe-propietario', 'landing-emprendimiento'];
 const rail = ordenFam.flatMap(f => f.ids.filter(id => !FUERA_DEL_PLAN.includes(id)).map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
 const pasos = [
   { t: 'Te suscribís a la prueba', d: `${trialDays} días gratis. Cargás la tarjeta, pero hoy no se cobra nada.` },
