@@ -5,6 +5,6 @@
   { "id": "clientes-ia", "q": "¿Mis clientes hablan con una IA?", "a": "No. Centralito nunca les escribe a tus clientes ni manda mensajes masivos: te deja el texto o el PDF listo y lo mandás vos desde tu WhatsApp." },
   { "id": "chatgpt", "q": "Ya uso ChatGPT, ¿qué cambia?", "a": "ChatGPT te escribe un texto. Centralito lo hace en tu CRM: carga, edita, tasa, arma el PDF y te recuerda los seguimientos." },
   { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Te das de baja cuando quieras, sin permanencia: le escribís \"Mi cuenta\" a Centralito y te manda el link para cancelar. {garantia}" },
-  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Se paga con tarjeta, de crédito o de débito. Mercado Pago y transferencia, por ahora no." },
+  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Se paga con tarjeta." },
   { "id": "inmobiliaria", "q": "¿Y para mi inmobiliaria con equipo?", "a": "Para inmobiliarias con equipo tenemos otra propuesta.", "link": { "href": "/inmobiliarias", "label": "Ver la propuesta para inmobiliarias →", "cta": "inmobiliarias" } }
 ]

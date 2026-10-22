@@ -14,10 +14,10 @@ export function currencyFor(country: string): Currency {
   return country.trim().toUpperCase() === 'AR' ? 'ARS' : 'USD';
 }
 
-/** ARS: "$47.500" (miles con punto). USD: "USD 30". */
+/** ARS: "ARS 47.500" (miles con punto). USD: "USD 30". La moneda siempre explícita. */
 export function formatPrice(amount: number, currency: Currency): string {
   if (currency === 'USD') return `USD ${amount}`;
-  return `$${String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+  return `ARS ${String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 }
 
 export function priceLine(country: string): PriceLine {

@@ -9,13 +9,15 @@ const { trialDays } = priceLine('AR');
 // "Tasar y armar" va primero: es el diferencial (tasación con comparables de la Red Tokko).
 const PRIMERO = 'Tasar y armar';
 const familias = [
-  { nombre: 'Tasar y armar', items: ['Una tasación con comparables y PDF', 'El informe para el propietario', 'La landing de un emprendimiento', 'Ficha en PDF con tu marca'] },
+  { nombre: 'Tasar y armar', items: ['Una tasación con comparables y PDF', 'Ficha en PDF con tu marca', 'Comparables de la Red Tokko para tu cliente'] },
   { nombre: 'Leads', items: ['Qué entró anoche, con teléfono y estado', 'Cargá un lead desde la visita', '¿Quién consultó por Thames 400?', 'Que te avise si hay leads sin atender'] },
   { nombre: 'Buscar', items: ['Buscá en tu cartera como lo dirías', 'Tres opciones en la Red Tokko', '¿Quién de tus contactos busca algo así?'] },
   { nombre: 'Fichas y base', items: ['Cambios en lote, con tu OK antes', 'Segmentar contactos y etiquetarlos', 'Leer un plano o una foto', 'Planillas que se actualizan solas'] },
 ];
 const ordenFam = [...FAMILIAS].sort((a, b) => Number(b.nombre === PRIMERO) - Number(a.nombre === PRIMERO));
-const rail = ordenFam.flatMap(f => f.ids.map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
+// Fuera de la home: pedidos que el plan individual (asesor_ss) no tiene. El sandbox los sigue mostrando.
+const FUERA_DEL_PLAN = ['informe-propietario', 'landing-emprendimiento'];
+const rail = ordenFam.flatMap(f => f.ids.filter(id => !FUERA_DEL_PLAN.includes(id)).map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
 const pasos = [
   { t: 'Te suscribís a la prueba', d: `${trialDays} días gratis. Cargás la tarjeta, pero hoy no se cobra nada.` },
   { t: 'Mandás tu código por WhatsApp', d: 'Después de suscribirte te damos un código. Se lo mandás a Centralito desde tu WhatsApp y queda activo en tu número.' },
@@ -33,7 +35,7 @@ const items = faq.map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', preci
   </div>
   <div class="rail-m only-m" data-rail-m>
     {rail.map((r, i) => <a class="rail-card" href={`/sandbox#carta-${r.id}`} data-cta="sandbox" data-section="rail" style={`--i:${i}`}><b>{r.fam}</b><span>{r.corto}</span><i aria-hidden="true">→</i></a>)}
-    <a class="rail-card rail-end" href="/sandbox" data-cta="sandbox" data-section="rail"><span>Los 15, con tu propio texto</span><i aria-hidden="true">→</i></a>
+    <a class="rail-card rail-end" href="/sandbox" data-cta="sandbox" data-section="rail"><span>Probalos con tu propio texto</span><i aria-hidden="true">→</i></a>
   </div>
   <p class="rail-dots only-m" aria-hidden="true"><span></span><span></span><span></span><span></span></p>
 </section>
