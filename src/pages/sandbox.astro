@@ -19,12 +19,12 @@ const chips = orden.map(id => `<button type="button" class="pill" data-scene-tri
         <div class="sb-list">
           {familias.map(f => <div class="sb-fam"><b>{f.nombre}</b>{f.ids.map(id => <button type="button" class="sb-item" data-scene-trigger={id} data-target="sandbox" aria-pressed={id === 'resumen-del-dia' ? 'true' : 'false'}>{corto[id]}</button>)}</div>)}
         </div>
-        <a class="btn btn-primary" href="/empezar" data-cta="empezar" data-section="sandbox">Quiero uno en mi WhatsApp</a>
+        <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="sandbox">Quiero uno en mi WhatsApp</a>
       </aside>
       <div class="sb-main">
         <div class="sb-top"><h1>Pedile algo a Centralito</h1><button type="button" class="pill" data-open-sheet>Los 15 pedidos</button></div>
         <Chat instance="sandbox" scene="resumen-del-dia" mode="hero" input={true} chips={chips} />
-        <p class="sb-hint">Ejemplo con nombres y cifras de demostración · Lo que sale hacia un cliente lo mandás vos · <a class="link" href="/empezar">Quiero uno en mi WhatsApp</a></p>
+        <p class="sb-hint">Ejemplo con nombres y cifras de demostración · Lo que sale hacia un cliente lo mandás vos · <a class="link" href="/contratar">Quiero uno en mi WhatsApp</a></p>
       </div>
     </div>
     <dialog class="sb-sheet" data-sheet>

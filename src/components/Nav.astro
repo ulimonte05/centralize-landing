@@ -38,7 +38,7 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
       <div class="nav-right nav-min">
         <a class="ingresar" href="/">← Volver</a>
         <a class="link-wa" href={waHref} target="_blank" rel="noopener" data-wa data-section="min" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>WhatsApp</span></a>
-        {active !== 'empezar' && active !== 'contratar' && <a class="btn btn-primary nav-pill" href="/contratar" data-cta="contratar" data-section="nav">Probar gratis</a>}
+        {active !== 'contratar' && <a class="btn btn-primary nav-pill" href="/contratar" data-cta="contratar" data-section="nav">Probar gratis</a>}
       </div>
     )}
   </div>

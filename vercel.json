@@ -5,7 +5,9 @@
     { "source": "/ventas", "destination": "/inmobiliarias", "permanent": true },
     { "source": "/a-medida", "destination": "/inmobiliarias", "permanent": true },
     { "source": "/centralito", "destination": "/", "permanent": true },
-    { "source": "/privacy-policy/", "destination": "/privacy-policy", "permanent": true }
+    { "source": "/privacy-policy/", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/empezar", "destination": "/contratar", "permanent": true },
+    { "source": "/precios", "destination": "/contratar", "permanent": true }
   ],
   "headers": [
     { "source": "/fonts/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },

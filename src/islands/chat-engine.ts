@@ -306,7 +306,7 @@ export function init() {
     rail.style.setProperty('--at', String(idx / last));
     const clock = $('[data-clock]'); if (clock) clock.textContent = SCENES[id].hora;
     const ba = $('[data-ba]'); if (ba) ba.innerHTML = `<i>antes</i> <s>${SCENES[id].antes}</s> <i>→</i> <b>${SCENES[id].despues}</b>`;
-    const ped = $<HTMLAnchorElement>('[data-pedir]'); if (ped) ped.href = `/empezar?pedido=${id}`;
+    const ped = $<HTMLAnchorElement>('[data-pedir]'); if (ped) ped.href = `/contratar?pedido=${id}`;
     inst.onNext = idx < last ? () => railGo(DIA_IDS[idx + 1], true) : (AUTO ? () => autoNext(id) : null);
     inst.nextLabel = idx < last ? 'Siguiente momento →' : 'Volver al primero';
     if (idx === last && !AUTO) inst.onNext = () => railGo(DIA_IDS[0], true);

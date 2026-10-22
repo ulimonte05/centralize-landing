@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
 
-// Sitio estático; el adapter de Vercel solo sirve para la ruta on-demand /api/empezar.
+// Sitio estático; el adapter de Vercel solo sirve para las rutas on-demand /api/empezar y /api/geo.
 export default defineConfig({
   site: 'https://centralize.dev',
   output: 'static',

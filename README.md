@@ -9,7 +9,7 @@ npm install
 npm run dev            # http://localhost:4321
 npm run check          # astro check (tipos)
 npm test               # vitest, solo src/lib
-npm run build          # Astro 7 + adapter de Vercel (solo /api/empezar es on-demand)
+npm run build          # Astro 7 + adapter de Vercel (solo /api/empezar y /api/geo son on-demand)
 ```
 
 Con `?auto` la home encadena las escenas en loop (modo stand).
