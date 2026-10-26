@@ -3,9 +3,9 @@ import PlanCard from '@/components/PlanCard.astro';
 import WaLink from '@/components/WaLink.astro';
 import faq from '@/data/faq.json';
 import claims from '@/data/claims.json';
-import { priceLine, priceSummary, guarantee } from '@/lib/pricing';
+import { guarantee } from '@/lib/pricing';
+import { OFFER } from '@/lib/offer';
 import { CORTO, FAMILIAS, FUERA_DEL_PLAN } from '@/lib/pedidos';
-const { trialDays } = priceLine('AR');
 // "Tasar y armar" va primero: es el diferencial (tasación con comparables de la Red Tokko).
 const PRIMERO = 'Tasar y armar';
 const familias = [
@@ -18,12 +18,12 @@ const ordenFam = [...FAMILIAS].sort((a, b) => Number(b.nombre === PRIMERO) - Num
 // Fuera de la home: pedidos que el plan individual (asesor_ss) no tiene. El sandbox los sigue mostrando.
 const rail = ordenFam.flatMap(f => f.ids.filter(id => !FUERA_DEL_PLAN.includes(id)).map(id => ({ id, fam: f.nombre, corto: CORTO[id] })));
 const pasos = [
-  { t: 'Te suscribís a la prueba', d: `${trialDays} días gratis. Cargás la tarjeta, pero hoy no se cobra nada.` },
-  { t: 'Mandás tu código por WhatsApp', d: 'Después de suscribirte te damos un código. Se lo mandás a Centralito desde tu WhatsApp y queda activo en tu número.' },
+  OFFER.paso1,
+  { t: 'Mandás tu código por WhatsApp', d: 'Después de anotarte te damos un código. Se lo mandás a Centralito desde tu WhatsApp y queda activo en tu número.' },
   { t: 'Conectás tu CRM', d: 'Le pasás tu usuario de Tokko y ya le podés pedir cosas. ¿Usás otro CRM? Lo conectamos para vos.' },
 ];
-const precio = `En Argentina: ${priceSummary('AR')}. Fuera de Argentina: ${priceSummary('UY')}.`;
-const items = faq.map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', precio).replace('{garantia}', guarantee), link: 'link' in f ? f.link : undefined }));
+const precio = `En Argentina: ${OFFER.precio('AR')}. Fuera de Argentina: ${OFFER.precio('UY')}.`;
+const items = faq.map(f => (f.id === 'prueba' ? { ...f, ...OFFER.faqPrueba } : f)).map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', precio).replace('{garantia}', guarantee), link: 'link' in f ? f.link : undefined }));
 ---
 <section class="block" id="pedidos" aria-labelledby="ped-h">
   <div class="wrap">
@@ -52,7 +52,7 @@ const items = faq.map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', preci
     <div class="cols-3">
       <div class="step"><b>Integrado con Tokko.</b><p>¿Usás otro CRM? Lo conectamos para vos.</p></div>
       <div class="step"><b>Mensajes a tus clientes: 0.</b><p>Centralito nunca les escribe. Te deja el texto o el PDF listo y lo mandás vos.</p></div>
-      <div class="step"><b>Sin sorpresas con la tarjeta.</b><p>No se cobra hoy, te avisamos por WhatsApp antes de cobrar y cancelás cuando quieras.</p></div>
+      <div class="step"><b>{OFFER.cobro.t}</b><p>{OFFER.cobro.d}</p></div>
     </div>
     {claims.showClientLogos && <div class="clientes"><p class="eyebrow muted">Inmobiliarias que ya trabajan con Centralize</p><ul>{claims.clientLogos.map(c => <li>{c}</li>)}</ul></div>}
   </div>
@@ -72,9 +72,9 @@ const items = faq.map(f => ({ id: f.id, q: f.q, a: f.a.replace('{precio}', preci
 </section>
 <section class="block final" id="final" aria-labelledby="fin-h">
   <div class="wrap">
-    <h2 id="fin-h">Probalo {trialDays} días <em>en tu WhatsApp.</em></h2>
-    <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="final">Probar {trialDays} días gratis</a>
-    <p class="hero-sub">No se cobra hoy · Te avisamos antes de cobrar · Cancelás cuando quieras</p>
+    <h2 id="fin-h">Probalo {OFFER.plazo} <em>en tu WhatsApp.</em></h2>
+    <a class="btn btn-primary" href="/contratar" data-cta="contratar" data-section="final">{OFFER.cta}</a>
+    <p class="hero-sub">{OFFER.sub}</p>
     <p class="final-inmo"><a class="link" href="/inmobiliarias" data-cta="inmobiliarias" data-section="final">¿Tenés una inmobiliaria con equipo? →</a></p>
   </div>
 </section>

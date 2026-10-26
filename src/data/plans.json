@@ -1,9 +1,17 @@
 {
+  "offer": "free_month",
+  "freeMonthDays": 30,
   "trialDays": 7,
   "promoMonths": 3,
   "prices": {
-    "ARS": { "promo": 47500, "list": 75000 },
-    "USD": { "promo": 30, "list": 50 }
+    "ARS": {
+      "promo": 47500,
+      "list": 75000
+    },
+    "USD": {
+      "promo": 30,
+      "list": 50
+    }
   },
   "guarantee": "Si en el primer mes no te sirvió, te devolvemos el primer pago."
 }

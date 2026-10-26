@@ -1,7 +1,7 @@
 ---
 import contact from '@/data/contact.json';
 import Mark from '@/components/Mark.astro';
-import { priceLine } from '@/lib/pricing';
+import { OFFER } from '@/lib/offer';
 interface Props { mode?: 'full' | 'min'; active?: string }
 const { mode = 'full', active = '' } = Astro.props;
 const items = [
@@ -10,7 +10,6 @@ const items = [
   { href: '/#faq', label: 'Preguntas', id: 'faq' },
   { href: '/inmobiliarias', label: 'Inmobiliarias', id: 'inmobiliarias' },
 ];
-const { trialDays } = priceLine('AR');
 const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent(contact.texto_wa + ' [web-nav]')}`;
 ---
 <header class="nav" data-nav>
@@ -29,7 +28,7 @@ const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURICo
         <div class="menu" id="menu" data-menu hidden>
           <nav aria-label="Principal (móvil)">
             {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span></a>)}
-            <a href="/contratar" data-cta="contratar" data-section="menu"><span>Probar gratis</span><small>{trialDays} días, no se cobra hoy</small></a>
+            <a href="/contratar" data-cta="contratar" data-section="menu"><span>Probar gratis</span><small>{OFFER.menuSmall}</small></a>
             <button type="button" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
           </nav>
         </div>

@@ -4,6 +4,8 @@ import WaLink from '@/components/WaLink.astro';
 import contact from '@/data/contact.json';
 const c = contact.whatsapp_centralito;
 const href = `https://wa.me/${c.e164}?text=${encodeURIComponent(c.texto_cuenta)}`;
+import { OFFER } from '@/lib/offer';
+const free = OFFER.mode === 'free_month';
 ---
 <Base title="Mi cuenta | Centralize" description="Mirá el estado de tu suscripción a Centralito, cambiá la tarjeta o dala de baja." path="/cuenta">
   <section class="page">
@@ -15,6 +17,7 @@ const href = `https://wa.me/${c.e164}?text=${encodeURIComponent(c.texto_cuenta)}
       </div>
       <div class="cuenta">
         <ul class="cuenta-list">
+          {free && <li><b>Seguir con Centralito</b> cuando termine tu mes gratis. Si no querés seguir, no tenés que hacer nada: el mes gratis termina solo.</li>}
           <li><b>Ver el estado</b> de tu suscripción y la fecha del próximo cobro.</li>
           <li><b>Cambiar la tarjeta</b> con la que pagás.</li>
           <li><b>Darte de baja</b> cuando quieras. También es el botón de arrepentimiento.</li>

@@ -1,8 +1,11 @@
 ---
 import Base from '@/layouts/Base.astro';
 import { priceLine, guarantee } from '@/lib/pricing';
+import { OFFER } from '@/lib/offer';
+import plans from '@/data/plans.json';
 const ar = priceLine('AR');
 const us = priceLine('UY');
+const free = OFFER.mode === 'free_month';
 ---
 <Base title="Términos y condiciones | Centralize" description="Términos de la suscripción a Centralito y de Centralize Ventas." path="/terminos" noindex>
   <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Términos y condiciones</h1></div>
@@ -15,12 +18,14 @@ const us = priceLine('UY');
     </div>
     <h2>1. Partes y aceptación</h2><p>Estos términos aplican a los clientes de Argentina, Uruguay y el resto del mundo (precios en dólares). Quien contrata es el titular de la suscripción y acepta estos términos al iniciar la prueba.</p>
     <h2>2. Qué es Centralito y qué no hace</h2><p>Centralito es un asistente que opera tu CRM inmobiliario y te responde por WhatsApp. No les escribe a los clientes del asesor ni manda campañas: solo trabaja con vos, pide tu OK antes de cualquier cambio en lote y registra lo que hizo.</p>
-    <h2>3. Alta y cuenta</h2><p>Tu número de WhatsApp es tu identificador. Al terminar el pago, activás Centralito mandando el mensaje con tu código desde ese número.</p>
-    <h2>4. Prueba gratis</h2><p>Empezás con {ar.trialDays} días gratis. Para activarla cargás una tarjeta; no se cobra nada durante la prueba. Si no querés seguir, te das de baja antes de que termine y no pagás.</p>
+    <h2>3. Alta y cuenta</h2><p>Tu número de WhatsApp es tu identificador. {free ? 'Al anotarte' : 'Al terminar el pago'}, activás Centralito mandando el mensaje con tu código desde ese número.</p>
+    {free
+      ? <><h2>4. Mes gratis</h2><p>Empezás con {plans.freeMonthDays} días gratis, sin tarjeta y sin ningún cobro. Se cuentan desde que activás Centralito por WhatsApp y terminan solos: no se renuevan ni se cobran. Hay un solo mes gratis por persona, por número de WhatsApp y por email. Podemos dar de baja las altas que no cumplan esta regla, por ejemplo varias altas de una misma persona.</p></>
+      : <><h2>4. Prueba gratis</h2><p>Empezás con {ar.trialDays} días gratis. Para activarla cargás una tarjeta; no se cobra nada durante la prueba. Si no querés seguir, te das de baja antes de que termine y no pagás.</p></>}
     <h2>5. Precio y renovación automática</h2>
-    <p>Terminada la prueba, la suscripción se cobra todos los meses de forma automática con la tarjeta cargada, hasta que te des de baja. Los precios son finales y por mes:</p>
+    <p>{free ? 'Si después del mes gratis querés seguir, te suscribís con una tarjeta y desde ese momento la suscripción se cobra todos los meses de forma automática, hasta que te des de baja.' : 'Terminada la prueba, la suscripción se cobra todos los meses de forma automática con la tarjeta cargada, hasta que te des de baja.'} Los precios son finales y por mes:</p>
     <ul>
-      <li>Argentina: {ar.promo} al mes durante los primeros {ar.promoMonths} meses de pago (además de la semana gratis) y {ar.list} al mes desde entonces.</li>
+      <li>Argentina: {ar.promo} al mes durante los primeros {ar.promoMonths} meses de pago{free ? '' : ' (además de la semana gratis)'} y {ar.list} al mes desde entonces.</li>
       <li>Resto del mundo, Uruguay incluido: {us.promo} al mes durante los primeros {us.promoMonths} meses de pago y {us.list} al mes desde entonces.</li>
     </ul>
     <h2>6. Garantía del primer pago</h2><p>{guarantee} Escribinos desde <a class="link" href="/cuenta">Mi cuenta</a> y la devolución se hace a mano a la misma tarjeta.</p>
