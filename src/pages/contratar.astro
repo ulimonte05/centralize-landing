@@ -35,7 +35,7 @@ const description = free
           <ul class="contratar-lista">{incluye.map(t => <li><span class="tick" aria-hidden="true"></span>{t}</li>)}</ul>
         </div>
         {free ? (
-          <form class="card contratar-card contratar-pago form" data-free-form data-api={api} novalidate>
+          <form class="card contratar-card contratar-pago form" method="post" action="/contratar" data-free-form data-api={api} novalidate aria-describedby="f-error">
             <p class="mono up">Tu mes gratis</p>
             <p class="contratar-gratis"><b>{OFFER.gratis}, sin tarjeta</b></p>
             <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" maxlength="100" required></div>
@@ -47,13 +47,13 @@ const description = free
                   <option value="UY">UY +598</option>
                   <option value="OTRO">Otro país</option>
                 </select>
-                <input id="f-tel" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="11 5555 0101" required>
+                <input id="f-tel" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="11 5555 0101" required aria-describedby="f-tel-help">
               </div>
-              <small data-tel-help>Código de área y número, sin 0 ni 15. Es el número desde el que vas a usar Centralito.</small>
+              <small id="f-tel-help" data-tel-help>Código de área y número, sin 0 ni 15. Es el número desde el que vas a usar Centralito.</small>
             </div>
             <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
             <button type="submit" class="btn btn-primary btn-block" data-submit data-cta="contratar" data-section="contratar">Empezar mi mes gratis</button>
-            <p class="contratar-error" role="alert" data-error hidden></p>
+            <p class="contratar-error" id="f-error" role="alert" data-error hidden></p>
             <p class="plan-sub muted">{OFFER.sub}</p>
             <p class="plan-total muted">Si después querés seguir: {ar.promo} al mes por {ar.promoMonths} meses, y {ar.list} al mes. Fuera de Argentina, {usd.promo} y {usd.list}. No se cobra nada solo.</p>
             <p class="legal-mini">Al continuar aceptás los <a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>

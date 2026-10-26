@@ -17,9 +17,9 @@ const free = OFFER.mode === 'free_month';
       </div>
       <div class="cuenta">
         <ul class="cuenta-list">
-          {free && <li><b>Seguir con Centralito</b> cuando termine tu mes gratis. Si no querés seguir, no tenés que hacer nada: el mes gratis termina solo.</li>}
-          <li><b>Ver el estado</b> de tu suscripción y la fecha del próximo cobro.</li>
-          <li><b>Cambiar la tarjeta</b> con la que pagás.</li>
+          {free && <li><b>Ver hasta cuándo dura</b> tu mes gratis. Si no querés seguir, no tenés que hacer nada: termina solo y no se cobra.</li>}
+          <li><b>Ver el estado</b> de tu suscripción y la fecha del próximo cobro{free ? ', si te suscribiste' : ''}.</li>
+          <li><b>Cambiar la tarjeta</b> con la que pagás{free ? ', si te suscribiste' : ''}.</li>
           <li><b>Darte de baja</b> cuando quieras. También es el botón de arrepentimiento.</li>
         </ul>
         <a class="btn btn-primary btn-block cuenta-cta" href={href} target="_blank" rel="noopener" data-cta="cuenta" data-section="cuenta">Gestionar mi suscripción</a>

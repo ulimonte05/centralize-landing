@@ -14,7 +14,7 @@ const helpEl = form?.querySelector<HTMLElement>('[data-tel-help]');
 const AYUDA: Record<Pais, { placeholder: string; help: string }> = {
   AR: { placeholder: '11 5555 0101', help: 'Código de área y número, sin 0 ni 15. Es el número desde el que vas a usar Centralito.' },
   UY: { placeholder: '099 123 456', help: 'Tu celular. Es el número desde el que vas a usar Centralito.' },
-  OTRO: { placeholder: '+1 305 555 0101', help: 'El número completo, con el código de país.' },
+  OTRO: { placeholder: '+1 305 555 0101', help: 'El número completo, empezando con + y el código de país.' },
 };
 
 // Soporte = WhatsApp de ventas (el de Centralito es el bot).
@@ -52,7 +52,13 @@ if (form && btn && errorEl && paisEl && telEl && helpEl) {
     pintarPais();
   }).catch(() => { /* sin geo: queda Argentina */ });
 
+  const campos: Partial<Record<keyof typeof MENSAJES, HTMLInputElement | null>> = {
+    nombre: form.querySelector('#f-nombre'), tel: telEl, email: form.querySelector('#f-email'),
+  };
   const mostrarError = (key: keyof typeof MENSAJES) => {
+    for (const el of Object.values(campos)) el?.removeAttribute('aria-invalid');
+    const campo = campos[key];
+    if (campo) { campo.setAttribute('aria-invalid', 'true'); campo.focus(); }
     errorEl.textContent = MENSAJES[key];
     if (CON_SOPORTE.has(key)) {
       const a = document.createElement('a');
@@ -77,7 +83,7 @@ if (form && btn && errorEl && paisEl && telEl && helpEl) {
     const pais = (String(data.get('pais') ?? 'AR')) as Pais;
     const whatsapp = buildWhatsapp(pais, String(data.get('whatsapp') ?? ''));
     if (!nombre) return mostrarError('nombre');
-    if (!whatsapp) { telEl.focus(); return mostrarError('tel'); }
+    if (!whatsapp) return mostrarError('tel');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError('email');
 
     setBusy(true);

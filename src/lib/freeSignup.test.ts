@@ -30,7 +30,9 @@ describe('buildWhatsapp', () => {
   });
   it('otro país: número completo', () => {
     expect(buildWhatsapp('OTRO', '+1 305 555 0101')).toBe('13055550101');
-    expect(buildWhatsapp('OTRO', '555 0101')).toBeNull();
+    expect(buildWhatsapp('OTRO', '0034 612 345 678')).toBe('34612345678');
+    expect(buildWhatsapp('OTRO', '305 555 0101')).toBeNull();
+    expect(buildWhatsapp('OTRO', '+1 555 0101')).toBeNull();
   });
 });
 

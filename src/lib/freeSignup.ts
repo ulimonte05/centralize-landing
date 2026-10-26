@@ -9,7 +9,7 @@ export type Pais = 'AR' | 'UY' | 'OTRO';
  * WhatsApp en dígitos internacionales (5491155550101), o null si no cierra.
  *  - AR: código de área + número = 10 dígitos, sin 0 ni 15 (11 5555 0101) → 549 + 10.
  *  - UY: celular de 8 dígitos (9X XXX XXX), con o sin el 0 → 598 + 8.
- *  - Otro: número completo con código de país (+ opcional), 10 a 15 dígitos.
+ *  - Otro: número completo con código de país (con + o 00), 10 a 15 dígitos.
  * Si ya viene con el código del país (+54 9 ..., 598 ...) se respeta.
  */
 export function buildWhatsapp(pais: Pais, raw: string): string | null {
@@ -25,7 +25,10 @@ export function buildWhatsapp(pais: Pais, raw: string): string | null {
     const local = d.replace(/^0/, '');
     return /^9\d{7}$/.test(local) ? `598${local}` : null;
   }
-  return d.length >= 10 && d.length <= 15 ? d : null;
+  // Sin + / 00 no se puede saber si trae el código de país (305 555 0101 no lo trae).
+  if (!/^\s*(\+|00)/.test(raw)) return null;
+  const intl = d.replace(/^00/, '');
+  return intl.length >= 10 && intl.length <= 15 ? intl : null;
 }
 
 /** País para la API (precios y moneda después del mes gratis): "otro" = resto del mundo. */
