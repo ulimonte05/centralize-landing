@@ -53,7 +53,7 @@ if (form && btn && errorEl && paisEl && telEl && helpEl) {
   }).catch(() => { /* sin geo: queda Argentina */ });
 
   const campos: Partial<Record<keyof typeof MENSAJES, HTMLInputElement | null>> = {
-    nombre: form.querySelector('#f-nombre'), tel: telEl, email: form.querySelector('#f-email'),
+    nombre: form.querySelector<HTMLInputElement>('#f-nombre'), tel: telEl, email: form.querySelector<HTMLInputElement>('#f-email'),
   };
   const mostrarError = (key: keyof typeof MENSAJES) => {
     for (const el of Object.values(campos)) el?.removeAttribute('aria-invalid');
