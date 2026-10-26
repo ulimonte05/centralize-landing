@@ -1,0 +1,11 @@
+{ "id": "quien-consulto", "hora": "09:10", "titulo": "¿Quién consultó por Thames 400?", "chip": "¿Quién consultó por Thames 400?", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "quién consultó por Thames 400 este mes? pasame nombre, teléfono y estado" },
+    { "de": "centralito", "texto": "Este mes consultaron 7; 3 todavía no la vieron. Te los paso con teléfono y estado:", "typing_ms": 1300,
+      "artefacto": { "tipo": "tabla", "titulo": "Thames 400 · consultas del mes", "filas": [ ["Lucía P.", "11 5555 0142", "activa"], ["Martín R.", "11 5555 0177", "sin respuesta hace 12 días"], ["Sol A.", "11 5555 0199", "pide cochera"] ], "link": "ver los 7" },
+      "read": "tokko: 7 de 7 consultas leídas", "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "Thames 400 · 7 consultas", "sub": "3 sin visita · lista con teléfono", "unidad": "pedido" },
+  "antes": "la ficha, la pestaña de consultas y cada contacto", "despues": "una pregunta",
+  "wa_text": "Centralito, ¿quién consultó por Thames 400 este mes? Pasame nombre, teléfono y estado del lead.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

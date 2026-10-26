@@ -1,0 +1,78 @@
+---
+import Base from '@/layouts/Base.astro';
+import WaLink from '@/components/WaLink.astro';
+import { priceLine, guarantee } from '@/lib/pricing';
+import { OFFER } from '@/lib/offer';
+export const prerender = true;
+const ar = priceLine('AR');
+const usd = priceLine('UY');
+const api = (import.meta.env.PUBLIC_BILLING_API_URL || 'https://api.centralize.dev').trim();
+const free = OFFER.mode === 'free_month';
+const incluye = [
+  'Un asistente que opera tu CRM inmobiliario: le escribís por WhatsApp como a un colega.',
+  'Integrado con Tokko. ¿Usás otro CRM? Lo conectamos para vos.',
+  'Te arma el resumen del día, busca en tu cartera y te prepara fichas y tasaciones.',
+  'Pide tu OK antes de cambios en lote y te deja registro de lo que hizo.',
+];
+const title = `Probá Centralito ${OFFER.gratis} | Centralize`;
+const description = free
+  ? `Probá Centralito ${OFFER.gratis}, sin tarjeta. Un asistente que opera tu CRM inmobiliario desde WhatsApp.`
+  : `Probá Centralito ${ar.trialDays} días gratis, sin cobro hoy. Un asistente que opera tu CRM inmobiliario desde WhatsApp.`;
+---
+<Base title={title} description={description} path="/contratar" nav="min" active="contratar">
+  <section class="page">
+    <div class="wrap">
+      <div class="page-head">
+        <p class="eyebrow">Centralito</p>
+        <h1>Probalo <em>{OFFER.gratis}</em>.</h1>
+        <p class="lead">{free
+          ? 'Un asistente que opera tu CRM inmobiliario desde WhatsApp. Sin tarjeta: te anotás, lo activás en tu WhatsApp y listo.'
+          : 'Un asistente que opera tu CRM inmobiliario desde WhatsApp. Cargás tu medio de pago en el paso siguiente y no se cobra hoy.'}</p>
+      </div>
+      <div class="contratar-grid">
+        <div class="card contratar-card" data-contratar data-api={api}>
+          <p class="mono up">Qué incluye</p>
+          <ul class="contratar-lista">{incluye.map(t => <li><span class="tick" aria-hidden="true"></span>{t}</li>)}</ul>
+        </div>
+        {free ? (
+          <form class="card contratar-card contratar-pago form" method="post" action="/contratar" data-free-form data-api={api} novalidate aria-describedby="f-error">
+            <p class="mono up">Tu mes gratis</p>
+            <p class="contratar-gratis"><b>{OFFER.gratis}, sin tarjeta</b></p>
+            <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" maxlength="100" required></div>
+            <div class="field">
+              <label for="f-tel">Tu WhatsApp</label>
+              <div class="row">
+                <select id="f-pais" name="pais" aria-label="País del número">
+                  <option value="AR">AR +54</option>
+                  <option value="UY">UY +598</option>
+                  <option value="OTRO">Otro país</option>
+                </select>
+                <input id="f-tel" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="11 5555 0101" required aria-describedby="f-tel-help">
+              </div>
+              <small id="f-tel-help" data-tel-help>Código de área y número, sin 0 ni 15. Es el número desde el que vas a usar Centralito.</small>
+            </div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
+            <button type="submit" class="btn btn-primary btn-block" data-submit data-cta="contratar" data-section="contratar">Empezar mi mes gratis</button>
+            <p class="contratar-error" id="f-error" role="alert" data-error hidden></p>
+            <p class="plan-sub muted">{OFFER.sub}</p>
+            <p class="plan-total muted">Si después querés seguir: {ar.promo} al mes por {ar.promoMonths} meses, y {ar.list} al mes. Fuera de Argentina, {usd.promo} y {usd.list}. No se cobra nada solo.</p>
+            <p class="legal-mini">Al continuar aceptás los <a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>
+          </form>
+        ) : (
+          <div class="card contratar-card contratar-pago">
+            <p class="mono up">Tu plan</p>
+            <p class="contratar-gratis"><b>{ar.trialDays} días gratis</b></p>
+            <p class="contratar-precio" data-price aria-live="polite">Después {ar.promo} al mes por {ar.promoMonths} meses, y {ar.list} al mes.</p>
+            <p class="contratar-pais"><span data-country-label>Precios para Argentina.</span> <button type="button" class="link-btn" data-country-toggle>¿No estás en Argentina?</button></p>
+            <p class="plan-sub muted">{ar.trialDays} días gratis · No se cobra hoy · Te avisamos antes de cobrar</p>
+            <p class="plan-cond mono up">Sin permanencia · {guarantee}</p>
+            <button type="button" class="btn btn-primary btn-block" data-start data-cta="contratar" data-section="contratar">Empezar mi prueba</button>
+            <p class="contratar-error" role="alert" data-error hidden>No pudimos abrir el pago. Probá de nuevo o escribinos <WaLink section="contratar-error" label="por WhatsApp" /></p>
+            <p class="legal-mini">Al continuar aceptás los <a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+  {free ? <script>import '@/islands/free-signup';</script> : <script>import '@/islands/checkout';</script>}
+</Base>

@@ -1,0 +1,32 @@
+{
+  "id": "segmentar-contactos",
+  "hora": "13:40",
+  "titulo": "Segmentar contactos, con tu OK",
+  "chip": "Los de Palermo sin visita",
+  "parada": "Segmentar",
+  "aura": "#F9D08F",
+  "mensajes": [
+    { "de": "asesor", "texto": "armame la lista de los que consultaron por 3 amb en Palermo este año y nunca tuvieron visita" },
+    { "de": "centralito", "texto": "Revisé 1.940 de 1.940. Son 128: 41 sin respuesta hace más de 30 días, 17 piden cochera. ¿Los etiqueto en Tokko como palermo-3amb y te paso el Excel?", "typing_ms": 2200,
+      "panel": { "tipo": "base", "estado": "agrupado" },
+      "artefacto": { "tipo": "base-mini" },
+      "respuestas_rapidas": ["Dale", "Todavía no"], "rama_stand": "Dale",
+      "anuncio": "Centralito pregunta: ¿los etiqueto en Tokko? Elegí Dale o Todavía no" }
+  ],
+  "ramas": {
+    "Dale": [
+      { "de": "asesor", "texto": "dale" },
+      { "de": "centralito", "texto": "Listo: 128 etiquetados y verificados en Tokko a las 13:42. Va el Excel con nombre, teléfono y presupuesto.", "typing_ms": 1300,
+        "artefacto": { "tipo": "archivo", "clase": "xls", "nombre": "palermo-3amb.xlsx", "meta": "XLS · 128 filas" }, "panel_accion": "base-xls", "read": "tokko: 128 de 128 etiquetados", "hold_ms": 1200 }
+    ],
+    "Todavía no": [
+      { "de": "asesor", "texto": "todavía no" },
+      { "de": "centralito", "texto": "Perfecto, no toco nada en Tokko. Te dejo el Excel igual y, cuando quieras, los etiqueto.", "typing_ms": 1200,
+        "artefacto": { "tipo": "archivo", "clase": "xls", "nombre": "palermo-3amb.xlsx", "meta": "XLS · 128 filas" }, "panel_accion": "base-sin-etiquetar", "read": "tokko: sin cambios", "hold_ms": 1200 }
+    ]
+  },
+  "antes": "exportar, filtrar y cruzar planillas",
+  "despues": "una pregunta, y el OK lo das vos",
+  "wa_text": "Centralito, buscame los contactos que consultaron por 3 ambientes en Palermo este año y nunca tuvieron visita. Etiquetalos en Tokko y pasame el Excel.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

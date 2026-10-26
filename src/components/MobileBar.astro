@@ -1,0 +1,14 @@
+---
+// Barra fija inferior solo en móvil (≤767px): una acción principal y una secundaria, en la zona del pulgar.
+import contact from '@/data/contact.json';
+interface Accion { href?: string; label: string; cta: string; wa?: boolean; text?: string; external?: boolean }
+interface Props { primary: Accion; secondary?: Accion; section: string }
+const { primary, secondary, section } = Astro.props;
+const href = (a: Accion) => a.wa ? `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent(`${a.text || contact.texto_wa} [web-${section}-bar]`)}` : a.href!;
+const ext = (a: Accion) => (a.wa || a.external) ? { target: '_blank', rel: 'noopener' } : {};
+const wa = (a: Accion) => a.wa ? { 'data-wa': '', 'data-e164': contact.whatsapp_ventas.e164, 'data-visible': contact.whatsapp_ventas.visible } : {};
+---
+<div class="m-bar" data-m-bar aria-label="Acciones">
+  <a class="btn btn-primary" href={href(primary)} data-cta={primary.cta} data-section={`${section}-bar`} {...ext(primary)} {...wa(primary)}>{primary.label}</a>
+  {secondary && <a class="btn btn-outline" href={href(secondary)} data-cta={secondary.cta} data-section={`${section}-bar`} {...ext(secondary)} {...wa(secondary)}>{secondary.label}</a>}
+</div>

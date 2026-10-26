@@ -1,0 +1,21 @@
+/* Tokens: identidad de centralize.dev (fondo negro cálido, Inter, mono, señal roja/naranja). */
+:root{
+  --bg:#0A0908; --bg-soft:#141210; --bg-tint:#100E0C; --card:#141210; --card-2:#1C1814;
+  --line:rgba(212,197,176,.12); --line-strong:#3A2E22;
+  --ink:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.4);
+  --signal:#DF1E02; --signal-bright:#FF5800; --signal-light:#E84A2A; --signal-soft:rgba(223,30,2,.08);
+  --green:#25D366; --green-text:#25D366; --green-soft:rgba(37,211,102,.12);
+  --amber-text:#F2B263; --amber-soft:rgba(242,178,99,.12);
+  /* chat estilo WhatsApp (modo oscuro) */
+  --chat-bg:#0B141A; --chat-ink:#E9EDEF; --chat-muted:#8696A0; --chat-card:#111B21; --chat-line:rgba(255,255,255,.08);
+  --bubble-in:#202C33; --bubble-out:#005C4B; --composer:#1F2C34; --field:#2A3942; --send:#00A884;
+  --display:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.3,1.6,.5,1);
+  --r-pill:999px; --r-card:20px; --r-chat:26px; --r-bubble:14px;
+  --shadow:0 2px 4px rgba(0,0,0,.3),0 30px 70px -28px rgba(0,0,0,.7);
+  --shadow-chat:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);
+  --sh-cta:0 10px 35px rgba(223,30,2,.30);
+  --nav-h:64px; --wrap:1180px;
+}

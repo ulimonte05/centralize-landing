@@ -1,0 +1,16 @@
+---
+import Base from '@/layouts/Base.astro';
+import HomeHero from '@/components/HomeHero.astro';
+import HomeBlocks from '@/components/HomeBlocks.astro';
+import { OFFER } from '@/lib/offer';
+const ld = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'Organization', name: 'Centralize', url: 'https://centralize.dev/', logo: 'https://centralize.dev/assets/centralize-mark-black.png', sameAs: ['https://www.linkedin.com/company/centralize-ai', 'https://www.instagram.com/centralize.dev/'] },
+  { '@type': 'WebSite', name: 'Centralize', alternateName: 'Centralito', url: 'https://centralize.dev/' },
+] };
+---
+<Base title="Centralito: pedile lo que quieras a tu CRM por WhatsApp | Centralize" description={`Centralito es el asistente que opera tu CRM inmobiliario desde WhatsApp: tasa con comparables de la Red Tokko, edita fichas, arma el PDF de una propiedad y te recuerda los seguimientos. ${OFFER.gratis}${OFFER.mode === 'free_month' ? ', sin tarjeta' : ''}.`} path="/" active="home">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <HomeHero />
+  <HomeBlocks />
+  <script src="@/islands/chat-engine.ts"></script>
+</Base>

@@ -1,0 +1,44 @@
+---
+import contact from '@/data/contact.json';
+import Mark from '@/components/Mark.astro';
+import { OFFER } from '@/lib/offer';
+interface Props { mode?: 'full' | 'min'; active?: string }
+const { mode = 'full', active = '' } = Astro.props;
+const items = [
+  { href: '/', label: 'Centralito', id: 'home' },
+  { href: '/#precio', label: 'Precio', id: 'precio' },
+  { href: '/#faq', label: 'Preguntas', id: 'faq' },
+  { href: '/inmobiliarias', label: 'Inmobiliarias', id: 'inmobiliarias' },
+];
+const waHref = `https://wa.me/${contact.whatsapp_ventas.e164}?text=${encodeURIComponent(contact.texto_wa + ' [web-nav]')}`;
+---
+<header class="nav" data-nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label="Centralize, inicio"><Mark /><span>Centralize</span></a>
+    {mode === 'full' ? (
+      <>
+        <nav class="nav-links" aria-label="Principal">
+          {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span></a>)}
+        </nav>
+        <div class="nav-right">
+          <button type="button" class="motion-btn" data-motion-toggle aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span class="t">Menos animación</span></button>
+          <a class="btn btn-primary nav-pill" href="/contratar" data-nav-pill data-cta="contratar" data-section="nav">Probar gratis</a>
+          <button type="button" class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="menu" aria-label="Menú"><span></span><span></span><span></span></button>
+        </div>
+        <div class="menu" id="menu" data-menu hidden>
+          <nav aria-label="Principal (móvil)">
+            {items.map(it => <a href={it.href} aria-current={active === it.id ? 'page' : undefined}><span>{it.label}</span></a>)}
+            <a href="/contratar" data-cta="contratar" data-section="menu"><span>Probar gratis</span><small>{OFFER.menuSmall}</small></a>
+            <button type="button" data-motion-toggle aria-pressed="false"><span class="t">Menos animación</span></button>
+          </nav>
+        </div>
+      </>
+    ) : (
+      <div class="nav-right nav-min">
+        <a class="ingresar" href="/">← Volver</a>
+        <a class="link-wa" href={waHref} target="_blank" rel="noopener" data-wa data-section="min" data-e164={contact.whatsapp_ventas.e164} data-visible={contact.whatsapp_ventas.visible}><span>WhatsApp</span></a>
+        {active !== 'contratar' && <a class="btn btn-primary nav-pill" href="/contratar" data-cta="contratar" data-section="nav">Probar gratis</a>}
+      </div>
+    )}
+  </div>
+</header>

@@ -1,0 +1,11 @@
+{ "id": "quien-busca-algo-asi", "hora": "15:30", "titulo": "¿Quién busca algo así?", "chip": "¿Quién busca algo así?", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "entró un 2 amb en Villa Crespo, 54 m² con balcón, 128 mil. quién de mis contactos buscaba algo así?" },
+    { "de": "centralito", "texto": "23 de tus contactos buscaban algo así; 9 consultaron en los últimos 60 días. Te paso la lista con teléfono; el mensaje lo mandás vos.", "typing_ms": 1600,
+      "artefacto": { "tipo": "tabla", "titulo": "23 contactos · 9 recientes", "filas": [ ["Carla M.", "11 5555 0210", "consultó hace 12 días"], ["Diego F.", "11 5555 0233", "consultó hace 30 días"], ["Ana R.", "11 5555 0251", "consultó hace 45 días"] ], "boton": "Copiar lista" },
+      "read": "contactos: 1.940 de 1.940 cruzados", "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "23 contactos buscaban algo así", "sub": "9 recientes · lista con teléfono", "unidad": "pedido" },
+  "antes": "acordarte de quién pedía qué", "despues": "la lista exacta, y el mensaje lo mandás vos",
+  "wa_text": "Centralito, entró un 2 ambientes en Villa Crespo, 54 m² con balcón, USD 128.000: ¿qué contactos míos buscaban algo así? Pasame la lista con teléfono.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

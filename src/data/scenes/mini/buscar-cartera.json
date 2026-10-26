@@ -1,0 +1,11 @@
+{ "id": "buscar-cartera", "hora": "12:10", "titulo": "Buscá en tu cartera", "chip": "Buscá en tu cartera", "mini": true,
+  "mensajes": [
+    { "de": "asesor", "texto": "buscame en mi cartera venta en Villa Crespo, 2 amb, hasta 130 mil" },
+    { "de": "centralito", "texto": "Tenés 4 que entran. Te las paso con link:", "typing_ms": 1200,
+      "artefacto": { "tipo": "tabla", "titulo": "Tu cartera · 4 fichas", "filas": [ ["Malabia 900", "54 m²", "USD 128.000"], ["Acevedo 300", "49 m²", "USD 119.000"], ["Padilla 700", "58 m²", "USD 130.000"], ["Serrano 1100", "51 m²", "USD 125.000"] ] },
+      "read": "cartera: 84 de 84 fichas leídas", "hold_ms": 1200 }
+  ],
+  "pila": { "tipo": "registro-mini", "titulo": "Villa Crespo · 4 fichas", "sub": "2 amb hasta USD 130.000 · con link", "unidad": "pedido" },
+  "antes": "filtros de Tokko desde el celular", "despues": "lo pedís como lo dirías",
+  "wa_text": "Centralito, buscame venta en Villa Crespo, 2 ambientes, hasta USD 130.000.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración" }

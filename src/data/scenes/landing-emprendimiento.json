@@ -1,0 +1,18 @@
+{
+  "id": "landing-emprendimiento",
+  "hora": "17:05",
+  "titulo": "La landing de un proyecto",
+  "chip": "Landing de un proyecto",
+  "parada": "Landing",
+  "aura": "#F2A68C",
+  "mensajes": [
+    { "de": "asesor", "adjuntos": [ { "clase": "pdf", "nombre": "Brochure Aurora Palermo.pdf", "meta": "PDF · 24 páginas" }, { "clase": "xls", "nombre": "Unidades y precios.xlsx", "meta": "XLS · 36 unidades" } ], "texto": "armame una landing del emprendimiento para pasarle a los interesados" },
+    { "de": "centralito", "texto": "Dale. Leo el brochure y la lista de precios. Te aviso cuando esté la vista previa.", "typing_ms": 1000, "panel": { "tipo": "landing", "estado": "esqueleto" }, "hold_ms": 2600 },
+    { "de": "centralito", "hora": "17:41", "texto": "Lista la vista previa: unidades con precio, amenities, financiación y un botón de WhatsApp que te llega a vos. Decime qué cambiás y te la dejo corregida en el día.", "typing_ms": 1400,
+      "panel": { "tipo": "landing", "estado": "lista" }, "artefacto": { "tipo": "landing-mini" }, "link": "Abrir vista previa", "hold_ms": 1200 }
+  ],
+  "antes": "un diseñador y días de ida y vuelta",
+  "despues": "reenviás el brochure y revisás la vista previa en el día",
+  "wa_text": "Centralito, te paso el brochure en PDF: armame una landing del emprendimiento y pasame el link para revisarla.",
+  "etiqueta": "Ejemplo · nombres y cifras de demostración"
+}

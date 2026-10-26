@@ -1,0 +1,55 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/base.css';
+import '@/styles/chat.css';
+import '@/styles/site.css';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import MetaPixel from '@/components/MetaPixel.astro';
+import contact from '@/data/contact.json';
+interface Props { title: string; description: string; noindex?: boolean; path?: string; nav?: 'full' | 'min' | 'none'; surface?: 'light' | 'dark'; active?: string; ogTitle?: string }
+const { title, description, noindex = false, path = '/', nav = 'full', surface = 'light', active = '', ogTitle } = Astro.props;
+const canonical = `https://centralize.dev${path === '/' ? '/' : path}`;
+// PUBLIC_NOINDEX=1 en deploys de muestra (vercel.app) para no competir con centralize.dev en Google
+const noindexAll = import.meta.env.PUBLIC_NOINDEX === '1';
+---
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Centralize">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content={ogTitle || title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content="https://centralize.dev/og/centralito.png">
+<meta property="og:image:alt" content="Centralito, tu colega de IA en WhatsApp para operar Tokko">
+<meta name="twitter:card" content="summary_large_image">
+<title>{title}</title>
+<meta name="description" content={description}>
+{(noindex || noindexAll) ? <meta name="robots" content="noindex, nofollow"> : <meta name="robots" content="index, follow, max-image-preview:large">}
+<link rel="canonical" href={canonical}>
+<link rel="icon" type="image/png" href="/assets/centralize-mark-black.png">
+<link rel="apple-touch-icon" href="/assets/centralize-mark-black.png">
+<meta name="theme-color" content="#0A0908">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<script is:inline>
+// antes del primer paint: preferencia de movimiento guardada
+try{var m=localStorage.getItem('motion');if(m==='reduced'||(m===null&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('motion-reduced')}catch(e){}
+</script>
+<MetaPixel />
+<slot name="head" />
+</head>
+<body>
+<a class="skip" href="#main">Ir al contenido</a>
+{nav !== 'none' && <Nav mode={nav} active={active} />}
+<main id="main"><slot /></main>
+{nav !== 'none' && <Footer />}
+<script src="@/islands/site.ts"></script>
+<slot name="scripts" />
+</body>
+</html>
