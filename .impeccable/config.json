@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-30T15:41:24.195Z",
+        "reason": "Fuente de marca de Centralize"
+      }
+    ]
+  }
+}

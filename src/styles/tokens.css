@@ -16,6 +16,6 @@
   --r-pill:999px; --r-card:20px; --r-chat:26px; --r-bubble:14px;
   --shadow:0 2px 4px rgba(0,0,0,.3),0 30px 70px -28px rgba(0,0,0,.7);
   --shadow-chat:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);
-  --sh-cta:0 10px 35px rgba(223,30,2,.30);
+  --sh-cta:0 6px 16px -6px rgba(0,0,0,.7);
   --nav-h:64px; --wrap:1180px;
 }

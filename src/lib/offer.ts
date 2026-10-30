@@ -49,7 +49,7 @@ export function offerCopy(mode: OfferMode): OfferCopy {
         const p = priceLine(country);
         return `${meses} gratis, sin tarjeta. Si después querés seguir: ${p.promo} al mes por ${p.promoMonths} meses y ${p.list} al mes`;
       },
-      notaPrecio: `Al terminar el mes gratis no se cobra nada solo: si querés seguir, te suscribís. La promo dura ${ar.promoMonths} meses de pago. Precios finales.`,
+      notaPrecio: 'Al terminar el mes gratis no se cobra nada automáticamente: si querés seguir, te suscribís. Precios finales.',
       faqPrueba: {
         q: '¿Cómo funciona el mes gratis? ¿Me van a cobrar?',
         a: 'No te cobramos nada: el mes gratis no pide tarjeta y termina solo. Unos días antes te avisamos por WhatsApp y, si querés seguir, te mandamos el link para suscribirte. {precio}',
@@ -69,7 +69,7 @@ export function offerCopy(mode: OfferMode): OfferCopy {
       const p = priceLine(country);
       return `${p.trialDays} días gratis, después ${p.promo} al mes por ${p.promoMonths} meses y ${p.list} al mes`;
     },
-    notaPrecio: `La promo dura ${ar.promoMonths} meses de pago, además de la semana gratis. Precios finales.`,
+    notaPrecio: `Los ${ar.promoMonths} meses de promo empiezan después de los ${ar.trialDays} días gratis. Precios finales.`,
     faqPrueba: {
       q: '¿Cómo funciona la prueba? ¿Cuándo me cobran?',
       a: 'Hoy no se cobra nada. Antes del primer cobro te avisamos por WhatsApp; si no te convence, cancelás antes y no pagás nada. {precio}',

@@ -4,11 +4,24 @@ import WaLink from '@/components/WaLink.astro';
 import Proof from '@/components/Proof.astro';
 import MobileBar from '@/components/MobileBar.astro';
 import contact from '@/data/contact.json';
+import { ORG, SITE, graph } from '@/lib/schema';
 const v = contact.productos.ventas.nombre;
 const demo = contact.calcom.url; const dur = contact.calcom.duracion.replace(' minutos', ' min');
+const ld = graph(ORG, {
+  '@type': 'Service',
+  '@id': `${SITE}/inmobiliarias#servicio`,
+  name: v,
+  serviceType: 'Agentes de IA para inmobiliarias',
+  description: `${v}: agentes de inteligencia artificial para inmobiliarias con equipo. Recontactan la base con campañas de WhatsApp aprobadas por Meta, responden en WhatsApp, Instagram y Facebook, califican los leads y los cargan en el CRM (Tokko, KiteProp, Xintel). Incluye Centralito para cada asesor.`,
+  provider: { '@id': `${SITE}/#org` },
+  areaServed: [{ '@type': 'Country', name: 'Argentina' }, { '@type': 'Country', name: 'Uruguay' }],
+  audience: { '@type': 'BusinessAudience', name: 'Inmobiliarias con equipo de asesores' },
+  url: `${SITE}/inmobiliarias`,
+});
 const waText = `Hola, vengo de centralize.dev y quiero una propuesta para mi inmobiliaria (${v})`;
 ---
 <Base title="Agentes de IA para inmobiliarias con equipo: campañas, respuestas y seguimiento | Centralize" description={`${v} recontacta tu base con mensajes aprobados por Meta, responde en WhatsApp, Instagram y Facebook, califica y carga el lead en tu CRM. Y armamos automatizaciones a medida para tu equipo.`} path="/inmobiliarias" active="inmobiliarias">
+  <script slot="head" type="application/ld+json" set:html={ld} />
   <section class="page">
     <div class="wrap">
       <div class="page-head" style="max-width:860px">

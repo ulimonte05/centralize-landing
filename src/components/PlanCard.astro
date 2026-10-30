@@ -8,12 +8,15 @@ const ar = priceLine('AR');
 const usd = priceLine('UY');
 ---
 <div class="plan-card card">
-  <p class="plan-nombre">Centralito · precio de lanzamiento</p>
+  <p class="plan-nombre">Centralito</p>
   <p class="plan-neto"><b>{OFFER.mode === 'free_month' ? `${OFFER.gratis}, sin tarjeta` : OFFER.gratis}</b></p>
-  <p class="plan-total">{OFFER.mode === 'free_month' ? 'Si después querés seguir: ' : 'Después '}<strong>{ar.promo} al mes</strong> por {ar.promoMonths} meses, y {ar.list} al mes.</p>
-  <p class="plan-total muted">Fuera de Argentina: {usd.promo} al mes por {usd.promoMonths} meses, y {usd.list} al mes.</p>
+  <dl class="plan-tabla tabular">
+    <div><dt>Primeros {ar.promoMonths} meses de pago</dt><dd>{ar.promo} <span>/ mes</span></dd></div>
+    <div><dt>Después</dt><dd>{ar.list} <span>/ mes</span></dd></div>
+  </dl>
+  <p class="plan-total muted">Fuera de Argentina: {usd.promo} y después {usd.list} por mes.</p>
   <p class="plan-total muted">{OFFER.notaPrecio}</p>
-  <p class="mono up plan-cond">Sin permanencia · {guarantee}</p>
+  {OFFER.mode === 'trial' && <p class="plan-total muted">{OFFER.cobro.d}</p>}
+  <p class="plan-cond">Sin permanencia. {guarantee}</p>
   <a class="btn btn-primary btn-block" href="/contratar" data-cta="contratar" data-section={section}>{OFFER.cta}</a>
-  <p class="plan-sub muted">{OFFER.sub}</p>
 </div>

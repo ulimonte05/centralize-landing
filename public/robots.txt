@@ -1,13 +1,23 @@
+# Buscadores y asistentes de IA: todos pueden leer el sitio público.
+# Van en un solo grupo para que los Disallow les apliquen a todos (un grupo propio por bot los anularía).
 User-agent: *
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
 Allow: /
 Disallow: /gracias
 Disallow: /api/
 Disallow: /v/
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
 
 Sitemap: https://centralize.dev/sitemap.xml

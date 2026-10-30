@@ -32,7 +32,7 @@ em{font-style:italic;color:var(--signal-bright)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;border-radius:var(--r-pill);border:1.5px solid transparent;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .2s var(--ease),box-shadow .25s,background-color .2s,color .2s,border-color .2s}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--signal);color:#fff;box-shadow:var(--sh-cta)}
-.btn-primary:hover{background:var(--signal-light);box-shadow:0 14px 45px rgba(223,30,2,.4);transform:translateY(-1px)}
+.btn-primary:hover{background:var(--signal-light);box-shadow:0 10px 22px -8px rgba(0,0,0,.8);transform:translateY(-1px)}
 .btn-outline{background:transparent;border-color:rgba(255,255,255,.18);color:#fff}
 .btn-outline:hover{border-color:rgba(255,255,255,.5)}
 .btn-light{background:#fff;color:#0A0908}
