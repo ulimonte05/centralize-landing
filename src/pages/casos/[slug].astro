@@ -9,7 +9,7 @@ import { ORG, SITE, graph } from '@/lib/schema';
 export function getStaticPaths() {
   return casos.map(c => ({ params: { slug: c.slug }, props: { caso: c } }));
 }
-type Caso = Omit<(typeof casos)[number], 'cita'> & { cita: { texto: string; nombre: string; cargo: string } | null };
+type Caso = Omit<(typeof casos)[number], 'cita' | 'corte_visible'> & { cita: { texto: string; nombre: string; cargo: string } | null; corte_visible?: string };
 const { caso } = Astro.props as { caso: Caso };
 const ventas = contact.productos.ventas.nombre;
 const PRODUCTO: Record<string, { nombre: string; href: string }> = {
@@ -62,7 +62,7 @@ const ld = graph(ORG, {
           <h2>El resultado</h2>
           <p>{caso.resultado}</p>
           {caso.cita && <blockquote class="caso-cita"><p>“{caso.cita.texto}”</p><footer>{caso.cita.nombre}, {caso.cita.cargo} en {caso.nombre}</footer></blockquote>}
-          <p class="caso-fecha">Publicado el {caso.publicado_visible} con autorización de {caso.nombre}. Las cifras son las de su cuenta en Centralize.</p>
+          <p class="caso-fecha">Publicado el {caso.publicado_visible} con autorización de {caso.nombre}. Las cifras son las de su cuenta en Centralize{caso.corte_visible && <>, con corte al {caso.corte_visible}</>}.</p>
         </div>
 
         <aside class="caso-ficha" aria-label={`Datos de ${caso.nombre}`}>
