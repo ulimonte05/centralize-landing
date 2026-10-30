@@ -3,6 +3,7 @@ import PlanCard from '@/components/PlanCard.astro';
 import WaLink from '@/components/WaLink.astro';
 import claims from '@/data/claims.json';
 import contact from '@/data/contact.json';
+import casos from '@/data/casos.json';
 import { priceLine } from '@/lib/pricing';
 import { faqItems } from '@/lib/faq';
 import { OFFER } from '@/lib/offer';
@@ -68,7 +69,7 @@ const items = faqItems();
 </section>
 <section class="block" id="confianza" aria-labelledby="conf-h">
   <div class="wrap">
-    <div class="block-head"><h2 id="conf-h">Vos decidís qué sale y a quién.</h2><p class="lead">{claims.centralito.pedidos}, contados <span class="nowrap">{claims.corte_visible}</span>.</p></div>
+    <div class="block-head"><h2 id="conf-h">Vos decidís qué sale y a quién.</h2><p class="lead">{claims.centralito.pedidos}, contados <span class="nowrap">{claims.corte_visible}</span>.{casos[0] && <> <a class="link" href={`/casos/${casos[0].slug}`}>Mirá el caso de {casos[0].nombre}</a>.</>}</p></div>
     <dl class="reglas">
       <div><dt>Trabaja en Tokko</dt><dd>Lee y edita tu cartera y tus leads, y busca en la Red Tokko. ¿Usás otro CRM? Lo conectamos para vos.</dd></div>
       <div><dt>Nunca les escribe a tus clientes</dt><dd>Te deja el texto o el PDF listo y lo mandás vos desde tu WhatsApp.</dd></div>

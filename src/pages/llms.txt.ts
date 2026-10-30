@@ -6,6 +6,7 @@ import { OFFER } from '@/lib/offer';
 import { faqItems } from '@/lib/faq';
 import { ORDEN_PLAN } from '@/lib/pedidos';
 import { SCENES } from '@/lib/scenes';
+import casos from '@/data/casos.json';
 
 // Resumen del sitio para asistentes de IA (formato llms.txt). Sale de los mismos datos que la web: precios, cifras y FAQ.
 export const GET: APIRoute = () => {
@@ -13,6 +14,7 @@ export const GET: APIRoute = () => {
   const usd = priceLine('UY');
   const ventas = contact.productos.ventas.nombre;
   const pedidos = ORDEN_PLAN.map(id => `- "${SCENES[id].mensajes.find(m => m.de === 'asesor')?.texto}" (antes: ${SCENES[id].antes}; con Centralito: ${SCENES[id].despues})`).join('\n');
+  const listaCasos = casos.map(c => `### ${c.titulo}\n${c.resumen} ${c.nombre} es una inmobiliaria de ${c.ciudades.join(' y ')} (${c.pais}) con ${c.equipo}; trabaja con ${c.crm} y con Centralize desde ${c.desde}. Caso completo: https://centralize.dev/casos/${c.slug}`).join('\n\n');
   const faq = faqItems().map(f => `### ${f.q}\n${f.a}`).join('\n\n');
   const body = `# Centralize
 
@@ -40,6 +42,10 @@ ${pedidos}
 - Incluye Centralito para cada asesor del equipo, y automatizaciones a medida.
 - Demo: ${contact.calcom.url}
 
+## Casos de clientes (publicados con autorización)
+
+${listaCasos}
+
 ## Preguntas frecuentes
 
 ${faq}
@@ -48,6 +54,7 @@ ${faq}
 
 - [Centralito, asistente de IA para asesores inmobiliarios](https://centralize.dev/): qué hace, precio y preguntas frecuentes.
 - [${ventas}, agentes de IA para inmobiliarias con equipo](https://centralize.dev/inmobiliarias): canales, panel y automatizaciones a medida.
+${casos.map(c => `- [Caso ${c.nombre}](https://centralize.dev/casos/${c.slug}): ${c.titulo}.`).join('\n')}
 - [Probar Centralito](https://centralize.dev/contratar): alta de la prueba.
 - [Contacto](https://centralize.dev/contacto): WhatsApp de ventas ${contact.whatsapp_ventas.visible}.
 `;

@@ -4,6 +4,7 @@ import WaLink from '@/components/WaLink.astro';
 import Proof from '@/components/Proof.astro';
 import MobileBar from '@/components/MobileBar.astro';
 import contact from '@/data/contact.json';
+import casos from '@/data/casos.json';
 import { ORG, SITE, graph } from '@/lib/schema';
 const v = contact.productos.ventas.nombre;
 const demo = contact.calcom.url; const dur = contact.calcom.duracion.replace(' minutos', ' min');
@@ -52,6 +53,7 @@ const waText = `Hola, vengo de centralize.dev y quiero una propuesta para mi inm
         <h2>Centralito para todo el equipo</h2>
         <p>{v} incluye Centralito para cada asesor. Centralito trabaja para ellos: busca, ordena, tasa, arma y recuerda. Todo lo que le llega a un cliente lo manda el asesor.</p>
         <div style="margin:24px 0"><Proof which="ventas" /></div>
+        {casos.map(c => <><h2>Un caso: {c.nombre}</h2><p>{c.resumen} <a class="link" href={`/casos/${c.slug}`}>Leer el caso de {c.nombre}</a></p></>)}
       </div>
       <div class="page-head" style="max-width:860px;margin-top:48px">
         <p class="eyebrow">A medida</p>

@@ -1,0 +1,50 @@
+[
+  {
+    "_nota": "Publicado con autorización escrita de la inmobiliaria (confirmada por Pedro el 2026-10-30). Cifras confirmadas por Centralize. Cita: null hasta tener una textual con nombre y cargo.",
+    "slug": "gardiol",
+    "nombre": "Gardiol",
+    "pais": "Uruguay",
+    "ciudades": [
+      "Montevideo",
+      "Colonia"
+    ],
+    "equipo": "más de diez asesores",
+    "crm": "Tokko",
+    "desde": "diciembre de 2025",
+    "productos": [
+      "ventas",
+      "centralito"
+    ],
+    "publicado": "2026-10-30",
+    "publicado_visible": "30 de octubre de 2026",
+    "titulo": "Gardiol recontactó 2.700 leads fríos en 60 días y recuperó 4 operaciones",
+    "resumen": "Una inmobiliaria uruguaya con más de diez asesores volvió a hablar con 2.700 contactos que habían consultado y quedado sin seguimiento. En 60 días cerró 4 operaciones que ya daba por perdidas.",
+    "cifras": [
+      {
+        "valor": "2.700",
+        "detalle": "leads fríos recontactados por WhatsApp"
+      },
+      {
+        "valor": "60 días",
+        "detalle": "para recontactar toda esa base"
+      },
+      {
+        "valor": "4",
+        "detalle": "operaciones cerradas que estaban dadas por perdidas"
+      }
+    ],
+    "cita": null,
+    "problema": "Como pasa en cualquier inmobiliaria con años de trabajo, Gardiol tenía en Tokko miles de contactos que habían consultado por una propiedad y no habían vuelto a tener noticias. Hacer el segundo, el tercero y el cuarto mensaje a mano, con más de diez asesores ocupados en sus operaciones del día, no daba.",
+    "que_hicieron": [
+      {
+        "producto": "ventas",
+        "texto": "Con Centralize Ventas, la inmobiliaria les volvió a escribir por WhatsApp a esos 2.700 contactos, con mensajes aprobados por Meta. Los agentes de IA respondieron, siguieron cada conversación, calificaron el interés de cada lead y lo dejaron cargado en Tokko para que lo tome un asesor."
+      },
+      {
+        "producto": "centralito",
+        "texto": "Los asesores usan Centralito desde su propio WhatsApp para trabajar sobre Tokko: buscar en la cartera, armar fichas y tasaciones y no perder ningún seguimiento."
+      }
+    ],
+    "resultado": "En 60 días, 4 de esas conversaciones terminaron en operaciones cerradas que el equipo ya daba por perdidas."
+  }
+]
