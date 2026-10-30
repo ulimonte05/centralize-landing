@@ -106,9 +106,9 @@
 .reglas div{border-top:2px solid var(--signal);padding-top:16px}
 .reglas dt{font-weight:600;font-size:18px;letter-spacing:-.02em;color:#fff}
 .reglas dd{margin:8px 0 0;color:var(--muted);font-size:15.5px}
-.clientes{margin-top:40px}
-.clientes-t{font-size:14px;color:var(--muted);margin-bottom:10px}
-.clientes ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 28px;font-family:var(--display);font-weight:600;font-size:18px;color:var(--muted)}
+.clientes{margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.clientes-t{font-size:14px;color:var(--muted);margin-bottom:14px}
+.clientes ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px 40px;font-family:var(--display);font-weight:600;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.02em;color:#fff}
 
 .frase-fija{font-family:var(--display);font-weight:600;font-size:clamp(20px,2vw,26px);letter-spacing:-.025em;line-height:1.25;max-width:34ch;text-wrap:pretty}
 
