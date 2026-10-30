@@ -83,10 +83,6 @@
       {
         "valor": "1.209",
         "detalle": "leads cargados en Tokko sin carga manual"
-      },
-      {
-        "valor": "318",
-        "detalle": "pedidos de los asesores a Centralito desde septiembre de 2026"
       }
     ],
     "cita": null,
@@ -98,7 +94,7 @@
       },
       {
         "producto": "centralito",
-        "texto": "Los asesores le piden a Centralito desde su WhatsApp lo que antes hacían a mano en Tokko: cargar propiedades con fotos, etiquetar contactos, armar reportes de interesados y lanzar tandas de recontacto. Desde septiembre de 2026 le hicieron 318 pedidos. Centralito también revisa cada dos horas que ningún lead quede sin cargar."
+        "texto": "Los asesores le piden a Centralito desde su WhatsApp lo que antes hacían a mano en Tokko: cargar propiedades con fotos, etiquetar contactos y armar reportes de interesados. Además, Centralito revisa cada dos horas que ningún lead quede sin cargar."
       }
     ],
     "resultado": "Entre junio y octubre de 2026, 1.196 contactos respondieron a un recontacto, la IA calificó 2.052 leads (787 de ellos calientes) y dejó 1.209 cargados en Tokko para que los tome un asesor. En la unidad corporativa respondió el 39 % de los contactos a los que les llegó el mensaje."
