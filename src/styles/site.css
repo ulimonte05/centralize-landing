@@ -385,3 +385,24 @@
 .cuenta-soporte h2{font-size:20px;margin:0 0 6px}
 .cuenta-soporte p{margin:0 0 14px;color:var(--muted)}
 .foot-legal a{text-decoration:underline;text-underline-offset:3px}
+
+/* ===== Casos ===== */
+.migas{font-size:14px;color:var(--muted);margin-bottom:8px}
+.migas a{color:var(--muted);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-strong)}
+.migas a:hover{color:#fff}
+.caso .page-head h1{max-width:22ch}
+.caso-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(32px,5vw,80px);align-items:start}
+.caso-cifras{list-style:none;padding:0!important;margin:0 0 8px;border-top:1px solid var(--line)}
+.caso-cifras li{margin:0;padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+.caso-cifras b{color:#fff;font-size:24px;font-weight:700;letter-spacing:-.02em;margin-right:6px;font-variant-numeric:tabular-nums}
+.caso-cita{margin:32px 0;padding:0 0 0 20px;border-left:2px solid var(--signal)}
+.caso-cita p{color:#fff;font-size:20px;line-height:1.45}
+.caso-cita footer{font-size:14px}
+.caso-fecha{margin-top:32px!important;font-size:14px}
+.caso-ficha{position:sticky;top:calc(var(--nav-h) + 24px);display:flex;flex-direction:column;gap:14px}
+.caso-ficha dl{margin:0 0 6px;border-top:1px solid var(--line)}
+.caso-ficha dl div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.caso-ficha dt{color:var(--muted)}
+.caso-ficha dd{margin:0;color:#fff;text-align:right}
+.caso-ficha .link-wa{justify-content:center}
+@media (max-width:1023px){.caso-grid{grid-template-columns:1fr}.caso-ficha{position:static;order:-1}}

@@ -1,0 +1,102 @@
+[
+  {
+    "_nota": "Publicado con autorización escrita de la inmobiliaria (confirmada por Pedro el 2026-10-30). Cifras confirmadas por Centralize. Cita: null hasta tener una textual con nombre y cargo.",
+    "slug": "gardiol",
+    "nombre": "Gardiol",
+    "pais": "Uruguay",
+    "ciudades": [
+      "Montevideo",
+      "Colonia"
+    ],
+    "equipo": "más de diez asesores",
+    "crm": "Tokko",
+    "desde": "diciembre de 2025",
+    "productos": [
+      "ventas",
+      "centralito"
+    ],
+    "publicado": "2026-10-30",
+    "publicado_visible": "30 de octubre de 2026",
+    "titulo": "Gardiol recontactó 2.700 leads fríos en 60 días y recuperó 4 operaciones",
+    "resumen": "Una inmobiliaria uruguaya con más de diez asesores volvió a hablar con 2.700 contactos que habían consultado y quedado sin seguimiento. En 60 días cerró 4 operaciones que ya daba por perdidas.",
+    "cifras": [
+      {
+        "valor": "2.700",
+        "detalle": "leads fríos recontactados por WhatsApp"
+      },
+      {
+        "valor": "60 días",
+        "detalle": "para recontactar toda esa base"
+      },
+      {
+        "valor": "4",
+        "detalle": "operaciones cerradas que estaban dadas por perdidas"
+      }
+    ],
+    "cita": null,
+    "problema": "Como pasa en cualquier inmobiliaria con años de trabajo, Gardiol tenía en Tokko miles de contactos que habían consultado por una propiedad y no habían vuelto a tener noticias. Hacer el segundo, el tercero y el cuarto mensaje a mano, con más de diez asesores ocupados en sus operaciones del día, no daba.",
+    "que_hicieron": [
+      {
+        "producto": "ventas",
+        "texto": "Con Centralize Ventas, la inmobiliaria les volvió a escribir por WhatsApp a esos 2.700 contactos, con mensajes aprobados por Meta. Los agentes de IA respondieron, siguieron cada conversación, calificaron el interés de cada lead y lo dejaron cargado en Tokko para que lo tome un asesor."
+      },
+      {
+        "producto": "centralito",
+        "texto": "Los asesores usan Centralito desde su propio WhatsApp para trabajar sobre Tokko: buscar en la cartera, armar fichas y tasaciones y no perder ningún seguimiento."
+      }
+    ],
+    "resultado": "En 60 días, 4 de esas conversaciones terminaron en operaciones cerradas que el equipo ya daba por perdidas."
+  },
+  {
+    "_nota": "Publicado con autorización de Arkken Group (confirmada por Pedro el 2026-10-30). Cifras sacadas de prod con corte 2026-10-30 16:55 UTC; consultas y contexto en docs/research/2026-10-30-arkken-metricas-case-study.md del workspace. Sin visitas ni operaciones: no hay datos propios. Cita: null hasta tener una textual con nombre y cargo.",
+    "slug": "arkken",
+    "nombre": "Arkken Group",
+    "pais": "Argentina",
+    "ciudades": [
+      "Zona Norte del Gran Buenos Aires"
+    ],
+    "equipo": "tres unidades: corporativa, residencial y el barrio Openn Pilar",
+    "crm": "Tokko",
+    "desde": "mayo de 2026",
+    "productos": [
+      "ventas",
+      "centralito"
+    ],
+    "publicado": "2026-10-30",
+    "publicado_visible": "30 de octubre de 2026",
+    "corte_visible": "30 de octubre de 2026",
+    "titulo": "Arkken Group recontactó a 5.752 contactos por WhatsApp y cargó 1.209 leads en Tokko en cinco meses",
+    "resumen": "Un grupo inmobiliario de Zona Norte con tres unidades de negocio le volvió a escribir por WhatsApp a 5.752 contactos entre junio y octubre de 2026. Respondieron 1.196, la IA calificó 2.052 leads y dejó 1.209 cargados en Tokko para que los tome un asesor.",
+    "cifras": [
+      {
+        "valor": "5.752",
+        "detalle": "contactos recontactados por WhatsApp entre junio y octubre de 2026"
+      },
+      {
+        "valor": "30 %",
+        "detalle": "respondió: 1.196 de los 4.000 contactos a los que les llegó el mensaje"
+      },
+      {
+        "valor": "2.052",
+        "detalle": "leads calificados por la IA: 787 calientes, 689 tibios y 444 fríos"
+      },
+      {
+        "valor": "1.209",
+        "detalle": "leads cargados en Tokko sin carga manual"
+      }
+    ],
+    "cita": null,
+    "problema": "Arkken atiende a tres públicos distintos: empresas que buscan oficinas, galpones o naves en el corredor industrial de Zona Norte; familias que buscan casa, departamento o lote; y compradores de Openn Pilar, su barrio privado en preventa. Cada consulta tiene que llegar a la unidad correcta y quedar cargada en el Tokko que corresponde, y además había bases de contactos a las que volver a escribir. Hacerlo a mano no escalaba.",
+    "que_hicieron": [
+      {
+        "producto": "ventas",
+        "texto": "Con Centralize Ventas, cada unidad tiene su propio agente de IA por WhatsApp, y el de Openn Pilar también atiende Instagram. Los agentes responden, califican el interés de cada lead y lo cargan en Tokko. Si alguien le pregunta por una casa a la unidad corporativa, lo derivan a la residencial. Con mensajes aprobados por Meta, el equipo recontactó a 5.752 contactos entre junio y octubre de 2026."
+      },
+      {
+        "producto": "centralito",
+        "texto": "Los asesores le piden a Centralito desde su WhatsApp lo que antes hacían a mano en Tokko: cargar propiedades con fotos, etiquetar contactos y armar reportes de interesados. Además, Centralito revisa cada dos horas que ningún lead quede sin cargar."
+      }
+    ],
+    "resultado": "Entre junio y octubre de 2026, 1.196 contactos respondieron a un recontacto, la IA calificó 2.052 leads (787 de ellos calientes) y dejó 1.209 cargados en Tokko para que los tome un asesor. En la unidad corporativa respondió el 39 % de los contactos a los que les llegó el mensaje."
+  }
+]
