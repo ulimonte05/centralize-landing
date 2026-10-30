@@ -6,3 +6,7 @@ dist
 .env.*
 .DS_Store
 .env*
+
+# impeccable: auditorías y capturas locales (la config del detector sí se versiona)
+.impeccable/critique/
+.impeccable/review/
