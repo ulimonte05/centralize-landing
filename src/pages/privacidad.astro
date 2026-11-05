@@ -1,16 +1,37 @@
 ---
 import Base from '@/layouts/Base.astro';
+import LegalData from '@/components/LegalData.astro';
 ---
-<Base title="Política de privacidad | Centralize" description="Cómo tratamos los datos de clientes de Argentina y Uruguay." path="/privacidad" noindex>
-  <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Política de privacidad</h1></div>
+<Base title="Política de privacidad | Centralize" description="Cómo tratamos los datos de los clientes de Centralito." path="/privacidad" noindex>
+  <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Política de privacidad</h1><p class="lead">Última actualización: 5 de noviembre de 2026.</p></div>
   <div class="prose">
-    <h2>Responsable</h2><p>La entidad vendedora de Centralito:</p>
-    <p style="margin:0"><strong>Razón social:</strong> {'{{RAZON_SOCIAL}}'} <span class="mono">TODO</span></p>
-    <p style="margin:0"><strong>CUIT:</strong> {'{{CUIT}}'} <span class="mono">TODO</span></p>
-    <p style="margin:0 0 16px"><strong>Domicilio:</strong> {'{{DOMICILIO}}'} <span class="mono">TODO</span></p>
-    <h2>Qué datos y para qué</h2><p>Nombre, inmobiliaria, WhatsApp y email para activar y facturar el servicio; el usuario de Tokko que nos das para operar tu CRM en tu nombre; los pedidos que le hacés a Centralito para ejecutarlos.</p>
-    <h2>Conservación y transferencias</h2><p>Los datos se conservan mientras dure el servicio y se borran al cierre. Subencargados: Google Cloud, OpenAI, Google Gemini y Meta, con cláusulas modelo para transferencias internacionales.</p>
-    <h2>Tus derechos</h2><p>Acceso, rectificación y supresión escribiendo al contacto de datos publicado. Clientes de Argentina y Uruguay: aplican las leyes 25.326 y 18.331 (AAIP y URCDP).</p>
-    <h2>Cookies y medición</h2><p>Medimos visitas con Vercel Web Analytics, sin cookies ni identificadores. Usamos el Pixel de Meta en este sitio y su API de Conversiones para medir y optimizar nuestra publicidad: el Pixel guarda cookies de Meta (_fbp, _fbc) y nosotros enviamos a Meta, desde nuestro servidor, eventos como el inicio de la contratación con datos de contacto hasheados (email y teléfono, con SHA-256), el identificador del navegador y parámetros UTM. No enviamos el contenido de tus pedidos ni datos de tu CRM.</p>
+    <LegalData titulo="Responsable de los datos" />
+    <h2>Qué datos usamos y para qué</h2>
+    <ul>
+      <li><strong>Para darte de alta y atenderte:</strong> nombre, inmobiliaria, WhatsApp, email y país.</li>
+      <li><strong>Para operar tu CRM:</strong> el usuario y la contraseña de Tokko que nos das, y lo que Centralito lee o cambia en tu cuenta con tu pedido.</li>
+      <li><strong>Para hacer lo que le pedís:</strong> tus mensajes, audios, fotos, documentos y los archivos que genera.</li>
+      <li><strong>Para cobrar, si te suscribís:</strong> el medio de pago lo procesa la empresa de pagos. Nosotros no guardamos el número de tu tarjeta.</li>
+      <li><strong>Para cuidar el servicio y medir publicidad:</strong> IP, navegador y datos de la campaña por la que llegaste.</li>
+    </ul>
+    <h2>Quién los ve</h2><p>El equipo de Centralize puede leer tus conversaciones con Centralito y sus registros para darte soporte, corregir errores y mejorar el servicio. El equipo también recibe un aviso cuando alguien se anota o activa Centralito. No vendemos tus datos.</p>
+    <h2>Datos de tus clientes</h2><p>Tu CRM tiene datos de tus clientes y contactos. Los trabajamos solo por tu pedido y según tus instrucciones; sos responsable de tener derecho a usarlos.</p>
+    <h2>Con qué proveedores trabajamos</h2><p>Para dar el servicio compartimos los datos necesarios con estos proveedores, algunos de ellos fuera de Argentina y Uruguay, por ejemplo en Estados Unidos:</p>
+    <ul>
+      <li>Google Cloud: servidores.</li>
+      <li>Anthropic: el modelo de inteligencia artificial de Centralito.</li>
+      <li>OpenAI: transcripción de audios.</li>
+      <li>WhatsApp y Meta: mensajería y medición de publicidad.</li>
+      <li>Vercel: este sitio y su medición de visitas.</li>
+      <li>Rebill y Stripe: cobros, si te suscribís.</li>
+      <li>Tokko Broker: tu CRM, al que accedemos con tu usuario.</li>
+    </ul>
+    <h2>Cuánto tiempo los guardamos</h2><p>Mientras dure el servicio. Cuando termina, Centralito queda en pausa y conservamos tus datos por si querés volver, hasta que nos pidas borrarlos. Los borramos dentro de los 30 días de tu pedido, salvo lo que la ley nos obligue a conservar, como los datos de facturación.</p>
+    <h2>Cómo los cuidamos</h2><p>Tu usuario del CRM se guarda en el entorno aislado de tu Centralito y no aparece en el chat. Podés revocarlo cuando quieras cambiando la contraseña en tu CRM.</p>
+    <h2>Tus derechos</h2><p>Podés pedir acceso, rectificación y supresión de tus datos por los medios de contacto de arriba. Te respondemos dentro de los plazos de la ley. En Argentina aplica la Ley 25.326 y en Uruguay, la Ley 18.331.</p>
+    <p>La Agencia de Acceso a la Información Pública, en su carácter de Órgano de Control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales.</p>
+    <p>En Uruguay, el órgano de control es la Unidad Reguladora y de Control de Datos Personales (URCDP).</p>
+    <h2>Cookies y medición</h2><p>Medimos visitas con Vercel Web Analytics, sin cookies ni identificadores. Usamos el Pixel de Meta en este sitio y su API de Conversiones para medir y optimizar nuestra publicidad: el Pixel guarda cookies de Meta (_fbp, _fbc) y nosotros enviamos a Meta, desde nuestro servidor, eventos como el inicio de la contratación con datos de contacto hasheados (email y teléfono, con SHA-256), la IP, el navegador y parámetros UTM. No enviamos el contenido de tus pedidos ni datos de tu CRM.</p>
+    <h2>Cambios</h2><p>Si cambiamos esta política, publicamos la versión nueva acá y, si el cambio te afecta, te avisamos por WhatsApp.</p>
   </div></div></section>
 </Base>

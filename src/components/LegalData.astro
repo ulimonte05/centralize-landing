@@ -1,0 +1,15 @@
+---
+import contact from '@/data/contact.json';
+const { razon_social, cuit, domicilio } = contact.legal;
+interface Props { titulo?: string }
+const { titulo = 'Datos del vendedor' } = Astro.props;
+const falta = 'Falta completar';
+---
+<div class="card" style="padding:16px 20px;margin-bottom:24px">
+  <p class="mono up" style="margin:0 0 8px">{titulo}</p>
+  <p style="margin:0"><strong>Nombre legal:</strong> {razon_social || falta}</p>
+  <p style="margin:0"><strong>CUIT:</strong> {cuit || falta}</p>
+  <p style="margin:0"><strong>Domicilio:</strong> {domicilio || falta}</p>
+  {contact.email.confirmado && <p style="margin:0"><strong>Email:</strong> <a class="link" href={`mailto:${contact.email.direccion}`}>{contact.email.direccion}</a></p>}
+  <p style="margin:0"><strong>WhatsApp:</strong> <a class="link" href={`https://wa.me/${contact.whatsapp_ventas.e164}`} target="_blank" rel="noopener">{contact.whatsapp_ventas.visible}</a>, {contact.horario}</p>
+</div>
