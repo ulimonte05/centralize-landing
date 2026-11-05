@@ -1,5 +1,6 @@
 ---
 import Base from '@/layouts/Base.astro';
+import LegalData from '@/components/LegalData.astro';
 import { priceLine, guarantee } from '@/lib/pricing';
 import { OFFER } from '@/lib/offer';
 import plans from '@/data/plans.json';
@@ -7,16 +8,11 @@ const ar = priceLine('AR');
 const us = priceLine('UY');
 const free = OFFER.mode === 'free_month';
 ---
-<Base title="Términos y condiciones | Centralize" description="Términos de la suscripción a Centralito y de Centralize Ventas." path="/terminos" noindex>
-  <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Términos y condiciones</h1></div>
+<Base title="Términos y condiciones | Centralize" description="Términos de la suscripción a Centralito." path="/terminos" noindex>
+  <section class="page"><div class="wrap"><div class="page-head"><p class="eyebrow">Legales</p><h1>Términos y condiciones</h1><p class="lead">Última actualización: 5 de noviembre de 2026.</p></div>
   <div class="prose">
-    <div class="card" style="padding:16px 20px;margin-bottom:24px">
-      <p class="mono up" style="margin:0 0 8px">Datos del vendedor</p>
-      <p style="margin:0"><strong>Razón social:</strong> {'{{RAZON_SOCIAL}}'} <span class="mono">TODO</span></p>
-      <p style="margin:0"><strong>CUIT:</strong> {'{{CUIT}}'} <span class="mono">TODO</span></p>
-      <p style="margin:0"><strong>Domicilio:</strong> {'{{DOMICILIO}}'} <span class="mono">TODO</span></p>
-    </div>
-    <h2>1. Partes y aceptación</h2><p>Estos términos aplican a los clientes de Argentina, Uruguay y el resto del mundo (precios en dólares). Quien contrata es el titular de la suscripción y acepta estos términos al iniciar la prueba.</p>
+    <LegalData />
+    <h2>1. Partes y aceptación</h2><p>Estos términos regulan la suscripción a Centralito para clientes de Argentina, Uruguay y el resto del mundo. Quien contrata es el titular de la suscripción, tiene que ser mayor de 18 años y acepta estos términos al {free ? 'anotarse' : 'iniciar la prueba'}. Centralize Ventas, el producto para inmobiliarias con equipo, se contrata con un acuerdo aparte.</p>
     <h2>2. Qué es Centralito y qué no hace</h2><p>Centralito es un asistente que opera tu CRM inmobiliario y te responde por WhatsApp. No les escribe a los clientes del asesor ni manda campañas: solo trabaja con vos, pide tu OK antes de cualquier cambio en lote y registra lo que hizo.</p>
     <h2>3. Alta y cuenta</h2><p>Tu número de WhatsApp es tu identificador. {free ? 'Al anotarte' : 'Al terminar el pago'}, activás Centralito mandando el mensaje con tu código desde ese número.</p>
     {free
@@ -28,10 +24,15 @@ const free = OFFER.mode === 'free_month';
       <li>Argentina: {ar.promo} al mes durante los primeros {ar.promoMonths} meses de pago{free ? '' : ' (además de la semana gratis)'} y {ar.list} al mes desde entonces.</li>
       <li>Resto del mundo, Uruguay incluido: {us.promo} al mes durante los primeros {us.promoMonths} meses de pago y {us.list} al mes desde entonces.</li>
     </ul>
+    <p>Si cambiamos el precio, te avisamos por WhatsApp con al menos 30 días de anticipación. Si no estás de acuerdo, te das de baja antes de que empiece a regir.</p>
     <h2>6. Garantía del primer pago</h2><p>{guarantee} Escribinos desde <a class="link" href="/cuenta">Mi cuenta</a> y la devolución se hace a mano a la misma tarjeta.</p>
-    <h2>7. Baja</h2><p>Das de baja cuando quieras desde <a class="link" href="/cuenta">/cuenta</a>: Centralito te manda por WhatsApp un link personal de gestión. La baja corta los cobros siguientes; no hay permanencia mínima.</p>
-    <h2>8. Botón de arrepentimiento</h2><p>Podés arrepentirte dentro de los 10 días corridos de contratar y te devolvemos lo pagado. Lo pedís desde el mismo botón, en <a class="link" href="/cuenta">/cuenta</a>.</p>
+    <h2>7. Baja</h2><p>Das de baja cuando quieras con el botón de baja, desde <a class="link" href="/cuenta">Mi cuenta</a>: Centralito te manda por WhatsApp un link personal de gestión, y si no tenés acceso a ese número te ayuda el soporte. La baja corta los cobros siguientes; no hay permanencia mínima. Dentro de las 24 horas te confirmamos el pedido con un código.</p>
+    <h2>8. Botón de arrepentimiento</h2><p>Podés arrepentirte dentro de los 10 días corridos de contratar y te devolvemos lo pagado. Lo pedís desde el mismo botón, en <a class="link" href="/cuenta">Mi cuenta</a>. Dentro de las 24 horas te confirmamos el pedido con un código.</p>
     <h2>9. Credenciales y acceso al CRM</h2><p>Para operar le das a Centralito un usuario de tu CRM, a tu nombre, que podés revocar desde el CRM cuando quieras. Usamos esas credenciales solo para lo que pedís. Si tu CRM todavía no está integrado, el equipo de Centralize también puede usarlas para conectarlo. Tus contactos siguen siendo tuyos.</p>
-    <h2>10. Datos</h2><p>Ver la <a class="link" href="/privacidad">Política de privacidad</a>.</p>
+    <h2>10. Uso correcto</h2><p>Te comprometés a usar Centralito con cuentas y datos que tengas derecho a usar, y a no usarlo para actividades ilegales, para mandar mensajes no solicitados ni para intentar vulnerar el servicio. Si no se cumple, o si el uso pone en riesgo el servicio, podemos suspender la cuenta y te avisamos por WhatsApp.</p>
+    <h2>11. Inteligencia artificial y CRM de terceros</h2><p>Centralito usa inteligencia artificial y puede equivocarse. Revisá lo que te entrega antes de usarlo o de mandárselo a un cliente, sobre todo precios, tasaciones y datos de una propiedad. Sus tasaciones son una ayuda de trabajo: no reemplazan tu criterio profesional. Centralito depende de servicios de terceros, como tu CRM y WhatsApp, y puede fallar o interrumpirse cuando ellos cambian o se caen. Este punto no limita los derechos que la ley no permite limitar.</p>
+    <h2>12. Cambios en estos términos</h2><p>Si los cambiamos, publicamos la versión nueva acá y, si el cambio te afecta, te avisamos por WhatsApp antes de que empiece a regir.</p>
+    <h2>13. Ley aplicable y reclamos</h2><p>Estos términos se rigen por las leyes de la República Argentina. Si contratás como consumidor, conservás los derechos y la jurisdicción que te da la ley de tu domicilio, incluida la Ley 24.240 en Argentina y la Ley 17.250 en Uruguay. Para cualquier reclamo, escribinos a los datos de contacto de arriba.</p>
+    <h2>14. Datos</h2><p>Ver la <a class="link" href="/privacidad">Política de privacidad</a>.</p>
   </div></div></section>
 </Base>

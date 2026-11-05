@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import WaLink from '@/components/WaLink.astro';
+import LegalData from '@/components/LegalData.astro';
 import contact from '@/data/contact.json';
 const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.replace(' minutos', ' min');
 ---
@@ -32,6 +33,7 @@ const v = contact.productos.ventas.nombre; const dur = contact.calcom.duracion.r
           <p class="muted" style="margin:12px 0 0">¿Querés darte de baja o arrepentirte? Hacelo desde <a class="link" href="/cuenta">/cuenta</a>.</p>
         </form>
       </div>
+      <div style="max-width:68ch;margin-top:32px"><LegalData titulo="Quién está detrás de Centralize" /></div>
     </div>
   </section>
   <script>const t = new URLSearchParams(location.search).get('tema'); const s = document.getElementById('c-tema') as HTMLSelectElement | null; if (t && s) { for (const o of s.options) if (o.value === t) s.value = t; }</script>
