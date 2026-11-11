@@ -20,6 +20,18 @@ describe('startCheckout', () => {
     expect(JSON.parse(init.body)).toEqual({ country: 'AR', attribution });
     expect(d.navigate).toHaveBeenCalledWith('https://checkout.example.com/x');
   });
+  it('sends the payer email when given (Argentina / Mercado Pago)', async () => {
+    const d = deps({ email: 'juan@example.com' });
+    await startCheckout(d);
+    expect(JSON.parse(d.fetch.mock.calls[0][1].body)).toEqual({ country: 'AR', email: 'juan@example.com', attribution });
+  });
+  it('422 (or 400 with an email) → email_required, no navigate', async () => {
+    const missing = deps({ fetch: vi.fn(async () => res(422, { error: 'email_required' })) as any });
+    expect(await startCheckout(missing)).toEqual({ ok: false, error: 'email_required' });
+    const invalid = deps({ email: 'x@y', fetch: vi.fn(async () => res(400, { error: 'x' })) as any });
+    expect(await startCheckout(invalid)).toEqual({ ok: false, error: 'email_required' });
+    expect(missing.navigate).not.toHaveBeenCalled();
+  });
   it('tolerates a trailing slash in apiUrl', async () => {
     const d = deps({ apiUrl: 'https://api.test/' });
     await startCheckout(d);

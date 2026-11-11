@@ -66,6 +66,12 @@ const description = free
             <p class="contratar-pais"><span data-country-label>Precios para Argentina.</span> <button type="button" class="link-btn" data-country-toggle>¿No estás en Argentina?</button></p>
             <p class="plan-sub muted">{ar.trialDays} días gratis · No se cobra hoy · Te avisamos antes de cobrar</p>
             <p class="plan-cond mono up">Sin permanencia · {guarantee}</p>
+            <div class="field" data-email-field>
+              <label for="c-email">Email de tu cuenta de Mercado Pago</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" maxlength="200" aria-describedby="c-email-help c-email-error">
+              <small id="c-email-help">El pago es con Mercado Pago: usá el email con el que entrás a tu cuenta.</small>
+              <p class="contratar-error" id="c-email-error" role="alert" data-email-error hidden>Escribí el email de tu cuenta de Mercado Pago para seguir.</p>
+            </div>
             <button type="button" class="btn btn-primary btn-block" data-start data-cta="contratar" data-section="contratar">Empezar mi prueba</button>
             <p class="contratar-error" role="alert" data-error hidden>No pudimos abrir el pago. Probá de nuevo o escribinos <WaLink section="contratar-error" label="por WhatsApp" /></p>
             <p class="legal-mini">Al continuar aceptás los <a class="link" href="/terminos">Términos</a> y la <a class="link" href="/privacidad">Privacidad</a>.</p>
