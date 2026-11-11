@@ -3,7 +3,7 @@ import { priceLine } from './pricing';
 
 // La oferta de entrada en un solo lugar. plans.json → "offer":
 //  - "free_month": un mes gratis sin tarjeta (POST /billing/free-signup).
-//  - "trial": prueba con tarjeta (Rebill/Stripe, POST /billing/checkout).
+//  - "trial": prueba con tarjeta (Mercado Pago en Argentina, Stripe en el resto; POST /billing/checkout).
 // Volver a la prueba con tarjeta es cambiar ese valor y redeployar.
 
 export type OfferMode = 'free_month' | 'trial';

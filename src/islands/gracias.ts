@@ -6,7 +6,8 @@ const root = document.querySelector<HTMLElement>('[data-gracias]');
 if (root) {
   const api = (root.dataset.api || 'https://api.centralize.dev').replace(/\/+$/, '');
   const q = new URLSearchParams(location.search);
-  const sessionId = q.get('session_id');
+  // Mercado Pago agrega sus parámetros al volver; si los pega con un segundo "?", quedan dentro de session_id.
+  const sessionId = q.get('session_id')?.split(/[?&#]/)[0] ?? null;
   const views = Array.from(root.querySelectorAll<HTMLElement>('[data-view]'));
   const el = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
 

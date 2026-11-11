@@ -8,6 +8,9 @@ export interface CheckoutDeps {
   country: string;
   /** Email del pagador. En Argentina el cobro es con Mercado Pago, que lo exige. */
   email?: string;
+  /** Nombre y WhatsApp (dígitos internacionales): Mercado Pago no los devuelve. */
+  nombre?: string;
+  phone?: string;
   attribution: Attribution;
   navigate: (url: string) => void;
 }
@@ -20,13 +23,13 @@ function isHttpsUrl(v: unknown): v is string {
 }
 
 /** Pide la URL de checkout a la API y navega a ella. Nunca lanza: devuelve el motivo del error. */
-export async function startCheckout({ fetch: doFetch, apiUrl, country, email, attribution, navigate }: CheckoutDeps): Promise<CheckoutResult> {
+export async function startCheckout({ fetch: doFetch, apiUrl, country, email, nombre, phone, attribution, navigate }: CheckoutDeps): Promise<CheckoutResult> {
   let res: Response;
   try {
     res = await doFetch(`${apiUrl.replace(/\/+$/, '')}/billing/checkout`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(email ? { country, email, attribution } : { country, attribution }),
+      body: JSON.stringify(email ? { country, email, nombre, phone, attribution } : { country, attribution }),
       signal: AbortSignal.timeout(CHECKOUT_TIMEOUT_MS),
     });
   } catch {

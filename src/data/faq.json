@@ -5,7 +5,7 @@
   { "id": "clientes-ia", "q": "¿Mis clientes hablan con una IA?", "a": "No. Centralito nunca les escribe a tus clientes ni manda mensajes masivos: te deja el texto o el PDF listo y lo mandás vos desde tu WhatsApp." },
   { "id": "chatgpt", "q": "Ya uso ChatGPT, ¿qué cambia?", "a": "ChatGPT te escribe un texto. Centralito lo hace en tu CRM: carga, edita, tasa, arma el PDF y te recuerda los seguimientos." },
   { "id": "no-sirve", "q": "¿Y si no me sirve?", "a": "Te das de baja cuando quieras, sin permanencia: le escribís \"Mi cuenta\" a Centralito y te manda el link para cancelar. {garantia}" },
-  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Se paga con tarjeta." },
+  { "id": "pago", "q": "¿Se puede pagar con débito o Mercado Pago?", "a": "Sí. En Argentina se paga con Mercado Pago: tarjeta de crédito, débito o dinero en cuenta. Fuera de Argentina, con tarjeta." },
   { "id": "que-es", "q": "¿Qué es Centralize?", "a": "Centralize hace agentes de inteligencia artificial para inmobiliarias de Argentina y Uruguay. Tiene dos productos: Centralito, el asistente que cada asesor usa desde WhatsApp para operar su CRM inmobiliario (Tokko), y Centralize Ventas, los agentes que responden, recontactan y califican a los clientes de la inmobiliaria por WhatsApp, Instagram y Facebook. {inmobiliarias}." },
   { "id": "inmobiliaria", "q": "¿Y para mi inmobiliaria con equipo?", "a": "Para inmobiliarias con equipo tenemos otra propuesta.", "link": { "href": "/inmobiliarias", "label": "Ver la propuesta para inmobiliarias →", "cta": "inmobiliarias" } }
 ]

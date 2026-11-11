@@ -21,9 +21,9 @@ describe('startCheckout', () => {
     expect(d.navigate).toHaveBeenCalledWith('https://checkout.example.com/x');
   });
   it('sends the payer email when given (Argentina / Mercado Pago)', async () => {
-    const d = deps({ email: 'juan@example.com' });
+    const d = deps({ email: 'juan@example.com', nombre: 'Juan', phone: '5491155550101' });
     await startCheckout(d);
-    expect(JSON.parse(d.fetch.mock.calls[0][1].body)).toEqual({ country: 'AR', email: 'juan@example.com', attribution });
+    expect(JSON.parse(d.fetch.mock.calls[0][1].body)).toEqual({ country: 'AR', email: 'juan@example.com', nombre: 'Juan', phone: '5491155550101', attribution });
   });
   it('422 (or 400 with an email) → email_required, no navigate', async () => {
     const missing = deps({ fetch: vi.fn(async () => res(422, { error: 'email_required' })) as any });
